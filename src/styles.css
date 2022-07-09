@@ -1,4 +1,12 @@
 h1 {
-  color: white;
-  background-color: black;
+  /* color: white;
+  background-color: black; */
 }
+
+/*================================================                   OVERVIEW widget      ================================================*/
+#overview {
+border: 2px solid grey;
+border-radius: 10px;
+}
+
+/*================================================                   OVERVIEW widget      ================================================*/
