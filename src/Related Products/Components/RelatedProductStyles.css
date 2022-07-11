@@ -1,0 +1,18 @@
+
+/* Styling for interactice star rating component (Related Products and Comparisons) */
+.RPP {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+.star {
+  cursor: pointer;
+  transition: color 200ms;
+}
+/* End styling for star component (Related Products and Comparisons) */

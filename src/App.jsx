@@ -1,6 +1,7 @@
 
 import React from "react";
 import ReviewsApp from "./Reviews/ReviewsApp.jsx"
+import RPP from "./Related Products/RPP.jsx";
 
 class App extends React.Component {
   render() {
@@ -8,6 +9,7 @@ class App extends React.Component {
     return (
       <div>
         <ReviewsApp />
+        <RPP />
       </div>
     );
   }
