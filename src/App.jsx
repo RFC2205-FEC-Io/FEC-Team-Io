@@ -1,5 +1,6 @@
 
 import React from "react";
+import RPP from "./Related Products/RPP.jsx";
 
 class App extends React.Component {
   render() {
@@ -9,6 +10,9 @@ class App extends React.Component {
         <h1>
           Hello {name}
         </h1>
+        <div id="relatedProducts">
+          <RPP />
+        </div>
       </>
     );
   }
