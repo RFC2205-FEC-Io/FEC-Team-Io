@@ -11,11 +11,11 @@ const ReviewTile = ({rating, summary, recommend, response, body, date, reviewerN
   }
   //PUT request for updating helpful
   //PUT request for updating report
+  //As of 7/11/22 @ 3:42, conditional rendering for recommend does not work. Unsure where to go.
   return (
     <div>
       <h3>Ratings:</h3>
       <StaticStars rating={rating} />
-        {() => {if (recommend === false) {return <span>&#10003;</span>;}}}
       <span>{reviewerName}</span>
       <span>{date}</span>
       <h3>{summary}</h3>
