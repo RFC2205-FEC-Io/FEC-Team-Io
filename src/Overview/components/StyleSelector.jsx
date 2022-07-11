@@ -1,12 +1,16 @@
 import React from 'react';
+import Style from './Style.jsx';
 const axios = require('axios');
 class StyleSelector extends React.Component {
   constructor (props) {
     super (props);
     this.state = {
-      styles: []
+      styles: [],
+      styleClicked: false,
+      styleName: ''
     }
-    // this.renderStyles = this.renderStyles.bind(this);
+    this.styleClickEvent = this.styleClickEvent.bind(this);
+    this.styleHeader = this.styleHeader.bind(this);
   }
   componentDidMount() {
     console.log('StyleSelector, mounted');
@@ -29,23 +33,37 @@ class StyleSelector extends React.Component {
     });
   }
 
+  styleClickEvent (event, name) {
+    event.preventDefault();
+    console.log('name:', name);
+    this.setState({
+      styleClicked: true,
+      styleName:name
+    });
+  }
+
+  styleHeader(name) {
+    if (!this.state.styleClicked) {
+      return  (
+        <div>
+          <h3>Style > Select a Style a style</h3>
+        </div>
+      );
+    } else {
+      return  (
+        <div>
+          <h3>Style >{this.state.styleName}</h3>
+        </div>
+      );
+    }
+  }
 
   render (props) {
     return (
       <div id='style-selector'>
-        <h3>Style > Select a Style a style</h3>
-
-          {/* {console.log('this.state.styles.results:', this.state.styles)} */}
-          {this.state.styles.map ((style) => {
-            // console.log('this is prouct in the map function:', style.photos[0].thumbnail_url);
-            return (
-            <div key={style.name}>
-              {style.name}
-              <img src={style.photos[0].thumbnail_url} id='style-img'></img>
-            </div>
-            );
-          })}
-        </div>
+        {this.styleHeader()}
+        <Style styles={this.state.styles} styleClick={this.styleClickEvent}/>
+      </div>
     );
   }
 }
