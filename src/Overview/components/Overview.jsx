@@ -23,7 +23,7 @@ class Overview extends React.Component {
       }
     })
     .then((res) => {
-      // console.log('GET sent, products retreived!:', res.data);
+      console.log('GET sent, products retreived!:', res.data);
       this.setState({
         products: res.data
       })

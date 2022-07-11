@@ -19,7 +19,7 @@ class StyleSelector extends React.Component {
       }
     })
     .then((res) => {
-      console.log('GET sent, products retreived!:', res.data.results);
+      console.log('GET sent, styles retreived!:', res.data.results);
       this.setState({
         styles: res.data.results
       });
@@ -32,14 +32,20 @@ class StyleSelector extends React.Component {
 
   render (props) {
     return (
-      <div id='image-gallery'>
-        <h2 onClick={this.renderStyles}>Style-Selector</h2>
-        {console.log('this.state.styles.results:', this.state.styles)}
-        {this.state.styles.map ((style) => {
-          console.log('this is prouct in the map function:', style.name);
-          return <div>{style.name}</div>;
-        })}
-      </div>
+      <div id='style-selector'>
+        <h3>Style > Select a Style a style</h3>
+
+          {/* {console.log('this.state.styles.results:', this.state.styles)} */}
+          {this.state.styles.map ((style) => {
+            // console.log('this is prouct in the map function:', style.photos[0].thumbnail_url);
+            return (
+            <div key={style.name}>
+              {style.name}
+              <img src={style.photos[0].thumbnail_url} id='style-img'></img>
+            </div>
+            );
+          })}
+        </div>
     );
   }
 }

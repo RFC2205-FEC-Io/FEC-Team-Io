@@ -10,7 +10,7 @@ class ProductInfo extends React.Component {
   render (props) {
     return (
       <div id='image-gallery'>
-        Product Info
+        <h2>Product Info</h2>
       </div>
     );
   }

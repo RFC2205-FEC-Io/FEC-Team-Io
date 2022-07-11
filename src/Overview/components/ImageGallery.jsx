@@ -10,7 +10,7 @@ class ImageGallery extends React.Component {
   render (props) {
     return (
       <div id='image-gallery'>
-        Image Gallery
+        <h2>Image Gallery</h2>
       </div>
     );
   }
