@@ -13,8 +13,9 @@ class Overview extends React.Component {
   }
 
   componentDidMount () {
-    // console.log('Overview, mounted');
+    console.log('Overview, mounted');
     const APItoken = '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';
+    // PRODUCTS DATA
     axios({
       method: 'get',
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products',
@@ -23,7 +24,7 @@ class Overview extends React.Component {
       }
     })
     .then((res) => {
-      console.log('GET sent, products retreived!:', res.data);
+      // console.log('GET sent, products retreived!:', res.data);
       this.setState({
         products: res.data
       })
@@ -41,7 +42,6 @@ class Overview extends React.Component {
           <ProductInfo/>
           <StyleSelector/>
         </div>
-        <AddToCart/>
       </div>
     );
   }
