@@ -8,11 +8,12 @@
   "license": "ISC",
   "scripts": {
     "build-dev": "webpack --mode development",
-    "server-dev": "npx nodemon --watch server server/index.js",
-    "client-dev": "npx webpack --watch",
-    "test": "jest"
+    "test": "jest",
+    "server-dev": "nodemon ./server.js --watch server.js",
+    "client-dev": "npx webpack --watch"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "nodemon": "^2.0.19",

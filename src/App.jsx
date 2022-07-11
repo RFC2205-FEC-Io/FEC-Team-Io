@@ -1,19 +1,18 @@
 
 import React from "react";
+import Overview from '/Users/lawrence/FEC-Team-Io/src/Overview/components/Overview.jsx';
+import ReviewsApp from "./Reviews/ReviewsApp.jsx"
 import RPP from "./Related Products/RPP.jsx";
 
 class App extends React.Component {
   render() {
     const { name } = this.props;
     return (
-      <>
-        <h1>
-          Hello {name}
-        </h1>
-        <div id="relatedProducts">
-          <RPP />
-        </div>
-      </>
+      <div>
+        <Overview/>
+        <ReviewsApp />
+        <RPP />
+      </div>
     );
   }
 }
