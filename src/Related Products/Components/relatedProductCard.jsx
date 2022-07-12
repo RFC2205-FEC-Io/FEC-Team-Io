@@ -15,8 +15,9 @@ class RelatedProductCard extends React.Component {
         description: "The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.",
         category: "Jackets",
         default_price: "140",
-        url: "Onesie_image.png"
-      }
+        url: "Onesie_image.png",
+      },
+      averageRating: 3.7
     }
     this.CardClickHandler = this.CardClickHandler.bind(this);
   }
@@ -54,7 +55,7 @@ class RelatedProductCard extends React.Component {
             {'$' + this.state.cardPracticeInfo.default_price}
           </Card.Text>
           <Card.Text style={{textAlign: "center"}}>
-            <StaticStarRating />
+            <StaticStarRating averageRating={this.state.averageRating}/>
           </Card.Text>
         </Card.Body>
       </Card>
