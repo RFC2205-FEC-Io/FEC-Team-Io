@@ -10,8 +10,7 @@
     "build-dev": "webpack --mode development",
     "test": "jest",
     "server-dev": "nodemon ./server.js --watch server.js",
-    "client-dev": "npx webpack --watch",
-    "test": "jest"
+    "client-dev": "npx webpack --watch"
   },
   "dependencies": {
     "axios": "^0.27.2",
