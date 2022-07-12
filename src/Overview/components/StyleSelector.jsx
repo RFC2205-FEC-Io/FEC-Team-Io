@@ -18,13 +18,10 @@ class StyleSelector extends React.Component {
   }
   componentDidMount() {
     // console.log('StyleSelector, mounted');
-    const APItoken = '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';
+    const APItoken = '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';
     axios({
       method: 'get',
-      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products/66642/styles',
-      headers: {
-        'Authorization': APItoken,
-      }
+      url: '/styles'
     })
     .then((res) => {
       // console.log('GET sent, styles retreived!:', res.data.results);
