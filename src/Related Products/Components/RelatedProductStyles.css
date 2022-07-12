@@ -33,3 +33,22 @@ button[type="submit"] {
   cursor: pointer;
   transition: color 200ms;
 }
+
+/*Styling for Product Cards and Carousel*/
+image[type="submit"] {
+  display: none;
+}
+.card {
+  cursor: pointer;
+  transition: color 200ms;
+  margin: 0 .5em;
+  width: calc(100%/4);
+}
+
+.cards-wrapper {
+  display: flex;
+}
+
+.image-wrapper {
+  height:50px;
+}

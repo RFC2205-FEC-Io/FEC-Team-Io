@@ -4,7 +4,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import StaticStarRating from './StaticStarRating.jsx';
 import StarIconButton from './StarIconButton.jsx';
 
-const RelatedProductCard = () => {
+const RelatedProductCard = (props) => {
   const cardPracticeInfo =
     {
       id: 1,
@@ -18,11 +18,14 @@ const RelatedProductCard = () => {
 
 
   return (
-    <Card style={{ width: '18rem'}}>
-       <Card.Text style={{textAlign: "right"}}>
+    <Card>
+      <Card.Text style={{textAlign: "right"}}>
         <StarIconButton />
       </Card.Text>
-      <Card.Img variant="top" style={{ height: '24rem'}} src={cardPracticeInfo.url} />
+      <Card.Img
+        src="Onesie_image.png"
+        onClick={() => props.CardClickHandler()}
+      />
       <Card.Text style={{textAlign: "center"}}>
         {cardPracticeInfo.category}
       </Card.Text>
