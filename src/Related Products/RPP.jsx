@@ -14,7 +14,6 @@ class RPP extends React.Component {
       randomInfo: []
     }
     this.XIconButtonClickHandler = this.XIconButtonClickHandler.bind(this);
-    this.CardClickHandler = this.CardClickHandler.bind(this);
   }
 
 
@@ -22,14 +21,12 @@ class RPP extends React.Component {
   console.log("X Icon Button was clicked.")
  }
 
- CardClickHandler (event) {
-  console.log("Product Card was clicked.")
- }
+
 
   render () {
     return (
       <div className="RPP">
-        <RelatedProductsCarousel />
+          <RelatedProductsCarousel />
       </div>
     );
   };
