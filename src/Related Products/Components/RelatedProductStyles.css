@@ -18,13 +18,18 @@ input[type="radio"] {
 }
 /* End styling for star component (Related Products and Comparisons) */
 
-/* Styling for Star Icon Button (Related Products and Comparisons) */
+/* Styling for Star Icon Button and X Icon Button (Related Products and Comparisons) */
 
 button[type="submit"] {
   display: none;
 }
 
 .starIcon {
+  cursor: pointer;
+  transition: color 200ms;
+}
+
+.XIcon {
   cursor: pointer;
   transition: color 200ms;
 }
