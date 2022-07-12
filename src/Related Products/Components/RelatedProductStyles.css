@@ -1,11 +1,12 @@
 
-/* Styling for interactice star rating component (Related Products and Comparisons) */
 .RPP {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
 }
+
+/* Styling for interactice star rating component (Related Products and Comparisons) */
 
 input[type="radio"] {
   display: none;
@@ -16,3 +17,14 @@ input[type="radio"] {
   transition: color 200ms;
 }
 /* End styling for star component (Related Products and Comparisons) */
+
+/* Styling for Star Icon Button (Related Products and Comparisons) */
+
+button[type="submit"] {
+  display: none;
+}
+
+.starIcon {
+  cursor: pointer;
+  transition: color 200ms;
+}
