@@ -12,15 +12,15 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("dist"));
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname + "/dist/index.html"));
-});
+// app.get("/", (req, res) => {
+//   res.sendFile(path.join(__dirname + "/dist/index.html"));
+// });
 
 axios.defaults.headers.common['Authorization'] = API_KEY;
 
 
 app.get("/reviews", (req, res) => {
-  console.log('req.query: ', req.query);
+  // console.log('req.query: ', req.query);
   const product_id = req.query.product_id;
   const count = req.query.count;
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/reviews/?product_id=${product_id}&count=${count}`)
