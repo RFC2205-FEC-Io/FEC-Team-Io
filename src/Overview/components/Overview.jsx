@@ -4,8 +4,6 @@ import ProductInfo from './ProductInfo.jsx';
 import StyleSelector from './StyleSelector.jsx';
 import AddToCart from './AddToCart.jsx';
 const axios = require('axios');
-// import {API_KEY} from '../../../server.js';
-// console.log('API:', process.env.REACT_APP_OVERVIEW_API_KEY );
 
 class Overview extends React.Component {
   constructor (props) {
@@ -18,7 +16,7 @@ class Overview extends React.Component {
   }
 
   componentDidMount () {
-    // console.log('Overview, mounted');
+    console.log('Overview, mounted');
     // PRODUCTS DATA
     axios({
       method: 'get',
