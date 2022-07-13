@@ -4,34 +4,35 @@ import ProductInfo from './ProductInfo.jsx';
 import StyleSelector from './StyleSelector.jsx';
 import AddToCart from './AddToCart.jsx';
 const axios = require('axios');
+// import {API_KEY} from '../../../server.js';
+// console.log('API:', process.env.REACT_APP_OVERVIEW_API_KEY );
+
 class Overview extends React.Component {
   constructor (props) {
     super (props);
     this.state = {
-      products: []
+      products: [],
+      count: 5,
+      page: 1,
     }
   }
 
   componentDidMount () {
     // console.log('Overview, mounted');
-    // const APItoken = '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';
-    // // PRODUCTS DATA
-    // axios({
-    //   method: 'get',
-    //   url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products',
-    //   headers: {
-    //     'Authorization': APItoken,
-    //   }
-    // })
-    // .then((res) => {
-    //   console.log('GET sent, products retreived!:', res.data);
-    //   this.setState({
-    //     products: res.data
-    //   })
-    // })
-    // .catch((err) => {
-    //   throw err;
-    // });
+    // PRODUCTS DATA
+    axios({
+      method: 'get',
+      url: `/overview/?page=${this.state.page}&count=${this.state.count}`
+    })
+    .then((res) => {
+      console.log('GET sent, products retreived!:', res.data);
+      this.setState({
+        products: res.data
+      })
+    })
+    .catch((err) => {
+      throw err;
+    });
   }
 
   render (props) {
