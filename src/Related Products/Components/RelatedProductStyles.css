@@ -1,11 +1,12 @@
 
-/* Styling for interactice star rating component (Related Products and Comparisons) */
 .RPP {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
 }
+
+/* Styling for interactice star rating component (Related Products and Comparisons) */
 
 input[type="radio"] {
   display: none;
@@ -16,3 +17,56 @@ input[type="radio"] {
   transition: color 200ms;
 }
 /* End styling for star component (Related Products and Comparisons) */
+
+/* Styling for Star Icon Button and X Icon Button (Related Products and Comparisons) */
+
+button[type="submit"] {
+  display: none;
+}
+
+.starIcon {
+  cursor: pointer;
+  transition: color 200ms;
+}
+
+.XIcon {
+  cursor: pointer;
+  transition: color 200ms;
+}
+
+/*Styling for Product Cards and Carousel*/
+image[type="submit"] {
+  display: none;
+}
+
+@media screen and (min-width: 568px) {
+
+  .cards-wrapper {
+  display: flex;
+}
+
+.card {
+  cursor: pointer;
+  transition: color 200ms;
+  margin: 0 .5em;
+  width: calc(100%/4);
+}
+
+.image-wrapper {
+  margin: 0 auto;
+  height:500px;
+  align-items: center;
+  justify-content: center;
+}
+}
+
+@media screen and (max-width: 567px) {
+  .card:not(:first-child) {
+    display: none;
+  }
+}
+
+.image-wrapper img{
+  max-width: 100%;
+  max-height: 100%;
+}
