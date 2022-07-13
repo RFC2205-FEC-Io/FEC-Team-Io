@@ -18,10 +18,10 @@ class ReviewsList extends React.Component {
   };
 
   getReviews = () => {
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/reviews/?product_id=${this.state.productID}&count=100`,
-    {headers: {'Authorization': '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'}})
+    axios.get(`/reviews/?product_id=${this.state.productID}&count=100`)
+    // axios.get('/reviews', {params: {product_id: this.state.productID}})
     .then(res => {
-      console.log('res.data: ', res.data.results);
+      console.log('res.data: ', res.data);
       this.setState({reviewArray: res.data.results});
     })
     .catch(err => {
@@ -36,8 +36,8 @@ class ReviewsList extends React.Component {
   render() {
     return (
       <div>
-        <p>ReviewsList Here</p>
-        <ul>
+        <p id="reviewListHeader">ReviewsList Here</p>
+        <ul id="reviewTileList">
           {this.state.reviewArray.map(review =>
             // return (
               <div>

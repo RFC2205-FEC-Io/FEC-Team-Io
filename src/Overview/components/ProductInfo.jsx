@@ -9,14 +9,14 @@ class ProductInfo extends React.Component {
   }
   componentDidMount () {
     console.log('ProductInfo Mounted!');
-    const APItoken = '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';
+    // const APItoken = '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';
     // PRODUCTS DATA
     axios({
       method: 'get',
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products',
-      headers: {
-        'Authorization': APItoken,
-      }
+      // headers: {
+      //   'Authorization': APItoken,
+      // }
     })
     .then((res) => {
       console.log('GET sent, products retreived!:', res.data);
