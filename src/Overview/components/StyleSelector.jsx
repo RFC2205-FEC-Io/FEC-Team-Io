@@ -18,7 +18,6 @@ class StyleSelector extends React.Component {
   }
   componentDidMount() {
     // console.log('StyleSelector, mounted');
-    const APItoken = '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';
     axios({
       method: 'get',
       url: '/styles'

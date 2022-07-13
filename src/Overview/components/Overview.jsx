@@ -33,7 +33,6 @@ class Overview extends React.Component {
     .catch((err) => {
       throw err;
     });
-
   }
 
   render (props) {
