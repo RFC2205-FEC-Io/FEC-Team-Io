@@ -12,28 +12,28 @@ function RelatedProductsCarousel() {
   return (
     <Carousel activeIndex={index} onSelect={handleSelect}>
       <Carousel.Item>
-        <div className="cards-wrapper">
+        <span className="cards-wrapper">
           <RelatedProductCard />
           <RelatedProductCard />
           <RelatedProductCard />
           <RelatedProductCard />
-        </div>
+        </span>
       </Carousel.Item>
       <Carousel.Item>
-        <div className="cards-wrapper">
+        <span className="cards-wrapper">
           <RelatedProductCard />
           <RelatedProductCard />
           <RelatedProductCard />
           <RelatedProductCard />
-        </div>
+        </span>
       </Carousel.Item>
       <Carousel.Item>
-        <div className="cards-wrapper">
+        <span className="cards-wrapper">
           <RelatedProductCard />
           <RelatedProductCard />
           <RelatedProductCard />
           <RelatedProductCard />
-        </div>
+        </span>
       </Carousel.Item>
     </Carousel>
   );

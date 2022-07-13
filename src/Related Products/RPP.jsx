@@ -15,7 +15,7 @@ class RPP extends React.Component {
       currentId: 66645,
       relatedProductIds: []
     }
-    this.XIconButtonClickHandler = this.XIconButtonClickHandler.bind(this);
+    // this.XIconButtonClickHandler = this.XIconButtonClickHandler.bind(this);
     this.getRelatedProductIds = this.getRelatedProductIds.bind(this);
   }
   componentDidMount() {

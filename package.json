@@ -15,10 +15,7 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
-<<<<<<< HEAD
-=======
     "browserify": "^17.0.0",
->>>>>>> 559cea4018be4b3a080292d9533bf8e431b31993
     "bootstrap": "^5.1.3",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",

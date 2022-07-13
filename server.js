@@ -60,7 +60,7 @@ app.get('/styles', (req, res) => {
     });
 })
 
-module.exports = {API_KEY};
+
 //----------------API Requests for Related Products---------------//
 
 /* Handler for related product IDs requests*/
