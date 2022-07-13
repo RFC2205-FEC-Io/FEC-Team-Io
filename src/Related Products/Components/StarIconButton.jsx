@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaStar } from 'react-icons/Fa';
+import { FaStar } from 'react-icons/fa';
 
 class StarIconButton extends React.Component {
   constructor(props) {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaTimesCircle } from 'react-icons/Fa';
+import { FaTimesCircle } from 'react-icons/fa';
 
 const XIconButton = (props) => {
   return (
