@@ -42,7 +42,7 @@ class AddToCart extends React.Component {
   sizeDropDownList() {
     if (!this.state.sizeClicked) {
       return (
-        <option value='select-size' onSubmit={() => {console.log('select-size')}}>select size</option>
+        <option value='select-size'>select size</option>
       )
     } else {
       return this.state.skus.map((sku) => {
@@ -61,16 +61,29 @@ class AddToCart extends React.Component {
   }
 
   qtyDropDownList () {
-    if (!this.state.qtyClicked) {
+    if (this.state.sizeSelect.value === 'select a size') {
       return (
         <option value='small'>qty</option>
       )
     } else {
-      return this.state.skus.map((sku) => {
-          return (<option key={sku}>{sku.quantity}</option>);
+      var qtyArr = [];
+      this.state.skus.map((sku) => {
+          if (sku.size === this.state.sizeSelect.value) {
+            var i = 0;
+            while (i <= sku.quantity) {
+            qtyArr.push(i);
+            i++;
+          }
+        }
       })
+      console.log('qtyArr:', qtyArr);
+      return qtyArr.map((num) => {
+        return (<option key={num}>{num}</option>);
+      });
     }
   }
+
+  //    return (<option key={i}>{i}</option>);
 
   /* TOGGLES FOR LISTS */
   qtyClickEvent(event) {
@@ -81,7 +94,7 @@ class AddToCart extends React.Component {
   }
   sizeClickEvent(event) {
     event.preventDefault();
-    console.log('event.target.innerHTML:', event.target)
+    // console.log('event.target.innerHTML:', event.target)
     this.setState((prevState) => ({
       sizeClicked: !prevState.sizeClicked
     }));
@@ -89,6 +102,9 @@ class AddToCart extends React.Component {
 
   selectSize (event) {
     event.preventDefault();
+    this.setState({
+      sizeSelect: {value: event.target.value}
+    })
     alert(this.state.sizeSelect.value);
   }
 

@@ -21,7 +21,7 @@ class ReviewsList extends React.Component {
     axios.get(`/reviews/?product_id=${this.state.productID}&count=100`)
     // axios.get('/reviews', {params: {product_id: this.state.productID}})
     .then(res => {
-      console.log('res.data: ', res.data);
+      // console.log('res.data: ', res.data);
       this.setState({reviewArray: res.data.results});
     })
     .catch(err => {

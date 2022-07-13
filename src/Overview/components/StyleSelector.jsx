@@ -51,7 +51,7 @@ class StyleSelector extends React.Component {
     if (!this.state.styleClicked) {
       return  (
         <div>
-          <h3>Style > Select a Style a style</h3>
+          <h3>Style > Select a Style </h3>
         </div>
       );
     } else {
