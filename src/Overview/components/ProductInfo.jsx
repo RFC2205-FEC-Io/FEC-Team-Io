@@ -9,24 +9,11 @@ class ProductInfo extends React.Component {
   }
   componentDidMount () {
     console.log('ProductInfo Mounted!');
-    // const APItoken = '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';
-    // PRODUCTS DATA
-    axios({
-      method: 'get',
-      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products',
-      // headers: {
-      //   'Authorization': APItoken,
-      // }
+  }
+  componentWillReceiveProps({products}) {
+    this.setState({
+      products: products
     })
-    .then((res) => {
-      console.log('GET sent, products retreived!:', res.data);
-      this.setState({
-        products: res.data[0]
-      })
-    })
-    .catch((err) => {
-      throw err;
-    });
   }
   render (props) {
     return (
