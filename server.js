@@ -13,6 +13,21 @@ app.use(express.json());
 app.use(express.static("dist"));
 
 
+axios.defaults.headers.common['Authorization'] = API_KEY;
+
+
+app.get("/reviews", (req, res) => {
+  console.log('req.query: ', req.query);
+  const product_id = req.query.product_id;
+  const count = req.query.count;
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/reviews/?product_id=${product_id}&count=${count}`)
+  .then(response => {
+    // console.log('data: ', data);
+    res.json(response.data);
+  })
+  .catch(err => {console.log('Error: ', err)})
+})
+
 app.listen(3000, () => {
   console.log("App running on http://localhost:3000");
 });
@@ -35,14 +50,7 @@ app.get('/:product_id/related', (req, res) => {
 
 /*Request function for related product IDs requests*/
 getRelatedProductIds = (productID) => {
-  var config = {
-    method: 'get',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products/'${productID}'/related`,
-    headers: {
-      'Authorization': API_KEY
-    }
-  };
-  axios(config)
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products/'${productID}'/related`)
   .then(function (response) {
     console.log(JSON.stringify(response.data));
   })

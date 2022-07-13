@@ -13,20 +13,21 @@ const ReviewTile = ({rating, summary, recommend, response, body, date, reviewerN
   //PUT request for updating report
   //As of 7/11/22 @ 3:42, conditional rendering for recommend does not work. Unsure where to go.
   return (
-    <div>
-      <h3>Ratings:</h3>
+    <div id="reviewTile">
+      <h3 id="ratingsHeader">Ratings:</h3>
       <StaticStars rating={rating} />
-      <span>{reviewerName}</span>
-      <span>{date}</span>
-      <h3>{summary}</h3>
-      <p>{body}</p>
-      {() => {if (recommend === false) {return <span>&#10003; I recommend this product</span>;}}}
-      <div>
-        <h4>Response:</h4>
-        <p>Dummy Response{response}</p>
+      <span id="reviewerName">{reviewerName}</span>
+      <span id="reviewDate">{date}</span>
+      <h3 id="reviewSummary">{summary}</h3>
+      <p id="reviewBody">{body}</p>
+      {() => {if (recommend === false) {return <span id="reviewRecommend">&#10003; I recommend this product</span>;}}}
+      <div id="reviewResponse">
+        <h4 id="reviewResponseHeader">Response:</h4>
+        <p id="reviewResponseBody">Dummy Response{response}</p>
       </div>
-      <span>
-        Helpful? <a>Yes</a> | <a>Report</a>
+      {photos.map(photo => <img id="reviewPhoto" src={photo.url} width="35" height="40" />)}
+      <span id="reviewHelpfulness">
+        Helpful? <a id="reportHelpful">Yes</a> | <a id="reportBad">Report</a>
       </span>
     </div>
     )

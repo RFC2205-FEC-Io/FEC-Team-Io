@@ -9,7 +9,8 @@ const config = {
     filename: 'bundle.js'
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
+    // fallback: {"path": require.resolve("path-browserify")},
   },
   module: {
     rules: [
