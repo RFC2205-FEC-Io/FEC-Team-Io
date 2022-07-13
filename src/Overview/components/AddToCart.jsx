@@ -17,6 +17,7 @@ class AddToCart extends React.Component {
     this.sizeClickEvent = this.sizeClickEvent.bind(this);
     this.sizeClicked = this.sizeClicked.bind(this);
     this.selectSize = this.selectSize.bind(this);
+    this.cartButtonEvent = this.cartButtonEvent.bind(this);
   }
   /* UPDATES STATE WHEN STYLE THUMBNAIL IS CLICKED*/
   componentWillReceiveProps (props) {
@@ -91,6 +92,10 @@ class AddToCart extends React.Component {
     alert(this.state.sizeSelect.value);
   }
 
+  cartButtonEvent (event) {
+    event.preventDefault();
+    console.log('Added To Cart!');
+  }
   render (props) {
     return (
       <div id='add-to-cart'>
@@ -101,7 +106,7 @@ class AddToCart extends React.Component {
         <select name='select-qty' onClick={this.qtyClickEvent}>
         {this.qtyDropDownList()}
         </select>
-        <button>Add To Bag</button>
+        <button onClick={this.cartButtonEvent}>Add To Bag</button>
       </div>
     );
   }

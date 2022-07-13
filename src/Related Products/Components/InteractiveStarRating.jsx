@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaStar } from 'react-icons/fa';
+import { FaStar } from 'react-icons/Fa';
 
 const InteractiveStarRating = () => {
   const [rating, setRating] = useState(null);
