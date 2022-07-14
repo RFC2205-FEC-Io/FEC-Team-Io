@@ -70,13 +70,13 @@ class AddToCart extends React.Component {
       this.state.skus.map((sku) => {
           if (sku.size === this.state.sizeSelect.value) {
             var i = 0;
-            while (i <= sku.quantity) {
+            while (i <= 15) {
             qtyArr.push(i);
             i++;
           }
         }
       })
-      console.log('qtyArr:', qtyArr);
+      // console.log('qtyArr:', qtyArr);
       return qtyArr.map((num) => {
         return (<option key={num}>{num}</option>);
       });
