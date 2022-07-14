@@ -3,7 +3,7 @@
   background-color: black;
 } */
 
-/*================================================                   OVERVIEW widget      ================================================*/
+/* OVERVIEW */
 #overview {
 border: 2px solid grey;
 border-radius: 10px;
@@ -28,7 +28,15 @@ border-radius: 10px;
 #salePrice{
   color: red;
 }
-/*================================================                   OVERVIEW widget      ================================================*/
+#image-gallery{
+  display: flex;
+}
+#gallery {
+  height: 100px;
+  width: auto;
+}
+/* OVERVIEW */
+
   /* color: white;
   background-color: black;
 } */

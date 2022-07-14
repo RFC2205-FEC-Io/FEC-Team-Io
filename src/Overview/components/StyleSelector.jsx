@@ -80,7 +80,7 @@
 // export default StyleSelector;
 
 
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Style from './Style.jsx';
 import AddToCart from './AddToCart.jsx';
 import ImageGallery from './ImageGallery.jsx';
@@ -99,6 +99,8 @@ class StyleSelector extends React.Component {
       page: 1,
       price: 0,
       salePrice: 0,
+      images: [
+        {thumbnail_url: 'https://images.unsplash.com/photo-1501088430049-71…hcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80', url: 'https://images.unsplash.com/photo-1501088430049-71…hcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'}],
     }
     this.styleClickEvent = this.styleClickEvent.bind(this);
     this.styleHeader = this.styleHeader.bind(this);
@@ -111,7 +113,7 @@ class StyleSelector extends React.Component {
       url: '/styles'
     })
     .then((res) => {
-      console.log('GET sent, styles retreived!:', res.data.results);
+      console.log('GET sent, styles retreived!:', res.data.results[0].photos[0]);
       this.setState({
         styles: res.data.results
       });
@@ -144,16 +146,14 @@ class StyleSelector extends React.Component {
     for (var key in styleObj.skus) {
       skuArr.push(styleObj.skus[key]);
     }
+    this.state.styles.map((style) => {
+      if(style.name === name) {
+        this.setState({
+          images: style.photos
+        })
+      }
+    })
 
-  //   const statePromise = new Promise (() => {
-  // this.setState({
-  //     styleClicked: true,
-  //     styleName:name,
-  //     styleSKU: skuArr,
-  //     price: originalPrice,
-  //     salePrice: salePrice
-  //   });
-  //   })
     this.setState({
       styleClicked: true,
       styleName:name,
@@ -179,11 +179,10 @@ class StyleSelector extends React.Component {
     }
   }
 
-
   render (props) {
     return (
       <div id='main'>
-        <ImageGallery/>
+        <ImageGallery images={this.state.images}/>
         <ProductInfo products={this.state.products[0]} defaultPrice={this.state.price} salePrice={this.state.salePrice}/>
         <div id='style-selector'>
           {this.styleHeader()}

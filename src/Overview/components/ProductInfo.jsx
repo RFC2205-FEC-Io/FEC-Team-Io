@@ -7,11 +7,13 @@ class ProductInfo extends React.Component {
       products: {},
       price: 0,
       salePrice: 0,
+      show: false,
     }
     this.updatePrice = this.updatePrice.bind(this);
   }
   componentDidMount () {
     // console.log('ProductInfo Mounted!');
+
   }
   componentWillReceiveProps({products, defaultPrice, salePrice}) {
     this.setState({
@@ -45,11 +47,15 @@ class ProductInfo extends React.Component {
   }
 
   render (props) {
-    return (
-      <div id='image-gallery'>
-        {this.updatePrice()}
-      </div>
-    );
+    setTimeout(() => {
+      return (
+        <div id='image-gallery'>
+          {this.updatePrice()}
+        </div>
+      );
+
+    }, 500);
+
   }
 }
 
