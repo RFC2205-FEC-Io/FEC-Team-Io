@@ -45,8 +45,19 @@ class AddToCart extends React.Component {
         <option value='select-size'>select size</option>
       )
     } else {
+      var countXL = 0
+      for (var i = 0; i < this.state.skus.length; i ++) {
+        var sku = this.state.skus[i];
+        if (sku.size === 'XL') {
+          countXL ++;
+        }
+        if (countXL > 1) {
+          sku.size = 'XXL';
+        }
+        // console.log('i:', i, 'sku:', sku, 'countXL:', countXL);
+      }
       return this.state.skus.map((sku) => {
-        // {console.log('sku:'. sku)}
+        // console.log('sku:'. sku);
           return (
           <option
             id={sku.size}
@@ -83,7 +94,7 @@ class AddToCart extends React.Component {
           }
         }
       })
-      console.log('qtyArr:', qtyArr);
+      // console.log('qtyArr:', qtyArr);
       return qtyArr.map((num) => {
         return (<option key={num}>{num}</option>);
       });

@@ -8,7 +8,7 @@ class ProductInfo extends React.Component {
     }
   }
   componentDidMount () {
-    console.log('ProductInfo Mounted!');
+    // console.log('ProductInfo Mounted!');
   }
   componentWillReceiveProps({products}) {
     this.setState({
@@ -18,6 +18,7 @@ class ProductInfo extends React.Component {
   render (props) {
     return (
       <div id='image-gallery'>
+        {console.log('ProductInfo Props:', props)}
         <h2>Product Info</h2>
         <p id='category'>{this.state.products.category}</p>
         <p id='name'>{this.state.products.name}</p>
