@@ -47,9 +47,7 @@ class RelatedProductCard extends React.Component {
             </h1>
           </Card.Title>
           <Card.Text>
-            <h5>
               {this.state.cardPracticeInfo.description}
-            </h5>
           </Card.Text>
           <Card.Text>
             {'$' + this.state.cardPracticeInfo.default_price}
