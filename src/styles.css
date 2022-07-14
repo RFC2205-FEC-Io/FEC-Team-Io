@@ -22,6 +22,12 @@ border-radius: 10px;
 #add-to-cart{
   display: flex;
 }
+#price{
+  text-decoration: line-through;
+}
+#salePrice{
+  color: red;
+}
 /*================================================                   OVERVIEW widget      ================================================*/
   /* color: white;
   background-color: black;
