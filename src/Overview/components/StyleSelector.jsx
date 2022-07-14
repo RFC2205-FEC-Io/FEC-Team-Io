@@ -97,6 +97,8 @@ class StyleSelector extends React.Component {
       products: [],
       count: 5,
       page: 1,
+      price: 0,
+      salePrice: 0,
     }
     this.styleClickEvent = this.styleClickEvent.bind(this);
     this.styleHeader = this.styleHeader.bind(this);
@@ -134,17 +136,21 @@ class StyleSelector extends React.Component {
     });
   }
 
-  styleClickEvent (event, name, styleObj) {
+  styleClickEvent (event, name, styleObj, originalPrice, salePrice) {
     event.preventDefault();
     // console.log('name:', name, 'styleObj:', styleObj.skus);
+    console.log('originalPrice, salePrice:', originalPrice, salePrice)
     var skuArr = [];
     for (var key in styleObj.skus) {
       skuArr.push(styleObj.skus[key]);
     }
+    if (salePrice)
     this.setState({
       styleClicked: true,
       styleName:name,
-      styleSKU: skuArr
+      styleSKU: skuArr,
+      price: originalPrice,
+      salePrice: salePrice
     });
   }
 
@@ -163,6 +169,7 @@ class StyleSelector extends React.Component {
       );
     }
   }
+
 
   render (props) {
     return (
