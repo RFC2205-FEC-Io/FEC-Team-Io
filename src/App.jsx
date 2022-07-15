@@ -1,5 +1,5 @@
 import React from "react";
-// import Overview from './Overview/components/Overview.jsx';
+import Overview from './Overview/components/Overview.jsx';
 import StyleSelector from './Overview/components/StyleSelector.jsx';
 import ReviewsApp from "./Reviews/ReviewsApp.jsx"
 import RPP from "./Related Products/RPP.jsx";
@@ -9,10 +9,10 @@ class App extends React.Component {
     const { name } = this.props;
     return (
       <div>
-        {/* <Overview/> */}
-        {/*<StyleSelector/>*/}
+        <Overview/>
+        <StyleSelector/>
         <RPP />
-        {/*<ReviewsApp />*/}
+        <ReviewsApp />
       </div>
     );
   }

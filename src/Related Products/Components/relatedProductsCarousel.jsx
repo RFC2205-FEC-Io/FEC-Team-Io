@@ -19,6 +19,7 @@ const RelatedProductsCarousel = () => {
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [relatedStylesArray, setRelatedStylesArray] = useState([]);
   const [relatedMetaReviewsArray, setRelatedMetaReviewsArray] = useState([]);
+  const [productRatingsById, setProductRatingsByIds] = useState({});
 
   /*Helper functions */
   useEffect(() => {getRelatedProductIds()}, [currentId]);
@@ -88,7 +89,41 @@ const RelatedProductsCarousel = () => {
     /* Add related meta review info to state */
     .then(response => {
       setRelatedMetaReviewsArray(response)
+      return response;
     })
+    /*Average the ratings for each related item*/
+    .then(response => {
+      const productRatingsByIds = {};
+      response.map(obj => productRatingsByIds[obj.data.product_id] = obj.data.ratings)
+      return productRatingsByIds
+    })
+     /* Add product rating info to state */
+    .then(response => {
+      setProductRatingsByIds(response)
+      return response;
+    })
+    /*Average the rating of each product id */
+    .then(response => {
+      const productAverageRatingById = {};
+        for(var id in response) {
+          const totalNumberOfRatings = 0;
+          const totalSumOfRatings = 0;
+          for (var rating in id) {
+            totalNumberOfRatings +=  [id][rating];
+            totalSumOfRatings += [id][rating] * rating;
+          }
+          const averageRating = totalSumOfRatings / totalNumberOfRatings;
+          productAverageRatingById[id] = averageRating;
+        }
+      return productAverageRatingById;
+    })
+    .then(response => {
+      console.log('Response: ', response);
+    })
+
+      // return response.map(obj =>
+      //  {obj.data.product_id: ((obj.data.ratings[1]) + (obj.data.ratings[2] * 2) + (obj.data.ratings[3] * 3) + (obj.data.ratings[4] * 4) + (obj.data.ratings[5] * 5)) / ((obj.data.ratings[1]) + (obj.data.ratings[2]) + (obj.data.ratings[3]) + (obj.data.ratings[4]) + (obj.data.ratings[5]))}
+      //)
     .catch(err => {
       console.log('CLIENT SIDE getRelatedProductIds ERROR: ', err)
     })
