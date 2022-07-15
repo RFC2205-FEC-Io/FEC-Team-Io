@@ -13,7 +13,7 @@ import RelatedProductCard from './RelatedProductCard.jsx';
 const RelatedProductsCarousel = () => {
   /*State*/
   const [index, setIndex] = useState(0);
-  const [currentId, setCurrentId] = useState(66642);
+  const [currentId, setCurrentId] = useState(66645);
   const [relatedProducts, setRelatedProducts] = useState([])
 
   /*Helper functions */
@@ -22,6 +22,13 @@ const RelatedProductsCarousel = () => {
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
+
+  const breakPoints = [
+    {width: 1, itemsToShow: 1},
+    {width: 550, itemsToShow: 2},
+    {width: 768, itemsToShow: 3},
+    {width: 1200, itemsToShow: 4}
+  ];
 
   /*This is a function for mapping when the iteratee is asynchronous (like axios requests)*/
   const mapInBatches = (array, iteratee, batchSize) => {
@@ -56,44 +63,16 @@ const RelatedProductsCarousel = () => {
   }
 
 return (
-      <div>
+  <Carousel activeIndex={index} onSelect={handleSelect} breakPoints={breakPoints}>
+    <Carousel.Item>
+    <span className="cards-wrapper">
+      {relatedProducts.slice(0, 4).map((product) => (
+        <RelatedProductCard product={product} key={product.data.id} />
+      ))}
+    </span>
 
-      </div>
+    </Carousel.Item>
+  </Carousel>
     )
 };
 export default RelatedProductsCarousel;
-
-
-
-
-//   return (
-//     <Carousel activeIndex={index} onSelect={handleSelect}>
-//       <Carousel.Item>
-//         <span className="cards-wrapper">
-//           <RelatedProductCard />
-//           <RelatedProductCard />
-//           <RelatedProductCard />
-//           <RelatedProductCard />
-//         </span>
-//       </Carousel.Item>
-//       <Carousel.Item>
-//         <span className="cards-wrapper">
-//           <RelatedProductCard />
-//           <RelatedProductCard />
-//           <RelatedProductCard />
-//           <RelatedProductCard />
-//         </span>
-//       </Carousel.Item>
-//       <Carousel.Item>
-//         <span className="cards-wrapper">
-//           <RelatedProductCard />
-//           <RelatedProductCard />
-//           <RelatedProductCard />
-//           <RelatedProductCard />
-//         </span>
-//       </Carousel.Item>
-//     </Carousel>
-//   );
-// }
-
-

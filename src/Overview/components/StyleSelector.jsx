@@ -17,13 +17,13 @@ class StyleSelector extends React.Component {
     this.styleHeader = this.styleHeader.bind(this);
   }
   componentDidMount() {
-    // console.log('StyleSelector, mounted');
+    console.log('StyleSelector, mounted');
     axios({
       method: 'get',
       url: '/styles'
     })
     .then((res) => {
-      // console.log('GET sent, styles retreived!:', res.data.results);
+      console.log('GET sent, styles retreived!:', res.data.results);
       this.setState({
         styles: res.data.results
       });
@@ -35,7 +35,7 @@ class StyleSelector extends React.Component {
 
   styleClickEvent (event, name, styleObj) {
     event.preventDefault();
-    // console.log('name:', name, 'styleObj:', styleObj.skus);
+    console.log('name:', name, 'styleObj:', styleObj.skus);
     var skuArr = [];
     for (var key in styleObj.skus) {
       skuArr.push(styleObj.skus[key]);
