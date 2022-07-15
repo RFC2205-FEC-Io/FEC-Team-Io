@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaStar } from 'react-icons/Fa';
+import { FaStar } from 'react-icons/fa';
 
 class StarIconButton extends React.Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class StarIconButton extends React.Component {
 
   render () {
     return (
-      <div>
+      <span>
           <label>
             <button
               type="submit"
@@ -28,7 +28,7 @@ class StarIconButton extends React.Component {
             color="#ffc107"
             size={20}/>
           </label>
-      </div>
+      </span>
     )
   };
 };

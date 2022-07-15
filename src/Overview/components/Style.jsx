@@ -1,22 +1,38 @@
 import React from 'react';
-
-const Style = ({styles, styleClick}) => {
-  return (
-    <div id='styles'>
-      {styles.map ((style) => {
-        // console.log('Style.jsx style:', style.original_price, style.sale_price)
+import check_mark from '../../../dist/check_mark.png';
+const Style = ({styles, styleClick, clicked, name}) => {
+  var addStyle = () => {
+    return styles.map ((style) => {
+      if (style.name === name && clicked) {
         return (
+          <div key={style.name}>
+            <div
+            id='style-img'
+            style={{backgroundImage: `url(${style.photos[0].thumbnail_url})`}}
+            onClick={(event, name, styleObj, originalPrice, salePrice, img) =>{
+              styleClick (event, style.name, style, style.original_price, style.sale_price, style.photos[0].url);
+            }}
+            > <img class='check-mark 'src={check_mark}></img></div>
+          </div>
+          );
+      } else {
+      return (
         <div key={style.name}>
-          <img
-          src={style.photos[0].thumbnail_url}
+          <div
           id='style-img'
+          style={{backgroundImage: `url(${style.photos[0].thumbnail_url})`}}
           onClick={(event, name, styleObj, originalPrice, salePrice, img) =>{
             styleClick (event, style.name, style, style.original_price, style.sale_price, style.photos[0].url);
           }}
-          ></img>
+          > </div>
         </div>
         );
-      })}
+    }
+  })
+}
+  return (
+    <div id='styles'>
+      {addStyle()}
     </div>
   );
 }

@@ -1,90 +1,10 @@
-// import React from 'react';
-// import Style from './Style.jsx';
-// import AddToCart from './AddToCart.jsx';
-// import ImageGallery from './ImageGallery.jsx';
-// import ProductInfo from './ProductInfo.jsx';
-// const axios = require('axios');
-// class StyleSelector extends React.Component {
-//   constructor (props) {
-//     super (props);
-//     this.state = {
-//       styles: [],
-//       styleClicked: false,
-//       styleName: '',
-//       styleSKU: []
-//     }
-//     this.styleClickEvent = this.styleClickEvent.bind(this);
-//     this.styleHeader = this.styleHeader.bind(this);
-//   }
-//   componentDidMount() {
-//     console.log('StyleSelector, mounted');
-//     axios({
-//       method: 'get',
-//       url: '/styles'
-//     })
-//     .then((res) => {
-//       console.log('GET sent, styles retreived!:', res.data.results);
-//       this.setState({
-//         styles: res.data.results
-//       });
-//     })
-//     .catch((err) => {
-//       throw err;
-//     });
-//   }
-
-//   styleClickEvent (event, name, styleObj) {
-//     event.preventDefault();
-//     // console.log('name:', name, 'styleObj:', styleObj.skus);
-//     var skuArr = [];
-//     for (var key in styleObj.skus) {
-//       skuArr.push(styleObj.skus[key]);
-//     }
-//     this.setState({
-//       styleClicked: true,
-//       styleName:name,
-//       styleSKU: skuArr
-//     });
-//   }
-
-//   styleHeader(name) {
-//     if (!this.state.styleClicked) {
-//       return  (
-//         <div>
-//           <h3>Style > Select a Style </h3>
-//         </div>
-//       );
-//     } else {
-//       return  (
-//         <div>
-//           <h3>Style >{this.state.styleName}</h3>
-//         </div>
-//       );
-//     }
-//   }
-
-//   render (props) {
-//     return (
-//       <div id='main'>
-//         <ImageGallery/>
-//         <div id='style-selector'>
-//           {this.styleHeader()}
-//           <Style styles={this.state.styles} styleClick={this.styleClickEvent}/>
-//           </div>
-//           <AddToCart SKU={this.state.styleSKU} styleClicked={this.state.styleClicked}/>
-//       </div>
-//     );
-//   }
-// }
-
-// export default StyleSelector;
-
-
 import React, {useState, useEffect} from 'react';
 import Style from './Style.jsx';
 import AddToCart from './AddToCart.jsx';
 import ImageGallery from './ImageGallery.jsx';
 import ProductInfo from './ProductInfo.jsx';
+import Overlay from 'react-bootstrap/Overlay';
+import '../../styles.css';
 const axios = require('axios');
 class StyleSelector extends React.Component {
   constructor (props) {
@@ -115,10 +35,13 @@ class StyleSelector extends React.Component {
       url: '/styles'
     })
     .then((res) => {
-      console.log('GET sent, styles retreived!:', res.data.results[0].photos[0]);
+      console.log('GET sent, styles retreived!:', res.data);
       this.setState({
         styles: res.data.results
       });
+    })
+    .then(() => {
+
     })
     .catch((err) => {
       throw err;
@@ -137,6 +60,12 @@ class StyleSelector extends React.Component {
     })
     .catch((err) => {
       throw err;
+    });
+
+    const statePromise = new Promise(() => {
+      setTimeout(() => {
+        console.log('Promise Fulfilled')
+      }, 500)
     });
   }
 
@@ -185,11 +114,12 @@ class StyleSelector extends React.Component {
   render (props) {
     return (
       <div id='main'>
+        {console.log('CURRENT STATE:', this.state)}
         <ImageGallery images={this.state.images} clickedImg={this.state.clickedthumb}/>
-        <ProductInfo products={this.state.products[0]} defaultPrice={this.state.price} salePrice={this.state.salePrice}/>
+        {/* <ProductInfo products={this.state.products[0]} defaultPrice={this.state.price} salePrice={this.state.salePrice}/> */}
         <div id='style-selector'>
           {this.styleHeader()}
-          <Style styles={this.state.styles} styleClick={this.styleClickEvent}/>
+          <Style styles={this.state.styles} styleClick={this.styleClickEvent} clicked={this.state.styleClicked} name={this.state.styleName}/>
           </div>
           <AddToCart SKU={this.state.styleSKU} styleClicked={this.state.styleClicked}/>
       </div>
@@ -204,3 +134,12 @@ export default StyleSelector;
 setTimeout(() => {
 
 }, 500);
+
+// import React, {useState, useEffect} from 'react';
+
+// const StyleSelector = (props) => {
+//   console.log('props:', props)
+//   return (<div id = 'style-selector'> StyleSelector</div>)
+// }
+
+// export default StyleSelector;
