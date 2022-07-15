@@ -5,31 +5,53 @@ class ImageGallery extends React.Component {
     super (props);
     this.state = {
       images: [],
-      mainImage: 'main',
+      mainImage: 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
+      listImg: '',
+      imgClicked: false,
     }
+    this.setBackgroundImage = this.setBackgroundImage.bind(this);
   }
+
   componentDidMount () {
     console.log('imageGallerymounted')
   }
+
   componentWillReceiveProps(props) {
     this.setState({
       images: props.images,
-      mainImage: props.images[0].thumbnail_url
+      // mainImage: props.images[0].thumbnail_url
     })
   }
 
   componentWillMount () {
     console.log('componentWillMount, images saved to state:', this.state.images);
   }
+
+  setBackgroundImage(event, imageURL) {
+    event.preventDefault();
+    console.log('imageURL:', imageURL);
+    this.setState({
+      listImg: imageURL
+    });
+    this.setState({
+      imgClicked: true
+    })
+  }
+
+  setStyle () {
+    if (this.state.imgClicked) {
+      return { backgroundImage: `url( ${this.state.listImg})`};
+    } else {
+      return { backgroundImage: `url( ${this.state.mainImage})`};
+    }
+  }
   render (props) {
     return (
-      <div id='image-gallery'>
-        <h2>Image Gallery</h2>
-        <img id='main-img 'src={this.state.mainImage}/>
+      <div id='image-gallery' style={this.setStyle()}>
         {this.state.images.map((image) => {
           return (
           <div>
-            <img id ='gallery'src={image.thumbnail_url}/>
+            <img id ='gallery'src={image.thumbnail_url} onClick={()=> {this.setBackgroundImage(event, image.url)}}/>
           </div>
           );
         })}

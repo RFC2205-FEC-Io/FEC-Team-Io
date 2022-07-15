@@ -27,16 +27,15 @@ class ProductInfo extends React.Component {
     if (this.state.salePrice === null || this.state.salePrice === 0) {
       return (
         <div id='product-info'>
-          <h2>Product Info</h2>
           <p id='category'>{this.state.products.category}</p>
           <p id='name'>{this.state.products.name}</p>
           <p id='default-price'>{this.state.products.default_price}</p>
+          <p id='slogan'>{this.state.products.slogan}</p>
         </div>
       )
     } else {
       return (
         <div id='product-info'>
-          <h2>Product Info</h2>
           <p id='category'>{this.state.products.category}</p>
           <p id='name'>{this.state.products.name}</p>
           <p id='price'>{this.state.price}</p>
@@ -47,15 +46,11 @@ class ProductInfo extends React.Component {
   }
 
   render (props) {
-    setTimeout(() => {
-      return (
-        <div id='image-gallery'>
-          {this.updatePrice()}
-        </div>
-      );
-
-    }, 500);
-
+    return (
+      <div id='product-info'>
+        {this.updatePrice()}
+      </div>
+    );
   }
 }
 

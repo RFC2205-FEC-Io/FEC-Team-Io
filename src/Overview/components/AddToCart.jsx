@@ -123,7 +123,7 @@ class AddToCart extends React.Component {
     this.setState({
       sizeSelect: {value: event.target.value}
     })
-    alert(this.state.sizeSelect.value);
+    // alert(this.state.sizeSelect.value);
   }
 
   cartButtonEvent (event) {
@@ -133,7 +133,6 @@ class AddToCart extends React.Component {
   render (props) {
     return (
       <div id='add-to-cart'>
-        <h2>Add To Cart</h2>
         <select name='select-size' onClick={this.sizeClickEvent} value={this.state.sizeSelect.value} onChange={this.selectSize}>
           {this.sizeDropDownList()}
         </select>

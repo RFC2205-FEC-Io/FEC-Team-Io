@@ -4,10 +4,10 @@
 } */
 
 /* OVERVIEW */
-#overview {
-border: 2px solid grey;
-border-radius: 10px;
+#main {
+display: flex;
 }
+
 #styles-selector {
   display: flex;
 }
@@ -15,12 +15,13 @@ border-radius: 10px;
   display: flex;
 }
 #style-img {
-  height: 100px;
-  width: auto;
-  border-radius: 10%;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
 }
 #add-to-cart{
-  display: flex;
+  /* display: flex;
+  flex-direction: row; */
 }
 #price{
   text-decoration: line-through;
@@ -30,10 +31,19 @@ border-radius: 10px;
 }
 #image-gallery{
   display: flex;
+  background-image: url('https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80');
+  background-size: cover;
+  width: 400px;
+  height: 400px;
+  background-repeat: no-repeat;
 }
 #gallery {
-  height: 100px;
-  width: auto;
+  height: 50px;
+  width: 50px;
+  margin-left: 5px;
+}
+.check {
+
 }
 /* OVERVIEW */
 

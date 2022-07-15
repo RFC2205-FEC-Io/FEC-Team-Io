@@ -7,7 +7,6 @@ const Style = ({styles, styleClick}) => {
         // console.log('Style.jsx style:', style.original_price, style.sale_price)
         return (
         <div key={style.name}>
-          {style.name}
           <img
           src={style.photos[0].thumbnail_url}
           id='style-img'

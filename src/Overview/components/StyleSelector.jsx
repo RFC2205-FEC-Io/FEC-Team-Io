@@ -100,7 +100,9 @@ class StyleSelector extends React.Component {
       price: 0,
       salePrice: 0,
       images: [
-        {thumbnail_url: 'https://images.unsplash.com/photo-1501088430049-71…hcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80', url: 'https://images.unsplash.com/photo-1501088430049-71…hcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'}],
+        {thumbnail_url: 'https://images.unsplash.com/photo-1501088430049-71…hcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
+         url: 'https://images.unsplash.com/photo-1501088430049-71…hcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
+        }],
     }
     this.styleClickEvent = this.styleClickEvent.bind(this);
     this.styleHeader = this.styleHeader.bind(this);
@@ -173,7 +175,7 @@ class StyleSelector extends React.Component {
     } else {
       return  (
         <div>
-          <h3>Style >{this.state.styleName}</h3>
+          <h3>Style > {this.state.styleName}</h3>
         </div>
       );
     }
@@ -197,3 +199,7 @@ class StyleSelector extends React.Component {
 export default StyleSelector;
 
 // defaultPrice={this.state.price} salePrice={this.state.salePrice}
+
+setTimeout(() => {
+
+}, 500);
