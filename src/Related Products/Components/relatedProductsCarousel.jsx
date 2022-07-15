@@ -15,7 +15,10 @@ const RelatedProductsCarousel = () => {
   /*State*/
   const [index, setIndex] = useState(0);
   const [currentId, setCurrentId] = useState(66645);
-  const [relatedProducts, setRelatedProducts] = useState([])
+  const [relatedIds, setRelatedIds] = useState([]);
+  const [relatedProducts, setRelatedProducts] = useState([]);
+  const [relatedStylesArray, setRelatedStylesArray] = useState([]);
+  const [relatedMetaReviewsArray, setRelatedMetaReviewsArray] = useState([]);
 
   /*Helper functions */
   useEffect(() => {getRelatedProductIds()}, [currentId]);
@@ -41,33 +44,73 @@ const RelatedProductsCarousel = () => {
     console.log('Ran mapInBatches');
   };
 
-   /*Get requests */
+   //-------- Get requests -----------------//
+
+  /* Get related products ids */
   const getRelatedProductIds = () => {
     axios.get(`/related/?product_id=${currentId}`)
     .then(response => {
-      const relatedProductIds = response.data;
-      return relatedProductIds;
+      const relatedIds = response.data;
+      setRelatedIds(response.data);
+      return relatedIds;
     })
+    /* Get related products by their ids */
     .then(response => {
       const relatedProductArray = mapInBatches(response, async (id) => {
         return axios.get(`/products/?product_id=${id}`);
       }, 4)
       return relatedProductArray;
     })
+    /* Add related products (array of objs) to state */
     .then(response => {
-      console.log('RESPONSE: ', response)
       setRelatedProducts(response)
+      return response.map(obj => obj.data.id);
+    })
+    /* Get related styles by their ids */
+    .then(response => {
+      const relatedStylesArray = mapInBatches(response, async (id) => {
+        return axios.get(`/relatedStyles/?product_id=${id}`);
+      }, 4)
+      return relatedStylesArray;
+    })
+    /* Add related styles  to state */
+    .then(response => {
+      setRelatedStylesArray(response)
+      return response.map(obj => obj.data.product_id);
+    })
+     /* Get products' meta review info by their ids */
+     .then(response => {
+      const relatedMetaReviewsArray = mapInBatches(response, async (id) => {
+        return axios.get(`/relatedMetaReviews/?product_id=${id}`);
+      }, 4)
+      return relatedMetaReviewsArray;
+    })
+    /* Add related meta review info to state */
+    .then(response => {
+      setRelatedMetaReviewsArray(response)
     })
     .catch(err => {
       console.log('CLIENT SIDE getRelatedProductIds ERROR: ', err)
     })
   }
 
+  //console.log('relatedProducts: ', relatedProducts);
+  //console.log('relatedStylesArray: ', relatedStylesArray);
+
+  // const constructRelatedInfoArray = (productsArray, stylesArray) => {
+  //   //set an object for only one product with only info needed for card THEN figure out the array
+  //   //for each obj in styles array
+  //   for () {
+  //     //add the
+  //   }
+
+  // }
+
 return (
-  <Carousel activeIndex={index} onSelect={handleSelect} breakPoints={breakPoints}>
+  <Carousel activeIndex={index} onSelect={handleSelect} breakpoints={breakPoints}>
     <Carousel.Item>
     <span className="cards-wrapper">
-      {relatedProducts.slice(0, 4).map((product) => (
+      {relatedProducts.map((product) => (
         <RelatedProductCard product={product} key={product.data.id} />
       ))}
     </span>

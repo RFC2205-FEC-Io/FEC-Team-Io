@@ -10,9 +10,9 @@ class App extends React.Component {
     return (
       <div>
         {/* <Overview/> */}
-        <StyleSelector/>
+        {/*<StyleSelector/>*/}
         <RPP />
-        <ReviewsApp />
+        {/*<ReviewsApp />*/}
       </div>
     );
   }
