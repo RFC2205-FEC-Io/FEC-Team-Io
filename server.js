@@ -17,7 +17,7 @@ axios.defaults.headers.common['Authorization'] = API_KEY;
 
 
 app.get("/reviews", (req, res) => {
-  console.log('req.query: ', req.query);
+  //console.log('req.query: ', req.query);
   const product_id = req.query.product_id;
   const count = req.query.count;
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/reviews/?product_id=${product_id}&count=${count}`)
@@ -32,23 +32,14 @@ app.listen(3000, () => {
   console.log("App running on http://localhost:3000");
 });
 
-<<<<<<< HEAD
-=======
-
-// console.log('header:', header);
->>>>>>> 559cea4018be4b3a080292d9533bf8e431b31993
 /* == OVERVIEW == */
 app.get('/overview', (req, res) => {
   // console.log('req.query:', req.query);
   const page = req.query.page;
   const count = req.query.count;
-<<<<<<< HEAD
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products/?page=${page}&count=${count}`)
-=======
-  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products/??page=${page}&count=${count}`)
->>>>>>> 559cea4018be4b3a080292d9533bf8e431b31993
     .then((response) => {
-      console.log('GET sent, products retreived!:', response.data);
+      //console.log('GET sent, products retreived!:', response.data);
       res.send(response.data);
     })
     .catch((err) => {
@@ -59,7 +50,7 @@ app.get('/overview', (req, res) => {
 app.get('/styles', (req, res) => {
   axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products/66642/styles')
     .then((response) => {
-      console.log('GET sent, Styles retreived!:', response.data);
+      //console.log('GET sent, Styles retreived!:', response.data);
       res.send(response.data);
     })
     .catch((err) => {
@@ -67,30 +58,32 @@ app.get('/styles', (req, res) => {
     });
 })
 
-//----------------API Requests for Related Products---------------//
 
-/* Handler for related product IDs requests*/
-app.get('/:product_id/related', (req, res) => {
-  console.log('Incoming request: ', req);
-  getRelatedProductIds()
-  .then (function (idArray) {
-    console.log('Related product id numbers acquired!')
-    return res.json(idArray)
+//----------------API Handlers and Requests for Related Products Widget---------------//
+
+/*Handler and request for related product Ids*/
+app.get('/related', (req, res) => {
+  const product_id = req.query.product_id;
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products/${product_id}/related`)
+  .then((response) => {
+    res.send(response.data);
   })
-  .catch (function (err) {
-    console.log('Uh-oh! API request error: ' + err);
-    return res.sendStatus(500);
-  })
+  .catch((err) => {
+    throw err;
+  });
 })
 
-/*Request function for related product IDs requests*/
-getRelatedProductIds = (productID) => {
-  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products/'${productID}'/related`)
-  .then(function (response) {
-    console.log(JSON.stringify(response.data));
+
+/*Handler and request for products based on input ids */
+app.get('/products', (req, res) => {
+  const product_id = req.query.product_id;
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products/${product_id}`)
+  .then((response) => {
+    res.send(response.data);
   })
-  .catch(function (error) {
-    console.log(error);
+  .catch((err) => {
+    throw err;
   });
-};
+})
+/*WORKS! Responds with one product object*/
 

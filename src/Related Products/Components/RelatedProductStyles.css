@@ -6,7 +6,7 @@
   min-height: 100vh;
 }
 
-/* Styling for interactice star rating component (Related Products and Comparisons) */
+/* Styling for interactive star rating component (Related Products and Comparisons) */
 
 input[type="radio"] {
   display: none;
