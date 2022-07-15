@@ -7,9 +7,9 @@ class ProductInfo extends React.Component {
       products: {}
     }
   }
-  componentDidMount () {
-    console.log('ProductInfo Mounted!');
-  }
+  // componentDidMount () {
+  //   console.log('ProductInfo Mounted!');
+  // }
   componentWillReceiveProps({products}) {
     this.setState({
       products: products

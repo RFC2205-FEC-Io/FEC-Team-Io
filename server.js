@@ -41,7 +41,7 @@ app.get('/overview', (req, res) => {
   const count = req.query.count;
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products/??page=${page}&count=${count}`)
     .then((response) => {
-      console.log('GET sent, products retreived!:', response.data);
+      // console.log('GET sent, products retreived!:', response.data);
       res.send(response.data);
     })
     .catch((err) => {
@@ -52,7 +52,7 @@ app.get('/overview', (req, res) => {
 app.get('/styles', (req, res) => {
   axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products/66642/styles')
     .then((response) => {
-      console.log('GET sent, Styles retreived!:', response.data);
+      // console.log('GET sent, Styles retreived!:', response.data);
       res.send(response.data);
     })
     .catch((err) => {
@@ -65,10 +65,10 @@ module.exports = {API_KEY};
 
 /* Handler for related product IDs requests*/
 app.get('/:product_id/related', (req, res) => {
-  console.log('Incoming request: ', req);
+  // console.log('Incoming request: ', req);
   getRelatedProductIds()
   .then (function (idArray) {
-    console.log('Related product id numbers acquired!')
+    // console.log('Related product id numbers acquired!')
     return res.json(idArray)
   })
   .catch (function (err) {

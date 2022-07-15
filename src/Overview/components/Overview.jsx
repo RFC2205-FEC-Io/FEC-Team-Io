@@ -25,7 +25,7 @@ class Overview extends React.Component {
       url: `/overview/?page=${this.state.page}&count=${this.state.count}`
     })
     .then((res) => {
-      console.log('GET sent, products retreived!:', res.data);
+      // console.log('GET sent, products retreived!:', res.data);
       this.setState({
         products: res.data
       })
