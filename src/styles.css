@@ -50,16 +50,3 @@ display: flex;
   width: 50px;
   margin-left: 5px;
 }
-
-
-.check-mark {
-  height: 15px;
-  width: auto;
-  position: relative;
-}
-/* OVERVIEW */
-
-  /* color: white;
-  background-color: black;
-} */
-

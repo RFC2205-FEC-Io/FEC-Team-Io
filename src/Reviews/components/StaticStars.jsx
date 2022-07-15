@@ -46,11 +46,11 @@ const StaticStars = ({ rating }) => {
     <div className="star-rating">
       {displayStars.map((item, i) => {
         return (
-          <div className="sincle-star-container" key={i}>
+          <span className="sincle-star-container" key={i}>
             <div className="single-star-fill" style={{ "width": `${parseInt(item * 31)}px` }}>
               <img className="single-star-outline" src="star.png" alt="stars alt" />
             </div>
-          </div>
+          </span>
         );
       })}
     </div>

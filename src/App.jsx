@@ -11,8 +11,8 @@ class App extends React.Component {
       <div>
         <Overview/>
         <StyleSelector/>
-        {/* <RPP />
-        <ReviewsApp /> */}
+        <RPP />
+        <ReviewsApp />
       </div>
     );
   }
