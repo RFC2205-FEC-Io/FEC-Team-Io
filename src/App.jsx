@@ -9,10 +9,9 @@ class App extends React.Component {
     const { name } = this.props;
     return (
       <div>
-        <Overview/>
         <StyleSelector/>
-        {/* <RPP />
-        <ReviewsApp /> */}
+        <RPP />
+        <ReviewsApp />
       </div>
     );
   }
