@@ -9,7 +9,7 @@ const Style = ({styles, styleClick, clicked, name}) => {
             <div
             id='style-img'
             style={{backgroundImage: `url(${style.photos[0].thumbnail_url})`}}
-            onClick={(event, name, styleObj, originalPrice, salePrice, img) =>{
+            onClick={(event, name, styleObj, originalPrice, salePrice, img) => {
               styleClick (event, style.name, style, style.original_price, style.sale_price, style.photos[0].url);
             }}
             > <img class='check-mark 'src={check_mark}></img></div>
@@ -21,7 +21,7 @@ const Style = ({styles, styleClick, clicked, name}) => {
           <div
           id='style-img'
           style={{backgroundImage: `url(${style.photos[0].thumbnail_url})`}}
-          onClick={(event, name, styleObj, originalPrice, salePrice, img) =>{
+          onClick={(event, name, styleObj, originalPrice, salePrice, img) => {
             styleClick (event, style.name, style, style.original_price, style.sale_price, style.photos[0].url);
           }}
           > </div>
