@@ -42,11 +42,13 @@ display: flex;
   width: 50px;
   margin-left: 5px;
 }
+
 /*================================================      Reviews Widget      ================================================*/
 .single-star-outline {
   height: 36px;
   width: 31px;
 }
+
 
 .single-star-fill {
   position: relative;
