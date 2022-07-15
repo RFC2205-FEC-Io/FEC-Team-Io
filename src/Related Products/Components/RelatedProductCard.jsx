@@ -5,7 +5,6 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import StaticStarRating from './StaticStarRating.jsx';
 import StarIconButton from './StarIconButton.jsx';
 
-
 //----------------- MAIN FUNCTIONAL COMPONENT -----------------//
 
 const RelatedProductCard = ({ product }) => {

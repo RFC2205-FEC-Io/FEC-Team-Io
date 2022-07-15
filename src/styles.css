@@ -42,6 +42,26 @@ display: flex;
   width: 50px;
   margin-left: 5px;
 }
+<<<<<<< HEAD
+/*================================================      Reviews Widget      ================================================*/
+.single-star-outline {
+  height: 36px;
+  width: 31px;
+}
+
+.single-star-fill {
+  position: relative;
+  display: inline-block;
+  height: 36px;
+  background-color: #333333;
+}
+
+.single-star-container {
+  height: 36px;
+  width: 31px;
+  display: inline-block;
+}
+=======
 .check {
 
 }
@@ -50,3 +70,4 @@ display: flex;
   /* color: white;
   background-color: black;
 } */
+>>>>>>> 0ad6b8b0b67927584ad8b9ad83ed1fae2e2be4d4

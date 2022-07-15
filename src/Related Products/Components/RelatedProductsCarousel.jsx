@@ -8,7 +8,6 @@ import RelatedProductCard from './RelatedProductCard.jsx';
 
 
 
-
 //--------------------- MAIN COMPONENT FUNCTION WITH HOOKS------------------------//
 
 const RelatedProductsCarousel = () => {

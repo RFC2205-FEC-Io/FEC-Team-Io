@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Container, Navbar } from 'react-bootstrap';
 import './Components/RelatedProductStyles.css';
-import InteractiveStarRating from './Components/InteractiveStarRating.jsx';
+// import InteractiveStarRating from './Components/InteractiveStarRating.jsx';
 import StaticStarRating from './Components/StaticStarRating.jsx';
 import XIconButton from './Components/XIconButton.jsx';
 import RelatedProductCard from './Components/RelatedProductCard.jsx';
