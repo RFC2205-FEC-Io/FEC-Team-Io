@@ -11,24 +11,31 @@ display: flex;
 #styles-selector {
   display: flex;
 }
+
 #styles {
   display: flex;
 }
+
 #style-img {
   height: 50px;
   width: 50px;
   border-radius: 50%;
+  background-size: cover;
 }
+
 #add-to-cart{
   /* display: flex;
   flex-direction: row; */
 }
+
 #price{
   text-decoration: line-through;
 }
+
 #salePrice{
   color: red;
 }
+
 #image-gallery{
   display: flex;
   background-image: url('https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80');
@@ -37,37 +44,22 @@ display: flex;
   height: 400px;
   background-repeat: no-repeat;
 }
+
 #gallery {
   height: 50px;
   width: 50px;
   margin-left: 5px;
 }
-<<<<<<< HEAD
-/*================================================      Reviews Widget      ================================================*/
-.single-star-outline {
-  height: 36px;
-  width: 31px;
-}
 
-.single-star-fill {
+
+.check-mark {
+  height: 15px;
+  width: auto;
   position: relative;
-  display: inline-block;
-  height: 36px;
-  background-color: #333333;
-}
-
-.single-star-container {
-  height: 36px;
-  width: 31px;
-  display: inline-block;
-}
-=======
-.check {
-
 }
 /* OVERVIEW */
 
   /* color: white;
   background-color: black;
 } */
->>>>>>> 0ad6b8b0b67927584ad8b9ad83ed1fae2e2be4d4
+
