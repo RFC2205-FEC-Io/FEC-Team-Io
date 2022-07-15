@@ -15,26 +15,6 @@ app.use(express.static("dist"));
 
 axios.defaults.headers.common['Authorization'] = API_KEY;
 
-
-app.get("/reviews", (req, res) => {
-  //console.log('req.query: ', req.query);
-  const product_id = req.query.product_id;
-  const count = req.query.count;
-  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/reviews/?product_id=${product_id}&count=${count}`)
-  .then(response => {
-    // console.log('data: ', data);
-    res.json(response.data);
-  })
-  .catch(err => {console.log('Error: ', err)})
-})
-
-app.listen(3000, () => {
-  console.log("App running on http://localhost:3000");
-});
-
-
-
-
 /* == OVERVIEW == */
 app.get('/overview', (req, res) => {
   // console.log('req.query:', req.query);
@@ -64,7 +44,7 @@ app.get('/styles', (req, res) => {
 
 //----------------API Handlers and Requests for Related Products Widget---------------//
 
-/*Handler and request for related product Ids*/
+/*Handler and request for related product Ids based on current id*/
 app.get('/related', (req, res) => {
   const product_id = req.query.product_id;
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products/${product_id}/related`)
@@ -88,5 +68,57 @@ app.get('/products', (req, res) => {
     throw err;
   });
 })
-/*WORKS! Responds with one product object*/
 
+
+/*Handler and request for related product styles based on ids*/
+app.get('/relatedStyles', (req, res) => {
+  const product_id = req.query.product_id;
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products/${product_id}/styles`)
+  .then((response) => {
+    res.send(response.data);
+  })
+  .catch((err) => {
+    throw err;
+  });
+})
+
+/*Handler and request for related meta review info based on ids*/
+app.get('/relatedMetaReviews', (req, res) => {
+  const product_id = req.query.product_id;
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/reviews/meta/?product_id=${product_id}`)
+  .then((response) => {
+    res.send(response.data);
+  })
+  .catch((err) => {
+    throw err;
+  });
+})
+
+//----------------API Requests for Ratings and Reviews---------------//
+
+app.get("/reviews", (req, res) => {
+  //console.log('req.query: ', req.query);
+  const product_id = req.query.product_id;
+  const count = req.query.count;
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/reviews/?product_id=${product_id}&count=${count}`)
+  .then(response => {
+    // console.log('data: ', data);
+    res.json(response.data);
+  })
+  .catch(err => {console.log('Error: ', err)})
+})
+
+app.put("/reviews/help", (req, res) => {
+  //console.log('req.query: ', req.query);
+  const review_id = req.query.review_id;
+  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/reviews/${review_id}/helpful`)
+  .then(response => {
+    // console.log('data: ', data);
+    res.sendStatus(201)
+  })
+  .catch(err => {console.log('Error: ', err)})
+})
+
+app.listen(3000, () => {
+  console.log("App running on http://localhost:3000");
+});

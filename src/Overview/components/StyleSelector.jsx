@@ -3,7 +3,7 @@ import Style from './Style.jsx';
 import AddToCart from './AddToCart.jsx';
 import ImageGallery from './ImageGallery.jsx';
 import ProductInfo from './ProductInfo.jsx';
-import Overlay from 'react-bootstrap/Overlay';
+import Stars from './Stars.jsx';
 import '../../styles.css';
 const axios = require('axios');
 class StyleSelector extends React.Component {
@@ -19,6 +19,8 @@ class StyleSelector extends React.Component {
       page: 1,
       price: 0,
       salePrice: 0,
+      productID: 66642,
+      reviews: [],
       images: [
         {thumbnail_url: 'https://images.unsplash.com/photo-1501088430049-71…hcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
          url: 'https://images.unsplash.com/photo-1501088430049-71…hcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
@@ -27,9 +29,9 @@ class StyleSelector extends React.Component {
     this.styleClickEvent = this.styleClickEvent.bind(this);
     this.styleHeader = this.styleHeader.bind(this);
   }
-  componentDidMount() {
-    console.log('StyleSelector, mounted');
-    // Retreive styles
+
+  getAllData() {
+    // GET STYLES
     axios({
       method: 'get',
       url: '/styles'
@@ -47,13 +49,13 @@ class StyleSelector extends React.Component {
       throw err;
     });
 
-    // retreive products
+    // GET PRODUCTS
     axios({
       method: 'get',
       url: `/overview/?page=${this.state.page}&count=${this.state.count}`
     })
     .then((res) => {
-      console.log('GET sent, products retreived!:', res.data);
+      // console.log('GET sent, products retreived!:', res.data);
       this.setState({
         products: res.data
       })
@@ -62,11 +64,35 @@ class StyleSelector extends React.Component {
       throw err;
     });
 
-    const statePromise = new Promise(() => {
-      setTimeout(() => {
-        console.log('Promise Fulfilled')
-      }, 500)
+    // GET REVIEWS
+    axios({
+      method: 'get',
+      url: `/reviews/?product_id=${this.state.productID}&count=${this.state.count}`
+    })
+    .then((res) => {
+      // console.log('GET sent, reviews retreived!:', res.data);
+      this.setState({
+        reviews: res.data.results
+      });
+    })
+    .catch((err) => {
+      console.log('Stars:', err);
     });
+
+    // const statePromise = new Promise(() => {
+    //   setTimeout(() => {
+    //     // console.log('Promise Fulfilled')
+    //   }, 500)
+    // });
+  }
+
+  componentWillMount() {
+    this.getAllData();
+  }
+
+  componentDidMount() {
+    console.log('StyleSelector MOUNTED!:', this.state);
+
   }
 
   styleClickEvent (event, name, styleObj, originalPrice, salePrice, img) {
@@ -114,9 +140,10 @@ class StyleSelector extends React.Component {
   render (props) {
     return (
       <div id='main'>
-        {console.log('CURRENT STATE:', this.state)}
+        {/* {console.log('CURRENT STATE:', this.state)} */}
         <ImageGallery images={this.state.images} clickedImg={this.state.clickedthumb}/>
-        <ProductInfo products={this.state.products[0]} defaultPrice={this.state.price} salePrice={this.state.salePrice}/>
+        <Stars/>
+        {/* <ProductInfo products={this.state.products[0]} defaultPrice={this.state.price} salePrice={this.state.salePrice}/> */}
         <div id='style-selector'>
           {this.styleHeader()}
           <Style styles={this.state.styles} styleClick={this.styleClickEvent} clicked={this.state.styleClicked} name={this.state.styleName}/>

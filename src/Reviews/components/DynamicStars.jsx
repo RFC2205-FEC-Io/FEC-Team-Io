@@ -47,11 +47,11 @@ class DynamicStars extends React.Component {
       <div>
         {this.state.starsArr.map((item, i) => {
           return (
-            <div className="single-star-container" value={i} key={i} onMouseOver={this.handleStarsHover} onClick={this.handleStarsClick} onMouseLeave={this.handleStarsLeave}>
-              <div className="single-star-fill" style={{ "width": "20px"}}>
+            <span className="single-star-container" value={i} key={i} onMouseOver={this.handleStarsHover} onClick={this.handleStarsClick} onMouseLeave={this.handleStarsLeave}>
+              <span className="single-star-fill" style={{ "width": "20px"}}>
                 <img className="single-star-outline" src="Single-Empty-Star.PNG" value={i} width="20px" height="20px"/>
-              </div>
-            </div>
+              </span>
+            </span>
           )
         })}
       </div>
