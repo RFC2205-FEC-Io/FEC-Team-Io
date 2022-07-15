@@ -32,14 +32,21 @@ app.listen(3000, () => {
   console.log("App running on http://localhost:3000");
 });
 
+<<<<<<< HEAD
+=======
 
 // console.log('header:', header);
+>>>>>>> 559cea4018be4b3a080292d9533bf8e431b31993
 /* == OVERVIEW == */
 app.get('/overview', (req, res) => {
   // console.log('req.query:', req.query);
   const page = req.query.page;
   const count = req.query.count;
+<<<<<<< HEAD
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products/?page=${page}&count=${count}`)
+=======
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products/??page=${page}&count=${count}`)
+>>>>>>> 559cea4018be4b3a080292d9533bf8e431b31993
     .then((response) => {
       console.log('GET sent, products retreived!:', response.data);
       res.send(response.data);
@@ -60,7 +67,6 @@ app.get('/styles', (req, res) => {
     });
 })
 
-module.exports = {API_KEY};
 //----------------API Requests for Related Products---------------//
 
 /* Handler for related product IDs requests*/

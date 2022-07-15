@@ -28,13 +28,13 @@ class RPP extends React.Component {
 getRelatedProductIds(currentId) {
   axios.get('/products/:product_id/related', {params: {product_id: this.state.currentID}})
   .then(response => {
-    console.log('response: ', response)
+    // console.log('response: ', response)
     this.setState({
       relatedProductIds: response.data
     })
   })
   .catch(err => {
-    console.log('getRelatedProductIds ERROR: ', err)
+    // console.log('getRelatedProductIds ERROR: ', err)
   });
 }
 
