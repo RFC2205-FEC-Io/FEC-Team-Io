@@ -32,14 +32,12 @@ app.listen(3000, () => {
   console.log("App running on http://localhost:3000");
 });
 
-
-// console.log('header:', header);
 /* == OVERVIEW == */
 app.get('/overview', (req, res) => {
   // console.log('req.query:', req.query);
   const page = req.query.page;
   const count = req.query.count;
-  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products/??page=${page}&count=${count}`)
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products/?page=${page}&count=${count}`)
     .then((response) => {
       //console.log('GET sent, products retreived!:', response.data);
       res.send(response.data);

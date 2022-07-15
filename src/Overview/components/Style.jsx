@@ -3,16 +3,15 @@ import React from 'react';
 const Style = ({styles, styleClick}) => {
   return (
     <div id='styles'>
-      {/* {console.log('styles:', styles)} */}
       {styles.map ((style) => {
+        // console.log('Style.jsx style:', style.original_price, style.sale_price)
         return (
         <div key={style.name}>
-          {style.name}
           <img
           src={style.photos[0].thumbnail_url}
           id='style-img'
-          onClick={(event, name, styleObj) =>{
-            styleClick (event, style.name, style);
+          onClick={(event, name, styleObj, originalPrice, salePrice, img) =>{
+            styleClick (event, style.name, style, style.original_price, style.sale_price, style.photos[0].url);
           }}
           ></img>
         </div>
