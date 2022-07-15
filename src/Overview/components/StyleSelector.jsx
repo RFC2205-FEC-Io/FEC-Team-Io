@@ -140,7 +140,7 @@ class StyleSelector extends React.Component {
     });
   }
 
-  styleClickEvent (event, name, styleObj, originalPrice, salePrice) {
+  styleClickEvent (event, name, styleObj, originalPrice, salePrice, img) {
     event.preventDefault();
     // console.log('name:', name, 'styleObj:', styleObj.skus);
     // console.log('originalPrice, salePrice:', originalPrice, salePrice)
@@ -161,7 +161,8 @@ class StyleSelector extends React.Component {
       styleName:name,
       styleSKU: skuArr,
       price: originalPrice,
-      salePrice: salePrice
+      salePrice: salePrice,
+      clickedthumb:img
     });
   }
 
@@ -184,7 +185,7 @@ class StyleSelector extends React.Component {
   render (props) {
     return (
       <div id='main'>
-        <ImageGallery images={this.state.images}/>
+        <ImageGallery images={this.state.images} clickedImg={this.state.clickedthumb}/>
         <ProductInfo products={this.state.products[0]} defaultPrice={this.state.price} salePrice={this.state.salePrice}/>
         <div id='style-selector'>
           {this.styleHeader()}

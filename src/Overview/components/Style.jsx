@@ -10,8 +10,8 @@ const Style = ({styles, styleClick}) => {
           <img
           src={style.photos[0].thumbnail_url}
           id='style-img'
-          onClick={(event, name, styleObj, originalPrice, salePrice) =>{
-            styleClick (event, style.name, style, style.original_price, style.sale_price);
+          onClick={(event, name, styleObj, originalPrice, salePrice, img) =>{
+            styleClick (event, style.name, style, style.original_price, style.sale_price, style.photos[0].url);
           }}
           ></img>
         </div>

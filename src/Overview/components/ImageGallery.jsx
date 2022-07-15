@@ -8,6 +8,7 @@ class ImageGallery extends React.Component {
       mainImage: 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
       listImg: '',
       imgClicked: false,
+      clickedthumb: ''
     }
     this.setBackgroundImage = this.setBackgroundImage.bind(this);
   }
@@ -20,6 +21,8 @@ class ImageGallery extends React.Component {
     this.setState({
       images: props.images,
       // mainImage: props.images[0].thumbnail_url
+      clickedthumb: props.clickedImg
+
     })
   }
 
@@ -42,7 +45,7 @@ class ImageGallery extends React.Component {
     if (this.state.imgClicked) {
       return { backgroundImage: `url( ${this.state.listImg})`};
     } else {
-      return { backgroundImage: `url( ${this.state.mainImage})`};
+      return { backgroundImage: `url( ${this.state.clickedthumb})`};
     }
   }
   render (props) {
