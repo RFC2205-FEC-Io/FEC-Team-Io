@@ -13,7 +13,7 @@ class RPP extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      info: []
+      currentId: 66645
     }
     // this.XIconButtonClickHandler = this.XIconButtonClickHandler.bind(this);
   }
