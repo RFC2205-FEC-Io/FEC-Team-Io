@@ -2,12 +2,12 @@ import React, {useState, useEffect} from 'react';
 import expand_icon from '../../../dist/expand_icon.png';
 import Modal from 'react-bootstrap/Modal';
 
-const ImageGallery = ({images, clickedThumb}) => {
+const ImageGallery = ({images, clickedThumb, thumbnailClicked}) => {
   const imageArr = [];
   const mainImage = 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80';
   const [listImg, addImage] = useState('');
   const [imgClicked, clicked] = useState(false);
-  const clickedthumb = '';
+  // const clickedthumb = ;
 
   const setBackgroundImage = (event, imageURL) => {
     event.preventDefault();
@@ -16,8 +16,11 @@ const ImageGallery = ({images, clickedThumb}) => {
     // console.log('imgClicked:', imgClicked, 'listImg:', listImg);
   }
 
-  const setStyle = () => {
-    if (imgClicked) {
+
+  const setMainImg = () => {
+    if (thumbnailClicked && !imgClicked) {
+      return { backgroundImage: `url( ${clickedThumb})`};
+    }  else if (imgClicked) {
       return { backgroundImage: `url( ${listImg})`};
     } else {
       return { backgroundImage: `url( ${mainImage})`};
@@ -48,10 +51,10 @@ const ImageGallery = ({images, clickedThumb}) => {
   const handleShow = () => setShow(true);
 
   const Example = (listImg) => {
-    console.log('show:', show);
+    // console.log('show:', show);
     const handleClose = () => setShow(false);
     if (!show) {
-      return <div>Closed</div>;
+      return;
     } else {
     return (
       <>
@@ -66,7 +69,7 @@ const ImageGallery = ({images, clickedThumb}) => {
 
   return (
     <div id='image-gallery'>
-      <div id='main-img'  style={setStyle()}>
+      <div id='main-img'  style={setMainImg()}>
         {images.map((image) => {
           return (
           <div>

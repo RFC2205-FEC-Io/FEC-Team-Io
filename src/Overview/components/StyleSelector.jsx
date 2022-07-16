@@ -144,7 +144,7 @@ class StyleSelector extends React.Component {
     return (
       <div id='main'>
         {/* {console.log('CURRENT STATE:', this.state)} */}
-        <ImageGallery images={this.state.images} clickedThumb={this.state.clickedthumb}/>
+        <ImageGallery images={this.state.images} clickedThumb={this.state.clickedthumb} thumbnailClicked={this.state.styleClicked}/>
         <Stars/>
         {/* <ProductInfo products={this.state.products[0]} defaultPrice={this.state.price} salePrice={this.state.salePrice}/> */}
         <div id='style-selector'>
