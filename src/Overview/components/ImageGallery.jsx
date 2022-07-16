@@ -2,25 +2,25 @@ import React, {useState, useEffect} from 'react';
 import expand_icon from '../../../dist/expand_icon.png';
 import Modal from 'react-bootstrap/Modal';
 
-const ImageGallery = ({images, clickedThumb, thumbnailClicked}) => {
+const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG}) => {
   const imageArr = [];
   const mainImage = 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80';
   const [listImg, addImage] = useState('');
-  const [imgClicked, clicked] = useState(false);
+  const [galleryIMGClicked, clicked] = useState(false);
   // const clickedthumb = ;
 
   const setBackgroundImage = (event, imageURL) => {
     event.preventDefault();
     addImage(current => imageURL);
     clicked( current => true);
-    // console.log('imgClicked:', imgClicked, 'listImg:', listImg);
+    // console.log('galleryIMGClicked:', galleryIMGClicked, 'listImg:', listImg);
   }
 
 
   const setMainImg = () => {
-    if (thumbnailClicked && !imgClicked) {
+    if (thumbnailClicked && !galleryIMGClicked) {
       return { backgroundImage: `url( ${clickedThumb})`};
-    }  else if (imgClicked) {
+    }  else if (galleryIMGClicked) {
       return { backgroundImage: `url( ${listImg})`};
     } else {
       return { backgroundImage: `url( ${mainImage})`};

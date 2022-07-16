@@ -3,7 +3,6 @@ import Style from './Style.jsx';
 import AddToCart from './AddToCart.jsx';
 import ImageGallery from './ImageGallery.jsx';
 import ProductInfo from './ProductInfo.jsx';
-import Stars from './Stars.jsx';
 import '../../styles.css';
 const axios = require('axios');
 class StyleSelector extends React.Component {
@@ -22,6 +21,7 @@ class StyleSelector extends React.Component {
       productID: 66642,
       reviews: [],
       clickedthumb: '',
+      galleryIMGClicked: false,
       images: [
         {thumbnail_url: 'https://images.unsplash.com/photo-1501088430049-71…hcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
          url: 'https://images.unsplash.com/photo-1501088430049-71…hcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
@@ -71,7 +71,6 @@ class StyleSelector extends React.Component {
       url: `/reviews/?product_id=${this.state.productID}&count=${this.state.count}`
     })
     .then((res) => {
-      // console.log('GET sent, reviews retreived!:', res.data);
       this.setState({
         reviews: res.data.results
       });
@@ -80,11 +79,6 @@ class StyleSelector extends React.Component {
       console.log('Stars:', err);
     });
 
-    // const statePromise = new Promise(() => {
-    //   setTimeout(() => {
-    //     // console.log('Promise Fulfilled')
-    //   }, 500)
-    // });
   }
 
   componentWillMount() {
@@ -99,8 +93,6 @@ class StyleSelector extends React.Component {
   // UPDATES CLICK STATE OF THUMBNAIL
   styleClickEvent (event, name, styleObj, originalPrice, salePrice, img) {
     event.preventDefault();
-    // console.log('name:', name, 'styleObj:', styleObj.skus);
-    // console.log('originalPrice, salePrice:', originalPrice, salePrice)
     var skuArr = [];
     for (var key in styleObj.skus) {
       skuArr.push(styleObj.skus[key]);
@@ -108,19 +100,16 @@ class StyleSelector extends React.Component {
     this.state.styles.map((style) => {
       if(style.name === name) {
         this.setState({
-          images: style.photos
+          images: style.photos,
+          styleClicked: true,
+          styleName:name,
+          styleSKU: skuArr,
+          price: originalPrice,
+          salePrice: salePrice,
+          clickedthumb:img
         })
       }
     })
-
-    this.setState({
-      styleClicked: true,
-      styleName:name,
-      styleSKU: skuArr,
-      price: originalPrice,
-      salePrice: salePrice,
-      clickedthumb:img
-    });
   }
 
   // RENDERS THE PRODUCT NAME TO THE HEADER
@@ -143,33 +132,34 @@ class StyleSelector extends React.Component {
   render (props) {
     return (
       <div id='main'>
-        {/* {console.log('CURRENT STATE:', this.state)} */}
-        <ImageGallery images={this.state.images} clickedThumb={this.state.clickedthumb} thumbnailClicked={this.state.styleClicked}/>
-        <Stars/>
-        {/* <ProductInfo products={this.state.products[0]} defaultPrice={this.state.price} salePrice={this.state.salePrice}/> */}
+        <ImageGallery
+          images={this.state.images}
+          clickedThumb={this.state.clickedthumb}
+          thumbnailClicked={this.state.styleClicked}
+          galleryIMG={this.state.galleryIMGClicked}
+          />
+        <ProductInfo
+          products={this.state.products[0]}
+          defaultPrice={this.state.price}
+          salePrice={this.state.salePrice}
+          reviews = {this.state.reviews}
+        />
         <div id='style-selector'>
           {this.styleHeader()}
-          <Style styles={this.state.styles} styleClick={this.styleClickEvent} clicked={this.state.styleClicked} name={this.state.styleName}/>
+          <Style
+            styles={this.state.styles}
+            styleClick={this.styleClickEvent}
+            clicked={this.state.styleClicked}
+            name={this.state.styleName}
+          />
           </div>
-          <AddToCart SKU={this.state.styleSKU} styleClicked={this.state.styleClicked}/>
+        <AddToCart
+          SKU={this.state.styleSKU}
+          styleClicked={this.state.styleClicked}
+        />
       </div>
     );
   }
 }
 
 export default StyleSelector;
-
-// defaultPrice={this.state.price} salePrice={this.state.salePrice}
-
-setTimeout(() => {
-
-}, 500);
-
-// import React, {useState, useEffect} from 'react';
-
-// const StyleSelector = (props) => {
-//   console.log('props:', props)
-//   return (<div id = 'style-selector'> StyleSelector</div>)
-// }
-
-// export default StyleSelector;
