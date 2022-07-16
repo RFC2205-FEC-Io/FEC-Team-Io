@@ -21,6 +21,7 @@ class StyleSelector extends React.Component {
       salePrice: 0,
       productID: 66642,
       reviews: [],
+      clickedthumb: '',
       images: [
         {thumbnail_url: 'https://images.unsplash.com/photo-1501088430049-71…hcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
          url: 'https://images.unsplash.com/photo-1501088430049-71…hcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
@@ -37,7 +38,7 @@ class StyleSelector extends React.Component {
       url: '/styles'
     })
     .then((res) => {
-      console.log('GET sent, styles retreived!:', res.data);
+      // console.log('GET sent, styles retreived!:', res.data);
       this.setState({
         styles: res.data.results
       });
@@ -91,10 +92,11 @@ class StyleSelector extends React.Component {
   }
 
   componentDidMount() {
-    console.log('StyleSelector MOUNTED!:', this.state);
+    // console.log('StyleSelector MOUNTED!:', this.state);
 
   }
 
+  // UPDATES CLICK STATE OF THUMBNAIL
   styleClickEvent (event, name, styleObj, originalPrice, salePrice, img) {
     event.preventDefault();
     // console.log('name:', name, 'styleObj:', styleObj.skus);
@@ -121,6 +123,7 @@ class StyleSelector extends React.Component {
     });
   }
 
+  // RENDERS THE PRODUCT NAME TO THE HEADER
   styleHeader(name) {
     if (!this.state.styleClicked) {
       return  (
@@ -141,7 +144,7 @@ class StyleSelector extends React.Component {
     return (
       <div id='main'>
         {/* {console.log('CURRENT STATE:', this.state)} */}
-        <ImageGallery images={this.state.images} clickedImg={this.state.clickedthumb}/>
+        <ImageGallery images={this.state.images} clickedThumb={this.state.clickedthumb}/>
         <Stars/>
         {/* <ProductInfo products={this.state.products[0]} defaultPrice={this.state.price} salePrice={this.state.salePrice}/> */}
         <div id='style-selector'>

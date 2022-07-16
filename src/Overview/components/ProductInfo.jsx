@@ -1,5 +1,5 @@
 import React from 'react';
-const axios = require('axios');
+
 class ProductInfo extends React.Component {
   constructor (props) {
     super (props);

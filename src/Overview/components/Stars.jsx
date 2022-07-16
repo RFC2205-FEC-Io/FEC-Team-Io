@@ -9,7 +9,7 @@ class Stars extends React.Component {
   }
 
   componentDidMount () {
-    console.log('Stars mounted!');
+    // console.log('Stars mounted!');
   }
 
   avgRating () {
