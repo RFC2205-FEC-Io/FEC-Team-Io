@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import StaticStarRating from './StaticStarRating.jsx';
 import StarIconButton from './StarIconButton.jsx';
+import ProductPrice from './ProductPrice.jsx';
 
 
 //----------------- MAIN FUNCTIONAL COMPONENT -----------------//
@@ -39,7 +40,7 @@ const RelatedProductCard = ({ product }) => {
             {product.description}
         </Card.Text>
         <Card.Text>
-          {'$' + product.default_price}
+          <ProductPrice product={product} />
         </Card.Text>
         <Card.Text style={{textAlign: "center"}}>
           <StaticStarRating averageRating={product.averageRating}/>
@@ -48,4 +49,5 @@ const RelatedProductCard = ({ product }) => {
     </Card>
   );
 };
+
 export default RelatedProductCard
