@@ -24,6 +24,46 @@ const ImageGallery = ({images, clickedThumb}) => {
     }
   }
 
+  // const [view, changeView] = useState(false);
+  // const expandView= () => changeView(true);
+
+  // const Modal = (listImg) => {
+  //   console.log('show:', view);
+  //   const revertView = () => changeView(false);
+  //   if (!view) {
+  //     return <div>Closed</div>;
+  //   } else {
+  //   return (
+  //     <>
+  //       <Modal ={view} onHide={revertView} animation={false}>
+  //         <img src={listImg}></img>
+  //       </Modal>
+  //     </>
+  //   );
+  // }
+  // }
+
+
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+
+  const Example = (listImg) => {
+    console.log('show:', show);
+    const handleClose = () => setShow(false);
+    if (!show) {
+      return <div>Closed</div>;
+    } else {
+    return (
+      <>
+        <Modal show={show} onHide={handleClose} animation={false}>
+          <img src={listImg}></img>
+        </Modal>
+      </>
+    );
+  }
+  }
+
+
   return (
     <div id='image-gallery'>
       <div id='main-img'  style={setStyle()}>
@@ -35,8 +75,13 @@ const ImageGallery = ({images, clickedThumb}) => {
           );
         })}
         <div id='view'>
-          <img src={expand_icon}>
+          {/* <img src={expand_icon} onClick={expandView}> */}
+          <img src={expand_icon} onClick={handleShow}>
         </img></div>
+        <div>
+          {Example(listImg)}
+          {/* {Modal(listImg)} */}
+        </div>
       </div>
     </div>
   );
