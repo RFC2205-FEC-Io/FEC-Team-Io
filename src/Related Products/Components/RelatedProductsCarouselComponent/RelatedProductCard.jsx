@@ -2,8 +2,8 @@
 import React from "react";
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
-import StaticStarRating from './StaticStarRating.jsx';
-import StarIconButton from './StarIconButton.jsx';
+import StaticStarRating from '../ReusableMiniComponents/StaticStarRating.jsx';
+import StarIconButton from '../ReusableMiniComponents/StarIconButton.jsx';
 import ProductPrice from './ProductPrice.jsx';
 
 

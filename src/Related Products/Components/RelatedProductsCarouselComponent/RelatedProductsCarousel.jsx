@@ -14,7 +14,7 @@ import RelatedProductCard from './RelatedProductCard.jsx';
 const RelatedProductsCarousel = () => {
   /*State*/
   const [index, setIndex] = useState(0);
-  const [currentId, setCurrentId] = useState(66647);
+  const [currentId, setCurrentId] = useState(66645);
   const [relatedProductsInfoSummaries, setRelatedProductsInfoSummaries] = useState([]);
 
   /*Helper functions */

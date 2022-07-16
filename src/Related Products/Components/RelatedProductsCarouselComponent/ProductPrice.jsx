@@ -11,11 +11,11 @@ const ProductPrice = ({ product }) => {
   } else {
     return (
       <span>
-        <span style={{textDecoration: 'line-through', color: 'red'}}>
-          {'$' + product.styles[0].original_price}
+        <span style={{color: 'red'}}>
+          {'$' + product.styles[0].sale_price}
         </span>
-        <span>
-          {'      $' + product.styles[0].sale_price}
+        <span style={{textDecoration: 'line-through'}}>
+          {'         $' + product.styles[0].original_price}
         </span>
       </span>
     )
