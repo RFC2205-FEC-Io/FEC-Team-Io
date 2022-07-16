@@ -14,7 +14,7 @@ import RelatedProductCard from './RelatedProductCard.jsx';
 const RelatedProductsCarousel = () => {
   /*State*/
   const [index, setIndex] = useState(0);
-  const [currentId, setCurrentId] = useState(66645);
+  const [currentId, setCurrentId] = useState(66647);
   const [relatedProductsInfoSummaries, setRelatedProductsInfoSummaries] = useState([]);
 
   /*Helper functions */
@@ -127,8 +127,23 @@ const handleSelect = (selectedIndex, e) => {
     })
   }
 
-  return (
-    <Carousel activeIndex={index} onSelect={handleSelect}>
+  //---------------- RETURN FOR CAROUSEL RENDER -------------------------------------//
+
+  if (relatedProductsInfoSummaries.length <= 4) {
+    return (
+      <Carousel activeIndex={index} onSelect={handleSelect}>
+        <Carousel.Item>
+          <span className="cards-wrapper">
+            {relatedProductsInfoSummaries.slice(0,4).map((product) => (
+              <RelatedProductCard product={product} key={product.id} />
+            ))}
+          </span>
+        </Carousel.Item>
+      </Carousel>
+    )
+  } else if (relatedProductsInfoSummaries.length > 4 && relatedProductsInfoSummaries.length <= 8) {
+    return (
+      <Carousel activeIndex={index} onSelect={handleSelect}>
       <Carousel.Item>
         <span className="cards-wrapper">
           {relatedProductsInfoSummaries.slice(0,4).map((product) => (
@@ -144,6 +159,34 @@ const handleSelect = (selectedIndex, e) => {
         </span>
       </Carousel.Item>
     </Carousel>
-      )
+    )
+  } else if (relatedProductsInfoSummaries.length > 8 && relatedProductsInfoSummaries.length <= 12) {
+    return (
+      <Carousel activeIndex={index} onSelect={handleSelect}>
+      <Carousel.Item>
+        <span className="cards-wrapper">
+          {relatedProductsInfoSummaries.slice(0,4).map((product) => (
+            <RelatedProductCard product={product} key={product.id} />
+          ))}
+        </span>
+      </Carousel.Item>
+      <Carousel.Item>
+        <span className="cards-wrapper">
+          {relatedProductsInfoSummaries.slice(4,8).map((product) => (
+            <RelatedProductCard product={product} key={product.id} />
+          ))}
+        </span>
+      </Carousel.Item>
+      <Carousel.Item>
+        <span className="cards-wrapper">
+          {relatedProductsInfoSummaries.slice(8,12).map((product) => (
+            <RelatedProductCard product={product} key={product.id} />
+          ))}
+        </span>
+      </Carousel.Item>
+    </Carousel>
+    )
+  };
+
 };
 export default RelatedProductsCarousel;
