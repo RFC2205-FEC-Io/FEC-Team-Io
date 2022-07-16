@@ -50,7 +50,6 @@ const handleSelect = (selectedIndex, e) => {
       ...(await memo),
       ...(await Promise.all(batch.map(iteratee)))
     ], []);
-    console.log('Ran mapInBatches');
   };
 
    //-------- Get requests -----------------//
@@ -61,7 +60,6 @@ const handleSelect = (selectedIndex, e) => {
     return axios.get(`/related/?product_id=${currentId}`)
     .then(response => {
       const relatedIds = response.data;
-      setRelatedIds(response.data);
       return relatedIds;
     })
     /* Get related products by their ids */
@@ -104,21 +102,11 @@ const handleSelect = (selectedIndex, e) => {
       }, 4)
       return relatedMetaReviewsArray;
     })
-    /* Add related meta review info to state */
-    .then(response => {
-      setRelatedMetaReviewsArray(response)
-      return response;
-    })
     /*Average the ratings for each related item*/
     .then(response => {
       const productRatingsByIds = {};
       response.map(obj => productRatingsByIds[obj.data.product_id] = obj.data.ratings)
       return productRatingsByIds
-    })
-     /* Add product rating info to state */
-    .then(response => {
-      setProductRatingsByIds(response)
-      return response;
     })
     /*Average the rating of each product id */
     .then(response => {
@@ -145,10 +133,6 @@ const handleSelect = (selectedIndex, e) => {
       infoSummary = newArr;
       return infoSummary;
     })
-
-      // return response.map(obj =>
-      //  {obj.data.product_id: ((obj.data.ratings[1]) + (obj.data.ratings[2] * 2) + (obj.data.ratings[3] * 3) + (obj.data.ratings[4] * 4) + (obj.data.ratings[5] * 5)) / ((obj.data.ratings[1]) + (obj.data.ratings[2]) + (obj.data.ratings[3]) + (obj.data.ratings[4]) + (obj.data.ratings[5]))}
-      //)
     .catch(err => {
       console.log('CLIENT SIDE getRelatedProductIds ERROR: ', err)
     })
