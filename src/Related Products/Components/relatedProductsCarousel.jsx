@@ -15,9 +15,6 @@ const RelatedProductsCarousel = () => {
   /*State*/
   const [index, setIndex] = useState(0);
   const [currentId, setCurrentId] = useState(66645);
-  // const [relatedProducts, setRelatedProducts] = useState([]);
-  // const [relatedStylesArray, setRelatedStylesArray] = useState([]);
-  // const [averageProductRatingById, setAverageProductRatingById] = useState({});
   const [relatedProductsInfoSummaries, setRelatedProductsInfoSummaries] = useState([]);
 
   /*Helper functions */
@@ -28,23 +25,16 @@ const RelatedProductsCarousel = () => {
     };
     fetchData();
    }, []);
-  //useEffect(() => {collectInfoForOneCard(relatedProducts)}, [averageProductRatingById]);
+
 
 
 const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
 
-  const breakPoints = [
-    {width: 1, itemsToShow: 1},
-    {width: 550, itemsToShow: 2},
-    {width: 768, itemsToShow: 3},
-    {width: 1200, itemsToShow: 4}
-  ];
 
   /*This is a function for mapping when the iteratee is asynchronous (like axios requests)*/
   const mapInBatches = (array, iteratee, batchSize) => {
-    console.log('MapInBatches triggered.');
     const batches = _.groupBy(array, (_v, i) => Math.floor(i/batchSize));
     return Object.values(batches).reduce(async (memo, batch) => [
       ...(await memo),
@@ -87,7 +77,6 @@ const handleSelect = (selectedIndex, e) => {
     })
     /* Add related styles  to state */
     .then(response => {
-      //console.log('RESPONSE to relatedStylesArray: ', response)
       const newArr = infoSummary;
       for (var i = 0; i < response.length; i++) {
         newArr[i]['styles'] = response[i].data.results;
@@ -138,16 +127,21 @@ const handleSelect = (selectedIndex, e) => {
     })
   }
 
- //console.log(getRelatedProductIds())
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect} breakpoints={breakPoints}>
+    <Carousel activeIndex={index} onSelect={handleSelect}>
       <Carousel.Item>
-      <span className="cards-wrapper">
-        {relatedProductsInfoSummaries.map((product) => (
-          <RelatedProductCard product={product} key={product.id} />
-        ))}
-      </span>
-
+        <span className="cards-wrapper">
+          {relatedProductsInfoSummaries.slice(0,4).map((product) => (
+            <RelatedProductCard product={product} key={product.id} />
+          ))}
+        </span>
+      </Carousel.Item>
+      <Carousel.Item>
+        <span className="cards-wrapper">
+          {relatedProductsInfoSummaries.slice(4,8).map((product) => (
+            <RelatedProductCard product={product} key={product.id} />
+          ))}
+        </span>
       </Carousel.Item>
     </Carousel>
       )

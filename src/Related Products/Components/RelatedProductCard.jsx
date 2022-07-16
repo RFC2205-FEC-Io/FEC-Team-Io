@@ -11,7 +11,6 @@ import StarIconButton from './StarIconButton.jsx';
 const RelatedProductCard = ({ product }) => {
 
   /*Helper functions */
-  console.log('product: ', product);
 
   const CardClickHandler = (event) => {
     console.log("Product Card was clicked.")
@@ -24,7 +23,7 @@ const RelatedProductCard = ({ product }) => {
       </Card.Text>
       <Card.Img
         className="image-wrapper"
-        src={product.styles[0].photos[0].url}
+        src={product.styles[0].photos[0].url || "Smiley Shades.png"}
         onClick={() => CardClickHandler()}
       />
       <Card.Text style={{textAlign: "center"}}>
@@ -33,7 +32,7 @@ const RelatedProductCard = ({ product }) => {
       <Card.Body>
         <Card.Title>
           <h2>
-            {product.productName}
+            {product.name}
           </h2>
         </Card.Title>
         <Card.Text>
@@ -44,7 +43,7 @@ const RelatedProductCard = ({ product }) => {
         </Card.Text>
         <Card.Text style={{textAlign: "center"}}>
           <StaticStarRating averageRating={product.averageRating}/>
-  </Card.Text>
+        </Card.Text>
       </Card.Body>
     </Card>
   );

@@ -6,10 +6,6 @@
   min-height: 100vh;
 }
 
-/* Styling for interactive star rating component (Related Products and Comparisons) */
-
-/* End styling for star component (Related Products and Comparisons) */
-
 /* Styling for Star Icon Button and X Icon Button (Related Products and Comparisons) */
 
 button[type="submit"] {
@@ -59,6 +55,21 @@ image[type="submit"] {
 }
 
 .image-wrapper img{
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/*Styling for static star rating images*/
+
+.static-star-image-wrapper {
+  margin: 0 auto;
+  height:54px;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.static-star-image-wrapper img{
   max-width: 100%;
   max-height: 100%;
 }
