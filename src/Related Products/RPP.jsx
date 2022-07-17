@@ -29,9 +29,6 @@ class RPP extends React.Component {
         <Container>
           <ComparisonModalTable />
         </Container>
-        <Container>
-          <RelatedProductsCarousel />
-        </Container>
       </div>
     );
   };
