@@ -4,6 +4,7 @@ import { Container, Navbar } from 'react-bootstrap';
 import './Components/RelatedProductsCarouselComponent/RelatedProductStyles.css';
 import RelatedProductsCarousel from './Components/RelatedProductsCarouselComponent/RelatedProductsCarousel.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ComparisonModalTable from './Components/ComparisonModalComponent/ComparisonModalTable.jsx';
 
 class RPP extends React.Component {
   constructor(props) {
@@ -21,10 +22,16 @@ class RPP extends React.Component {
 
   render () {
     return (
-      <div className="RPP">
-          <Container>
-            <RelatedProductsCarousel />
-          </Container>
+      <div className="RPP" style={{ display: "flex", flexDirection: "column" }}>
+        <Container>
+          <RelatedProductsCarousel />
+        </Container>
+        <Container>
+          <ComparisonModalTable />
+        </Container>
+        <Container>
+          <RelatedProductsCarousel />
+        </Container>
       </div>
     );
   };
