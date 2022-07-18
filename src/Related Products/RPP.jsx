@@ -1,18 +1,25 @@
-import React from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Container, Navbar } from 'react-bootstrap';
 import './Components/RelatedProductsCarouselComponent/RelatedProductStyles.css';
 import RelatedProductsCarousel from './Components/RelatedProductsCarouselComponent/RelatedProductsCarousel.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import ComparisonModalTable from './Components/ComparisonModalComponent/ComparisonModalTable.jsx';
+import ComparisonModalWindow from './Components/ComparisonModalComponent/ComparisonModalWindow.jsx';
 
-class RPP extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentId: 66645
-    }
-    // this.XIconButtonClickHandler = this.XIconButtonClickHandler.bind(this);
+
+const RPP = () => {
+
+  const [show, setShow] = useState(false);
+
+  const CardClickHandler = (event) => {
+    console.log("Product Card was clicked.")
+    setShow(true)
+  }
+
+  const WindowClickHandler = (event) => {
+    console.log("Window close button was clicked.")
+    setShow(false)
+
   }
 
  //XIconButtonClickHandler (event) {
@@ -20,18 +27,17 @@ class RPP extends React.Component {
 
 //---------------------- RENDER ------------------------------------------------------//
 
-  render () {
+
     return (
       <div className="RPP" style={{ display: "flex", flexDirection: "column" }}>
         <Container>
-          <RelatedProductsCarousel />
+          <RelatedProductsCarousel CardClickHandler={CardClickHandler}/>
         </Container>
         <Container>
-          <ComparisonModalTable />
+          <ComparisonModalWindow WindowClickHandler={WindowClickHandler} show={show} />
         </Container>
       </div>
     );
-  };
 };
 
 export default RPP;

@@ -11,7 +11,7 @@ import RelatedProductCard from './RelatedProductCard.jsx';
 
 //--------------------- MAIN COMPONENT FUNCTION WITH HOOKS------------------------//
 
-const RelatedProductsCarousel = () => {
+const RelatedProductsCarousel = (props) => {
   /*State*/
   const [index, setIndex] = useState(0);
   const [currentId, setCurrentId] = useState(66645);
@@ -25,6 +25,7 @@ const RelatedProductsCarousel = () => {
     };
     fetchData();
    }, []);
+
 
 
 
@@ -135,7 +136,7 @@ const handleSelect = (selectedIndex, e) => {
         <Carousel.Item>
           <span className="cards-wrapper">
             {relatedProductsInfoSummaries.slice(0,4).map((product) => (
-              <RelatedProductCard product={product} key={product.id} />
+              <RelatedProductCard product={product} key={product.id} CardClickHandler={props.CardClickHandler}/>
             ))}
           </span>
         </Carousel.Item>
@@ -147,14 +148,14 @@ const handleSelect = (selectedIndex, e) => {
       <Carousel.Item>
         <span className="cards-wrapper">
           {relatedProductsInfoSummaries.slice(0,4).map((product) => (
-            <RelatedProductCard product={product} key={product.id} />
+            <RelatedProductCard product={product} key={product.id} CardClickHandler={props.CardClickHandler}/>
           ))}
         </span>
       </Carousel.Item>
       <Carousel.Item>
         <span className="cards-wrapper">
           {relatedProductsInfoSummaries.slice(4,8).map((product) => (
-            <RelatedProductCard product={product} key={product.id} />
+            <RelatedProductCard product={product} key={product.id} CardClickHandler={props.CardClickHandler}/>
           ))}
         </span>
       </Carousel.Item>
@@ -166,21 +167,21 @@ const handleSelect = (selectedIndex, e) => {
       <Carousel.Item>
         <span className="cards-wrapper">
           {relatedProductsInfoSummaries.slice(0,4).map((product) => (
-            <RelatedProductCard product={product} key={product.id} />
+            <RelatedProductCard product={product} key={product.id} CardClickHandler={props.CardClickHandler}/>
           ))}
         </span>
       </Carousel.Item>
       <Carousel.Item>
         <span className="cards-wrapper">
           {relatedProductsInfoSummaries.slice(4,8).map((product) => (
-            <RelatedProductCard product={product} key={product.id} />
+            <RelatedProductCard product={product} key={product.id} CardClickHandler={props.CardClickHandler}/>
           ))}
         </span>
       </Carousel.Item>
       <Carousel.Item>
         <span className="cards-wrapper">
           {relatedProductsInfoSummaries.slice(8,12).map((product) => (
-            <RelatedProductCard product={product} key={product.id} />
+            <RelatedProductCard product={product} key={product.id} CardClickHandler={props.CardClickHandler}/>
           ))}
         </span>
       </Carousel.Item>
