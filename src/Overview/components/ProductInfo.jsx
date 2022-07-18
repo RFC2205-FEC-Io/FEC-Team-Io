@@ -23,10 +23,11 @@ class ProductInfo extends React.Component {
     }
     this.updatePrice = this.updatePrice.bind(this);
   }
+
   componentDidMount () {
     console.log('ProductInfo Mounted!');
-    // console.log('componentDidMount, props:', props);
   }
+
   componentWillReceiveProps({products, defaultPrice, salePrice, reviews}) {
     this.setState({
       products: products,
