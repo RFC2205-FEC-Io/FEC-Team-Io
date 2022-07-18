@@ -1,71 +1,52 @@
-// import React from 'react';
-// const axios = require('axios');
-// import Star_rating500 from '../../../dist/Star_rating500.png';
-// class Stars extends React.Component {
-//   constructor (props) {
-//     super (props);
-//       this.state = {
-//         reviews: [],
-//         ratings: []
-//       }
-//   }
-
-//   componentDidMount () {
-//     // console.log('Stars mounted!');
-//   }
-
-//   avgRating () {
-
-//   }
-//   getRatings () {
-
-//   }
-
-//   render (props) {
-//     return (
-//       <div>
-//         <img id='stars' src={Star_rating500}/>
-//         Read All # reviews
-//       </div>
-//     );
-//   }
-// }
-
-// export default Stars;
-
 import React, {useState} from 'react';
-const axios = require('axios');
-import Star_rating500 from '../../../dist/Star_rating500.png';
+import axios from 'axios';
+import {exportStars}from './GetStars.jsx';
+import img from './images/star.png';
+// import * as images from '../../../dist/exportImages.js';
+
+
 const Stars = ({reviews}) => {
 
   const [review, getReviews] =  useState([]);
   // const [ratings, getRatings] = useState([]);
 
-
+  var numOfReviews = 0;
 
   const avgRating = () => {
     var ratingsArr = [];
     var sum = 0;
+    var avg = 0;
     reviews.map((review) => {
-      console.log('review:', review);
+      // console.log('review:', review);
       ratingsArr.push(review.rating);
+      numOfReviews += 1;
     })
-    console.log('ratingsArr:', ratingsArr);
+    // console.log('ratingsArr:', ratingsArr);
     ratingsArr.forEach((rating) => {
       sum += rating;
     })
-    var avg = sum / ratingsArr.length;
+    avg = sum / ratingsArr.length;
+    return avg;
     console.log('avg:', avg);
   };
-  avgRating();
-  // const getRatings = () => {
+  var average = avgRating();
 
-  // };
+  // const starRatings = (average) => {
+  //   average = average * 1000;
+  //   console.log('average:', average);
+
+  //   if (avg < 125) {
+  //     return (<img id='stars' src='./'/>)
+  //   } else if (avg >= 0.5) {
+  //     return (<img id='stars' src={exportStars.Star_rating000}/>)
+  //   }
+  // }
+// starRatings(average);
 
   return (
     <div>
-      <img id='stars' src={Star_rating500}/>
-      Read All # reviews
+      {/* <img id='stars' src={exportStars.Star_rating500}/> */}
+      Read All {numOfReviews} reviews
     </div>
   );
 
