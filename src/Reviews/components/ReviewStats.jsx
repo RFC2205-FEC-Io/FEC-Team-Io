@@ -3,7 +3,6 @@ import axios from "axios";
 import ReviewsList from "./ReviewsList.jsx";
 import DynamicStars from "./DynamicStars.jsx";
 import StaticStars from "./StaticStars.jsx";
-import BarGroup from "./BarGroup.jsx";
 
 class ReviewStats extends React.Component {
   constructor(props) {

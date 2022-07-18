@@ -4,6 +4,7 @@ import ReviewsApp from "../ReviewsApp.jsx";
 import ReviewTile from "./ReviewTile.jsx";
 import ReviewForm from "./ReviewForm.jsx";
 import ReviewStats from "./ReviewStats.jsx";
+import FormModal from "./FormModal.jsx";
 
 //viable product id: 66642
 class ReviewsList extends React.Component {
@@ -118,6 +119,7 @@ class ReviewsList extends React.Component {
     this.setState({
       addFormShow: !this.state.addFormShow
     });
+// console.log('addFormShow: ', this.state.addFormShow)
   };
 
   starFilter = () => {
@@ -128,14 +130,16 @@ class ReviewsList extends React.Component {
     // this.mapDisplayList()
     return (
       <div>
-        <ReviewStats productID={this.state.productID} starFilter={this.starFilter} />
-        <ReviewForm onClose={this.showModal} show={this.state.addFormShow} />
-        <div id="reviewTileList">
+        <ReviewStats productID={this.state.productID} />
+        <div className="reviewTileList">
           {this.mapDisplayList()}
         </div>
         {/* <button id="ReviewFormButton" onClick={}>Add A Review +</button> */}
         <button id="ReviewDisplayIncrease" onClick={this.displayCount}>See More Reviews</button><br></br>
         <button className="reviewFormToggleButton" onClick={e => { this.showModal(e); }}>Add a Review</button>
+        <FormModal  show={this.state.addFormShow} >
+          <ReviewForm productID={this.state.productID} starFilter={this.starFilter} onClose={this.showModal}/>
+        </FormModal>
       </div>
     );
   }

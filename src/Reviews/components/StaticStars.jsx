@@ -21,13 +21,13 @@ const StaticStars = ({ rating }) => {
           displayStars.push(0);
           break;
         case quart:
-          displayStars.push(0.28);
+          displayStars.push(0.25);
           break;
         case half:
           displayStars.push(0.5);
           break;
         case three:
-          displayStars.push(0.72);
+          displayStars.push(0.75);
           break;
         case full:
           displayStars.push(1.0);
