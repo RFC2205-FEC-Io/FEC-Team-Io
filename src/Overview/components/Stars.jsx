@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import img from './images/star.png';
 
 const Stars = ({reviews}) => {
   const [review, getReviews] =  useState([]);

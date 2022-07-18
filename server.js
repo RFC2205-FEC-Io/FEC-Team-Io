@@ -72,6 +72,32 @@ app.get('/products', (req, res) => {
 
 /*Handler and request for related product styles based on ids*/
 app.get('/relatedStyles', (req, res) => {
+
+  const product_id = req.query.product_id;
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products/${product_id}/styles`)
+  .then((response) => {
+    res.send(response.data);
+  })
+  .catch((err) => {
+    throw err;
+  });
+})
+
+/*Handler and request for related meta review info based on ids*/
+app.get('/relatedMetaReviews', (req, res) => {
+  const product_id = req.query.product_id;
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/reviews/meta/?product_id=${product_id}`)
+  .then((response) => {
+    res.send(response.data);
+  })
+  .catch((err) => {
+    throw err;
+  });
+})
+
+
+/*Handler and request for related product styles based on ids*/
+app.get('/relatedStyles', (req, res) => {
   const product_id = req.query.product_id;
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products/${product_id}/styles`)
   .then((response) => {
@@ -101,6 +127,17 @@ app.get("/reviews", (req, res) => {
   const product_id = req.query.product_id;
   const count = req.query.count;
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/reviews/?product_id=${product_id}&count=${count}`)
+  .then(response => {
+    // console.log('data: ', data);
+    res.json(response.data);
+  })
+  .catch(err => {console.log('Error: ', err)})
+})
+
+app.get("/reviews/meta", (req, res) => {
+  // console.log('req.query: ', req.query);
+  const product_id = req.query.product_id;
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/reviews/meta/?product_id=${product_id}`)
   .then(response => {
     // console.log('data: ', data);
     res.json(response.data);

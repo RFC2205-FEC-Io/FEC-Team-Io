@@ -1,86 +1,83 @@
 import React from "react";
 import axios from "axios";
-import ReviewsApp from "../ReviewsApp.jsx";
+import ReviewsList from "./ReviewsList.jsx";
 import DynamicStars from "./DynamicStars.jsx";
 import StaticStars from "./StaticStars.jsx";
-import BarGroup from "./BarGroup.jsx";
 
 class ReviewStats extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviewArray: [],
-      productID: 66642,
-      ratingTotals: [
-        { name: '1 stars', value: 0 },
-        { name: '2 stars', value: 0 },
-        { name: '3 stars', value: 0 },
-        { name: '4 stars', value: 0 },
-        { name: '5 stars', value: 0 }
-      ]
+      productID: this.props.productID,
+      ratings: {},
+      recommends: {},
+      characteristics: {},
     }
   };
-  componentDidMount() {
-    this.getReviews();
-    this.ratingTotals();
-    this.render();
-  };
 
-  getReviews = async () => {
-    return axios.get(`/reviews/?product_id=${this.state.productID}&count=100`)
-      // axios.get('/reviews', {params: {product_id: this.state.productID}})
+
+  getMetadata(productID) {
+    return axios.get(`/reviews/meta/?product_id=${productID}`)
       .then(res => {
-        // console.log('res.data: ', res.data);
-        this.setState({ reviewArray: res.data.results });
+        console.log('metadata request came through!')
+        this.setState({
+          ratings: res.data.ratings,
+          recommends: res.data.recommended,
+          characteristics: res.data.characteristics
+        });
       })
       .catch(err => {
+<<<<<<< HEAD
         // alert('Error, no reviews summarize');
+=======
+        console.log('Error, no reviews summarize');
+>>>>>>> 040ad476764dc598db6a4aee76c104a8474bdc7d
       })
+  };
+
+  componentDidMount() {
+    this.getMetadata(this.props.productID);
+    // this.render();
   };
 
   averageCalculator = () => {
-    let avgSum = 0;
-    this.state.reviewArray.forEach(review => {
-      avgSum += review.rating
-    })
-    let average = (avgSum / this.state.reviewArray.length);
-    return Math.ceil(average * 10) / 10;
-  };
+    var total = 0;
+    var sum = 0;
+    var ratings = this.state.ratings;
+    for (var rating in ratings) {
+      total += Number(ratings[rating]);
+      sum +=  Number(ratings[rating]) * rating;
+    }
+    return  [(Math.ceil(sum/total * 10) / 10), total];
+  }
 
   recommendPercent = () => {
-    let recommendSum = 0;
-    this.state.reviewArray.forEach(review => {
-      if (review.recommend) {
-        recommendSum++;
-      }
-    })
-    return ((recommendSum / this.state.reviewArray.length) * 100)
-  };
+    if (this.state.recommends.false === undefined) {
+      return 100;
+    }
+    var total = Number(this.state.recommends.true) + Number(this.state.recommends.false);
+    return Math.ceil(this.state.recommends.true/total * 100);
+  }
 
-  ratingTotals = () => {
-    console.log('ratingTotals[0]: ', this.state.ratingTotals[0]);
-    this.state.reviewArray.forEach(review => {
-      if (review.rating === 1) {
-        this.state.ratingTotals[0].value++;
-      } else if (review.rating === 2) {
-        this.state.reviewTotals[1].value++;
-      } else if (review.rating === 3) {
-        this.state.reviewTotals[2].value++;
-      } else if (review.rating === 4) {
-        this.state.reviewTotals[3].value++;
-      } else if (review.rating === 5) {
-        this.state.reviewTotals[4].value++;
+  ratingsChart = () => {
+    var divList = [];
+    var total = 0;
+    var ratings = this.state.ratings;
+    var ratingTypes = [1, 2, 3, 4, 5];
+    for (var rating in ratings) {
+      total += Number(ratings[rating]);
+    }
+    for (var i = 0; i < 5; i ++) {
+      if (ratings[ratingTypes[i]] === undefined) {
+        divList.push(<div class='stars' onClick={this.starFilter} id={ratingTypes[i]}>{ratingTypes[i]} Stars  <progress class='starbar' id={ratingTypes[i]} value ="0" max = "100"/></div>)
+      } else {
+        divList.push(<div class='stars' onClick={this.starFilter} id={ratingTypes[i]}>{ratingTypes[i]} Stars  <progress class='starbar' id={ratingTypes[i]} value ={Math.floor(Number(ratings[ratingTypes[i]])/total*100)} max = "100"/></div>)
       }
-    })
-  };
+    }
+    return <div>{divList}</div>
+  }
 
   render() {
-    let barHeight = 30;
-    let barGroups = this.state.ratingTotals.map((data, i) =>
-      <g transform={`translate(0, ${i * barHeight})`}>
-        <BarGroup key={i} data={data} barHeight={barHeight} />
-      </g>
-    );
     return (
       <div id="ReviewStats">
         <span>
@@ -88,14 +85,7 @@ class ReviewStats extends React.Component {
           <StaticStars rating={this.averageCalculator()} />
         </span>
         <span>{Math.ceil(this.recommendPercent() * 1) / 1}% of reviews recommend this product</span>
-        <svg width="800" height="300" >
-          <g className="container">
-            <g className="chart" transform="translate(100,60)">
-
-              {barGroups}
-            </g>
-          </g>
-        </svg>
+        <div>{this.ratingsChart()}</div>
       </div>
     )
   }
