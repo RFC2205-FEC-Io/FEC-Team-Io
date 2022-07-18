@@ -12,6 +12,7 @@ const RPP = () => {
     /*State*/
     const [index, setIndex] = useState(0);
     const [currentId, setCurrentId] = useState(66645);
+    const [relatedProductCardId, setRelatedProductCardId] = useState();
     const [relatedProductsInfoSummaries, setRelatedProductsInfoSummaries] = useState([]);
     const [show, setShow] = useState(false);
 
@@ -39,9 +40,10 @@ const RPP = () => {
   };
 
 
-  const CardClickHandler = (event) => {
+  const CardClickHandler = (event, cardId) => {
     console.log("Product Card was clicked.")
     setShow(true)
+    setRelatedProductCardId(cardId)
   }
 
   const WindowClickHandler = (event) => {
@@ -152,7 +154,10 @@ const RPP = () => {
             />
         </Container>
         <Container>
-          <ComparisonModalWindow WindowClickHandler={WindowClickHandler} show={show} />
+          <ComparisonModalWindow
+          WindowClickHandler={WindowClickHandler}
+          relatedProductsInfoSummaries={relatedProductsInfoSummaries}
+          show={show} />
         </Container>
       </div>
     );
