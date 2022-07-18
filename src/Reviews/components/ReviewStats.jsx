@@ -34,7 +34,7 @@ class ReviewStats extends React.Component {
         this.setState({ reviewArray: res.data.results });
       })
       .catch(err => {
-        alert('Error, no reviews summarize');
+        // alert('Error, no reviews summarize');
       })
   };
 
