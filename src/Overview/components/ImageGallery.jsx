@@ -1,66 +1,93 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import expand_icon from '../../../dist/expand_icon.png';
+import Modal from 'react-bootstrap/Modal';
 
-class ImageGallery extends React.Component {
-  constructor (props) {
-    super (props);
-    this.state = {
-      images: [],
-      mainImage: 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
-      listImg: '',
-      imgClicked: false,
-      clickedthumb: ''
-    }
-    this.setBackgroundImage = this.setBackgroundImage.bind(this);
-  }
+const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG}) => {
+  const imageArr = [];
+  const mainImage = 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80';
+  const [listImg, addImage] = useState('');
+  const [galleryIMGClicked, clicked] = useState(false);
+  // const clickedthumb = ;
 
-  componentDidMount () {
-    console.log('imageGallerymounted')
-  }
-
-  componentWillReceiveProps(props) {
-    this.setState({
-      images: props.images,
-      // mainImage: props.images[0].thumbnail_url
-      clickedthumb: props.clickedImg
-
-    })
-  }
-
-  componentWillMount () {
-    console.log('componentWillMount, images saved to state:', this.state.images);
-  }
-
-  setBackgroundImage(event, imageURL) {
+  const setBackgroundImage = (event, imageURL) => {
     event.preventDefault();
-    console.log('imageURL:', imageURL);
-    this.setState({
-      listImg: imageURL
-    });
-    this.setState({
-      imgClicked: true
-    })
+    addImage(current => imageURL);
+    clicked( current => true);
+    // console.log('galleryIMGClicked:', galleryIMGClicked, 'listImg:', listImg);
   }
 
-  setStyle () {
-    if (this.state.imgClicked) {
-      return { backgroundImage: `url( ${this.state.listImg})`};
+
+  const setMainImg = () => {
+    if (thumbnailClicked && !galleryIMGClicked) {
+      return { backgroundImage: `url( ${clickedThumb})`};
+    }  else if (galleryIMGClicked) {
+      return { backgroundImage: `url( ${listImg})`};
     } else {
-      return { backgroundImage: `url( ${this.state.clickedthumb})`};
+      return { backgroundImage: `url( ${mainImage})`};
     }
   }
-  render (props) {
+
+  // const [view, changeView] = useState(false);
+  // const expandView= () => changeView(true);
+
+  // const Modal = (listImg) => {
+  //   console.log('show:', view);
+  //   const revertView = () => changeView(false);
+  //   if (!view) {
+  //     return <div>Closed</div>;
+  //   } else {
+  //   return (
+  //     <>
+  //       <Modal ={view} onHide={revertView} animation={false}>
+  //         <img src={listImg}></img>
+  //       </Modal>
+  //     </>
+  //   );
+  // }
+  // }
+
+
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+
+  const Example = (listImg) => {
+    // console.log('show:', show);
+    const handleClose = () => setShow(false);
+    if (!show) {
+      return;
+    } else {
     return (
-      <div id='image-gallery' style={this.setStyle()}>
-        {this.state.images.map((image) => {
+      <>
+        <Modal show={show} onHide={handleClose} animation={false}>
+          <img src={listImg}></img>
+        </Modal>
+      </>
+    );
+  }
+  }
+
+
+  return (
+    <div id='image-gallery'>
+      <div id='main-img'  style={setMainImg()}>
+        {images.map((image) => {
           return (
           <div>
-            <img id ='gallery'src={image.thumbnail_url} onClick={()=> {this.setBackgroundImage(event, image.url)}}/>
+            <img id ='gallery'src={image.thumbnail_url} onClick={()=> {setBackgroundImage(event, image.url)}}/>
           </div>
           );
         })}
+        <div id='view'>
+          {/* <img src={expand_icon} onClick={expandView}> */}
+          <img src={expand_icon} onClick={handleShow}>
+        </img></div>
+        <div>
+          {Example(listImg)}
+          {/* {Modal(listImg)} */}
+        </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default ImageGallery;
