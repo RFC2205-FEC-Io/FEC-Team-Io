@@ -3,6 +3,8 @@ import axios from "axios";
 import ReviewsApp from "../ReviewsApp.jsx";
 import ReviewTile from "./ReviewTile.jsx";
 import ReviewForm from "./ReviewForm.jsx";
+import ReviewStats from "./ReviewStats.jsx";
+import FormModal from "./FormModal.jsx";
 
 //viable product id: 66642
 class ReviewsList extends React.Component {
@@ -15,10 +17,11 @@ class ReviewsList extends React.Component {
       addFormShow: false,
       sort: 'helpful',
       helpClick: [],
+      reported: [],
     }
   };
 
-   componentDidMount() {
+  componentDidMount() {
     this.getReviews(1, 50, this.state.sort);
     console.log("reviewArray after GET: ", this.state.reviewArray)
   };
@@ -58,13 +61,20 @@ class ReviewsList extends React.Component {
         helpClick: clicked
       })
       axios.put(`/reviews/help/?review_id=${id}`)
-      .then(() => {
-        console.log('this review is more helpful!');
-      })
-      .catch((err) => {
-        console.log('Put request error', error);
-      })
+        .then(() => {
+          console.log('this review is more helpful!');
+        })
+        .catch((err) => {
+          console.log('Put request error', error);
+        })
     }
+  }
+
+  reportReview = (e) => {
+    e.preventDefault();
+    this.setState({
+      reported: this.state.reported.push(e.target.reviewID)
+    })
   }
 
   displayCount = () => {
@@ -81,24 +91,27 @@ class ReviewsList extends React.Component {
       if (review === undefined) {
         return displayList;
       }
-      displayList.push(
-      <div>
-        <ReviewTile
-          key={review.review_id}
-          reviewID={review.review_id}
-          rating={review.rating}
-          summary={review.summary}
-          recommend={review.recommend}
-          response={review.response}
-          body={review.body}
-          date={review.date}
-          reviewerName={review.reviewer_name}
-          helpfulness={review.helpfulness}
-          photos={review.photos}
-          putHelpful={this.putHelpful}
-        />
-      </div>)
-      };
+      else if ((review !== undefined) && (this.state.reported.indexOf(review.review_id) === -1)) {
+        displayList.push(
+          <div>
+            <ReviewTile
+              key={review.review_id}
+              reviewID={review.review_id}
+              rating={review.rating}
+              summary={review.summary}
+              recommend={review.recommend}
+              response={review.response}
+              body={review.body}
+              date={review.date}
+              reviewerName={review.reviewer_name}
+              helpfulness={review.helpfulness}
+              photos={review.photos}
+              putHelpful={this.putHelpful}
+              reportReview={this.reportReview}
+            />
+          </div>)
+      }
+    };
     return <div>{displayList}</div>;
   };
 
@@ -106,20 +119,27 @@ class ReviewsList extends React.Component {
     this.setState({
       addFormShow: !this.state.addFormShow
     });
+// console.log('addFormShow: ', this.state.addFormShow)
   };
+
+  starFilter = () => {
+
+  }
 
   render() {
     // this.mapDisplayList()
     return (
       <div>
-        <p id="reviewListHeader">ReviewsList Here</p>
-        <ReviewForm onClose={this.showModal} show={this.state.addFormShow} />
-        <div id="reviewTileList">
+        <ReviewStats productID={this.state.productID} />
+        <div className="reviewTileList">
           {this.mapDisplayList()}
         </div>
         {/* <button id="ReviewFormButton" onClick={}>Add A Review +</button> */}
         <button id="ReviewDisplayIncrease" onClick={this.displayCount}>See More Reviews</button><br></br>
-        <button className="reviewFormToggleButton" onClick={e => {this.showModal(e);}}>Add a Review</button>
+        <button className="reviewFormToggleButton" onClick={e => { this.showModal(e); }}>Add a Review</button>
+        <FormModal  show={this.state.addFormShow} >
+          <ReviewForm productID={this.state.productID} starFilter={this.starFilter} onClose={this.showModal}/>
+        </FormModal>
       </div>
     );
   }

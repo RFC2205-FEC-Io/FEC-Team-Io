@@ -8,7 +8,7 @@ class ReviewsApp extends React.Component {
     const { name } = this.props;
     return (
       <div>
-        <ReviewStats />
+        {/* <ReviewStats /> */}
         <ReviewsList />
       </div>
     );
