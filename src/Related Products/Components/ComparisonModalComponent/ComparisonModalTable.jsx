@@ -2,7 +2,7 @@ import React from 'react';
 import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './ComparisonModalStyles.css'
-import StaticStarRating from '../ReusableMiniComponents/StaticStarRating.jsx';
+import TableStaticStarRating from './TableStaticStarRating.jsx';
 
 function ComparisonModalTable() {
   return (
@@ -30,47 +30,73 @@ function ComparisonModalTable() {
           <td>Shoes</td>
         </tr>
         <tr>
+          <td>$100</td>
+          <td>Price</td>
+          <td>$150</td>
+        </tr>
+        <tr>
+          <td>Canvas</td>
+          <td>Fabric</td>
+          <td>Leather</td>
+        </tr>
+        <tr>
+          <td>Brass</td>
+          <td>Buttons</td>
+          <td>Pearl</td>
+        </tr>
+        <tr>
+          <td>Not applicable</td>
+          <td>Lenses</td>
+          <td>Polarizing</td>
+        </tr>
+        <tr>
+          <td>50 spf</td>
+          <td>UV Protection</td>
+          <td>25 spf</td>
+        </tr>
+        <tr>
+          <td>Blue</td>
+          <td>Frames</td>
+          <td>Gold</td>
+        </tr>
+        <tr>
+          <td colSpan={3}>Average Ratings</td>
+        </tr>
+        <tr>
           <td>
-            <StaticStarRating averageRating={3.4} className="modal-image-wrapper"/>
+            <TableStaticStarRating averageRating={3.4} />
           </td>
           <td>Average Overall Rating</td>
           <td>
-          <StaticStarRating averageRating={1.4}/>
+          <TableStaticStarRating averageRating={1.4} className=".table-static-star-image-wrapper" />
           </td>
         </tr>
         <tr>
-          <td>Jacob</td>
-          <td>Price</td>
-          <td>@fat</td>
+          <td>
+            <TableStaticStarRating averageRating={1.2} className=".table-static-star-image-wrapper"/>
+          </td>
+          <td>Size</td>
+          <td>
+          <TableStaticStarRating averageRating={3.3} className=".table-static-star-image-wrapper" />
+          </td>
         </tr>
         <tr>
-          <td>Jacob</td>
-          <td>Fabric</td>
-          <td>@fat</td>
+          <td>
+            <TableStaticStarRating averageRating={2.7} className=".table-static-star-image-wrapper"/>
+          </td>
+          <td>Width</td>
+          <td>
+          <TableStaticStarRating averageRating={.5} className=".table-static-star-image-wrapper" />
+          </td>
         </tr>
         <tr>
-          <td>Jacob</td>
-          <td>Buttons</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <td>Jacob</td>
-          <td>Lenses</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <td>Jacob</td>
-          <td>UV Protection</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <td>Jacob</td>
-          <td>Frames</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <td colSpan={2}>Larry the Bird</td>
-          <td>@twitter</td>
+          <td>
+            <TableStaticStarRating averageRating={2.4} className=".table-static-star-image-wrapper"/>
+          </td>
+          <td>Comfort</td>
+          <td>
+          <TableStaticStarRating averageRating={3.7} className=".table-static-star-image-wrapper" />
+          </td>
         </tr>
       </tbody>
     </Table>
