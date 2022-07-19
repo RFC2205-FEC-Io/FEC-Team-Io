@@ -15,7 +15,7 @@ const RelatedProductsCarousel = (props) => {
         <Carousel.Item>
           <span className="cards-wrapper">
             {props.relatedProductsInfoSummaries.slice(0,4).map((product) => (
-              <RelatedProductCard product={product} CardId={product.id} key={product.id} StarClickHandler={props.StarClickHandler}/>
+              <RelatedProductCard product={product} CardId={product.id} key={product.id} StarClickHandler={props.StarClickHandler} CardClickHandler={props.CardClickHandler}/>
             ))}
           </span>
         </Carousel.Item>
@@ -27,14 +27,14 @@ const RelatedProductsCarousel = (props) => {
       <Carousel.Item>
         <span className="cards-wrapper">
           {props.relatedProductsInfoSummaries.slice(0,4).map((product) => (
-            <RelatedProductCard product={product} key={product.id} StarClickHandler={props.StarClickHandler}/>
+            <RelatedProductCard product={product} key={product.id} StarClickHandler={props.StarClickHandler} CardClickHandler={props.CardClickHandler}/>
           ))}
         </span>
       </Carousel.Item>
       <Carousel.Item>
         <span className="cards-wrapper">
           {props.relatedProductsInfoSummaries.slice(4,8).map((product) => (
-            <RelatedProductCard product={product} key={product.id} StarClickHandler={props.StarClickHandler}/>
+            <RelatedProductCard product={product} key={product.id} StarClickHandler={props.StarClickHandler} CardClickHandler={props.CardClickHandler}/>
           ))}
         </span>
       </Carousel.Item>
@@ -46,21 +46,21 @@ const RelatedProductsCarousel = (props) => {
       <Carousel.Item>
         <span className="cards-wrapper">
           {props.relatedProductsInfoSummaries.slice(0,4).map((product) => (
-            <RelatedProductCard product={product} key={product.id} StarClickHandler={props.StarClickHandler}/>
+            <RelatedProductCard product={product} key={product.id} StarClickHandler={props.StarClickHandler} CardClickHandler={props.CardClickHandler}/>
           ))}
         </span>
       </Carousel.Item>
       <Carousel.Item>
         <span className="cards-wrapper">
           {props.relatedProductsInfoSummaries.slice(4,8).map((product) => (
-            <RelatedProductCard product={product} key={product.id} StarClickHandler={props.StarClickHandler}/>
+            <RelatedProductCard product={product} key={product.id} StarClickHandler={props.StarClickHandler} CardClickHandler={props.CardClickHandler}/>
           ))}
         </span>
       </Carousel.Item>
       <Carousel.Item>
         <span className="cards-wrapper">
           {props.relatedProductsInfoSummaries.slice(8,12).map((product) => (
-            <RelatedProductCard product={product} key={product.id} StarClickHandler={props.StarClickHandler}/>
+            <RelatedProductCard product={product} key={product.id} StarClickHandler={props.StarClickHandler} CardClickHandler={props.CardClickHandler}/>
           ))}
         </span>
       </Carousel.Item>

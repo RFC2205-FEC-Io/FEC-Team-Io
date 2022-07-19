@@ -53,6 +53,11 @@ const RPP = () => {
     fetchCardInfo();
   }
 
+  const CardClickHandler = () => {
+    console.log('Related product card image was clicked. ')
+
+  }
+
   const WindowClickHandler = (event) => {
     console.log("Window close button was clicked.")
     setShow(false)
@@ -174,6 +179,7 @@ const RPP = () => {
           <RelatedProductsCarousel
             relatedProductsInfoSummaries={relatedProductsInfoSummaries}
             StarClickHandler={StarClickHandler}
+            CardClickHandler={CardClickHandler}
             index={index}
             onSelect={handleSelect}
             />
