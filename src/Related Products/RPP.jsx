@@ -42,7 +42,7 @@ const RPP = () => {
   };
 
 
-  const CardClickHandler = (CardId) => {
+  const StarClickHandler = (CardId) => {
     console.log("Related Product Card Star Icon was clicked. Product id: ", CardId)
     const fetchCardInfo = async () => {
       const cardInfo = await getTwoComparisonCardsInfo (currentId, CardId);
@@ -173,7 +173,7 @@ const RPP = () => {
         <Container>
           <RelatedProductsCarousel
             relatedProductsInfoSummaries={relatedProductsInfoSummaries}
-            CardClickHandler={CardClickHandler}
+            StarClickHandler={StarClickHandler}
             index={index}
             onSelect={handleSelect}
             />

@@ -13,7 +13,7 @@ const RelatedProductCard = (props) => {
   return (
     <Card >
       <Card.Text style={{textAlign: "right"}}>
-        <StarIconButton CardClickHandler={props.CardClickHandler} CardId={props.product.id}/>
+        <StarIconButton StarClickHandler={props.StarClickHandler} CardId={props.product.id}/>
       </Card.Text>
       <Card.Img
         className="image-wrapper"
