@@ -1,5 +1,6 @@
 import React from 'react';
 import Stars from './Stars.jsx';
+import SocialMedia from './SocialMedia.jsx';
 class ProductInfo extends React.Component {
   constructor (props) {
     super (props);
@@ -66,6 +67,7 @@ class ProductInfo extends React.Component {
         <Stars
           reviews={this.state.reviews}
         />
+        <SocialMedia/>
       </div>
     );
   }
