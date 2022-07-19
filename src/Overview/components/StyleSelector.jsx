@@ -5,7 +5,7 @@ import ImageGallery from './ImageGallery.jsx';
 import ProductInfo from './ProductInfo.jsx';
 import '../../styles.css';
 const axios = require('axios');
-class StyleSelector extends React.Component {
+class StyleSelector extends React.Component { pull
   constructor (props) {
     super (props);
     this.state = {
