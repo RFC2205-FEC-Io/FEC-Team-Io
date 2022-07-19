@@ -18,7 +18,7 @@ class StyleSelector extends React.Component {
       page: 1,
       price: 0,
       salePrice: 0,
-      productID: 66642,
+      productID: 66644,
       reviews: [],
       clickedthumb: '',
       galleryIMGClicked: false,
@@ -37,7 +37,7 @@ class StyleSelector extends React.Component {
     // GET STYLES
     axios({
       method: 'get',
-      url: '/styles'
+      url: `/styles/?product_id=${this.state.productID}`
     })
     .then((res) => {
       // console.log('GET sent, styles retreived!:', res.data);

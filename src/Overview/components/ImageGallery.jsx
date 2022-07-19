@@ -69,7 +69,10 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
       return images.map((image) => {
         return (
           <div>
-            <img id ='gallery'src={image.thumbnail_url} onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}/>
+            <img
+            id ='gallery'src={image.thumbnail_url}
+            onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}
+            />
           </div>
           );
         });
@@ -79,13 +82,6 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
   return (
     <div id='image-gallery'>
       <div id='main-img'  style={setMainImg()}>
-        {/* {images.map((image) => {
-        return (
-          <div>
-            <img id ='gallery'src={image.thumbnail_url} onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}/>
-          </div>
-          );
-        })} */}
         {createGallery()}
         <div id='view'>
           {/* <img src={expand_icon} onClick={expandView}> */}
