@@ -12,8 +12,10 @@ const RPP = () => {
     /*State*/
     const [index, setIndex] = useState(0);
     const [currentId, setCurrentId] = useState(66645);
-    const [relatedProductCardId, setRelatedProductCardId] = useState();
+    //const [relatedProductCardId, setRelatedProductCardId] = useState();
     const [relatedProductsInfoSummaries, setRelatedProductsInfoSummaries] = useState([]);
+    const [relatedProductCardInfo, setRelatedProductCardInfo] = useState({})
+    const [currentProductCardInfo, setCurrentProductCardInfo] = useState({})
     const [show, setShow] = useState(false);
 
 
@@ -41,17 +43,39 @@ const RPP = () => {
 
 
   const CardClickHandler = (CardId) => {
-    console.log('CardId: ', CardId)
-    console.log("Product Card was clicked.")
-    setShow(true)
-    setRelatedProductCardId(CardId)
+    console.log("Related Product Card Star Icon was clicked. Product id: ", CardId)
+    const fetchCardInfo = async () => {
+      const cardInfo = await getTwoComparisonCardsInfo (currentId, CardId);
+      setCurrentProductCardInfo(cardInfo[0]);
+      setRelatedProductCardInfo(cardInfo[1]);
+      setShow(true)
+    }
+    fetchCardInfo();
   }
 
   const WindowClickHandler = (event) => {
     console.log("Window close button was clicked.")
     setShow(false)
-
   }
+
+  const getTwoComparisonCardsInfo = (idNumCurrent, idNumRelated) => {
+    console.log('getClickedCardInfoTriggered with ' + idNumCurrent + ' as idNumCurrent and ' + idNumRelated + ' as idNumRelated')
+    var currentCardInfo = {};
+    var relatedCardInfo = {};
+    relatedProductsInfoSummaries.map((product) => {
+      if (product.id === idNumCurrent) {
+        currentCardInfo = product;
+      }
+      if (product.id === idNumRelated) {
+        relatedCardInfo = product;
+      }
+    })
+    var comparisonCards = [];
+    comparisonCards.push(currentCardInfo);
+    comparisonCards.push(relatedCardInfo);
+    return comparisonCards;
+    console.log('comparisonCards returning from getTwoComparisonCardsInfo: ', comparisonCards)
+  };
 
  //XIconButtonClickHandler (event) {
   //console.log("X Icon Button was clicked.")
@@ -157,9 +181,10 @@ const RPP = () => {
         <Container>
           <ComparisonModalWindow
           WindowClickHandler={WindowClickHandler}
-          relatedProductsInfoSummaries={relatedProductsInfoSummaries}
+          relatedProductCardInfo={relatedProductCardInfo}
+          currentProductCardInfo={currentProductCardInfo}
           show={show} />
-        </Container>
+       </Container>
       </div>
     );
 };
