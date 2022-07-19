@@ -3,36 +3,38 @@ import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './ComparisonModalStyles.css'
 import TableStaticStarRating from './TableStaticStarRating.jsx';
+import ProductPrice from '../ComparisonModalComponent/ComparisonModalTable.jsx';
 
-function ComparisonModalTable() {
+function ComparisonModalTable(props) {
+  console.log('Props: ', props)
   return (
     <Table striped="columns" size="sm">
       <thead>
         <tr>
-          <th>Air Mini's 250</th>
+          <th>{props.currentProductCardInfo.name}</th>
           <th>Characteristic</th>
-          <th>Heir Force Ones</th>
+          <th>{props.relatedProductCardInfo.name}</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>
-            <img src="Onesie_image.png" className="modal-image-wrapper" />
+            <img src={props.currentProductCardInfo.styles[0].photos[0].thumbnail_url || "Smiley Shades.png"} className="modal-image-wrapper" />
           </td>
           <td>Picture</td>
           <td>
-            <img src="Smiley Shades.png" className="modal-image-wrapper" />
+          <img src={props.relatedProductCardInfo.styles[0].photos[0].thumbnail_url || "Smiley Shades.png"} className="modal-image-wrapper" />
           </td>
         </tr>
         <tr>
-          <td>Shoes</td>
+          <td>{props.currentProductCardInfo.category}</td>
           <td>Category</td>
-          <td>Shoes</td>
+          <td>{props.relatedProductCardInfo.category}</td>
         </tr>
         <tr>
-          <td>$100</td>
+          <td>{props.currentProductCardInfo.default_price}</td>
           <td>Price</td>
-          <td>$150</td>
+          <td>{props.relatedProductCardInfo.default_price}</td>
         </tr>
         <tr>
           <td>Canvas</td>
@@ -64,11 +66,11 @@ function ComparisonModalTable() {
         </tr>
         <tr>
           <td>
-            <TableStaticStarRating averageRating={3.4} />
+            <TableStaticStarRating averageRating={props.currentProductCardInfo.averageRating} />
           </td>
           <td>Average Overall Rating</td>
           <td>
-          <TableStaticStarRating averageRating={1.4} className=".table-static-star-image-wrapper" />
+          <TableStaticStarRating averageRating={props.relatedProductCardInfo.averageRating} className=".table-static-star-image-wrapper" />
           </td>
         </tr>
         <tr>

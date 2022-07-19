@@ -8,7 +8,7 @@ const StarIconButton = (props) => {
             <button
               type="submit"
               name="compareProducts"
-              onClick={() => props.CardClickHandler(props.CardId)}
+              onClick={() => props.StarClickHandler(props.CardId)}
             />
             <FaStar
             className="starIcon"
