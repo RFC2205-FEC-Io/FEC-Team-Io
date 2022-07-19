@@ -32,8 +32,10 @@ const config = {
             loader: 'url-loader',
             options: {
               mimetype: 'image/png'
-        },
-      },
+            },
+          },
+        ]
+      }
     ]
   }
 };

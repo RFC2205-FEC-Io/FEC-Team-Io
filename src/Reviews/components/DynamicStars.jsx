@@ -1,25 +1,34 @@
-import React from "react";
-import "./ReviewStyles.css";
-import ReviewStats from "./ReviewStats.jsx";
+import React, { useState } from "react";
+import { FaStar } from "react-icons/fa";
+import ReviewFormHooks from "./ReviewFormHooks.jsx";
 
-const DynamicStars = ({handleStarsHover, handleStarsClick, handleStarsLeave, starsArray}) => {
+const DynamicStars = ({ handleStarsClick, rating }) => {
 
-  function starMap() {
-    starsArray.map((item, i) => {
-      return (
-        <span className="single-star-container" value={i} key={i} onMouseOver={handleStarsHover} onClick={handleStarsClick} onMouseLeave={handleStarsLeave}>
-          <span className="single-star-fill" style={{ "width": "20px"}}>
-            <img className="single-star-outline" src="Single-Empty-Star.PNG" value={i} width="20px" height="20px"/>
+  const [hover, setHover] = useState(null);
+
+  return (
+    <div>
+      {[...Array(5)].map((star, i) => {
+        const ratingValue = i + 1;
+        return (
+          <span
+            name="rating"
+            value={ratingValue}
+            key={i}
+ >
+            <FaStar
+              className="star"
+              size={20}
+              color={ratingValue <= (hover || rating) ? "#ffc107" : "#e4e5e9"}
+              onMouseEnter={() => {setHover(ratingValue)}}
+              onMouseLeave={() => {setHover(null)}}
+              onClick={handleStarsClick}
+              />
           </span>
-        </span>
-      )
-    })
-  }
+        )
+      })}
+    </div>
+  )
 
-    return (
-      <div>
-        {starMap}
-      </div>
-    )
 }
 export default DynamicStars;
