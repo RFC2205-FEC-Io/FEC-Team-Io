@@ -33,9 +33,9 @@ const config = {
             options: {
               mimetype: 'image/png'
             },
-        },
-      ],
-      },
+          },
+        ]
+      }
     ]
   }
 };

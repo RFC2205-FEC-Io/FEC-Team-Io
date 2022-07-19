@@ -1,8 +1,10 @@
 import React from "react";
 import axios from "axios";
+import {Modal, Button} from "react-bootstrap";
 import ReviewsApp from "../ReviewsApp.jsx";
 import ReviewTile from "./ReviewTile.jsx";
 import ReviewForm from "./ReviewForm.jsx";
+import ReviewFormHooks from "./ReviewFormHooks.jsx";
 import ReviewStats from "./ReviewStats.jsx";
 import FormModal from "./FormModal.jsx";
 
@@ -12,17 +14,19 @@ class ReviewsList extends React.Component {
     super(props);
     this.state = {
       reviewArray: [],
-      productID: 66642,
+      productID: this.props.product_id,
       displayCount: 2,
       addFormShow: false,
       sort: 'helpful',
       helpClick: [],
       reported: [],
+      characteristics: {},
     }
   };
 
   componentDidMount() {
     this.getReviews(1, 50, this.state.sort);
+    this.getMetadata(this.state.productID)
     console.log("reviewArray after GET: ", this.state.reviewArray)
   };
 
@@ -47,6 +51,19 @@ class ReviewsList extends React.Component {
       })
       .catch(err => {
         console.log(err);
+      })
+  };
+
+  getMetadata(productID) {
+    return axios.get(`/reviews/meta/?product_id=${productID}`)
+      .then(res => {
+        console.log('metadata request came through!')
+        this.setState({
+          characteristics: res.data.characteristics
+        });
+      })
+      .catch(err => {
+        console.log('Error, no reviews summarize');
       })
   };
 
@@ -122,8 +139,16 @@ class ReviewsList extends React.Component {
 // console.log('addFormShow: ', this.state.addFormShow)
   };
 
-  starFilter = () => {
+  handleShow = () => {
+    this.setState({
+      addFormShow: true
+    })
+  }
 
+  handleClose = () => {
+    this.setState({
+      addFormShow: false
+    })
   }
 
   render() {
@@ -136,10 +161,25 @@ class ReviewsList extends React.Component {
         </div>
         {/* <button id="ReviewFormButton" onClick={}>Add A Review +</button> */}
         <button id="ReviewDisplayIncrease" onClick={this.displayCount}>See More Reviews</button><br></br>
-        <button className="reviewFormToggleButton" onClick={e => { this.showModal(e); }}>Add a Review</button>
-        <FormModal  show={this.state.addFormShow} >
+        <button className="btn btn-success" onClick={this.handleShow}>Add a Review</button>
+        <Modal show={this.state.addFormShow} onHide={this.handleClose}>
+          <Modal.Header>
+            <Modal.Title>
+              Add New Review
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <ReviewFormHooks characteristics={this.state.characteristics} id={this.state.productID}/>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.handleClose}>
+              Close Button
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        {/* <FormModal  show={this.state.addFormShow} >
           <ReviewForm productID={this.state.productID} starFilter={this.starFilter} onClose={this.showModal}/>
-        </FormModal>
+        </FormModal> */}
       </div>
     );
   }
