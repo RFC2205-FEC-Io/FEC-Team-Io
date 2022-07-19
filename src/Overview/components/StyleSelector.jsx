@@ -55,7 +55,7 @@ class StyleSelector extends React.Component {
     // GET PRODUCTS
     axios({
       method: 'get',
-      url: `/overview/?page=${this.state.page}&count=${this.state.count}`
+      url: `/overview/?page=${this.state.page}&count=${this.state.count}&product_id=${this.state.productID}`
     })
     .then((res) => {
       // console.log('GET sent, products retreived!:', res.data);
@@ -152,7 +152,7 @@ class StyleSelector extends React.Component {
           setGallery={this.state.setGallery}
           />
         <ProductInfo
-          products={this.state.products[0]}
+          products={this.state.products}
           defaultPrice={this.state.price}
           salePrice={this.state.salePrice}
           reviews = {this.state.reviews}

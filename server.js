@@ -20,7 +20,8 @@ app.get('/overview', (req, res) => {
   console.log('req.query:', req.query);
   const page = req.query.page;
   const count = req.query.count;
-  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products/?page=${page}&count=${count}`)
+  const product_id = req.query.product_id;
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products/${product_id}`)
     .then((response) => {
       //console.log('GET sent, products retreived!:', response.data);
       res.send(response.data);
