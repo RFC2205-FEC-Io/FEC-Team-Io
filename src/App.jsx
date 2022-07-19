@@ -1,19 +1,17 @@
-import React from "react";
+import React, {useState} from "react";
 import StyleSelector from './Overview/components/StyleSelector.jsx';
 import ReviewsApp from "./Reviews/ReviewsApp.jsx"
 import RPP from "./Related Products/RPP.jsx";
 
-class App extends React.Component {
-  render() {
-    const { name } = this.props;
+function App (props) {
+  const [productId, setProductId] = useState(66642);
     return (
       <div>
-        {/*<StyleSelector/>*/}
-        <RPP />
-        {/*<ReviewsApp />*/}
+        <StyleSelector product_id={productId}/>
+        <RPP product_id={productId}/>
+        <ReviewsApp product_id={productId}/>
       </div>
     );
-  }
 }
 
 export default App;
