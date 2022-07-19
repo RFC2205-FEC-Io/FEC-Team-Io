@@ -52,8 +52,18 @@ display: flex;
   position: relative;
 }
 #stars {
-  height: 15px;
+  height: 20px;
   width: auto;
+}
+
+a {
+  display: flex;
+  height: 20px;
+  width: auto;
+}
+
+.social-icon {
+  padding-left: 5px;
 }
 /* OVERVIEW */
 

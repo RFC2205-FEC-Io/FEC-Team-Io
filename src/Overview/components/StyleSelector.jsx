@@ -5,7 +5,7 @@ import ImageGallery from './ImageGallery.jsx';
 import ProductInfo from './ProductInfo.jsx';
 import '../../styles.css';
 const axios = require('axios');
-class StyleSelector extends React.Component {
+class StyleSelector extends React.Component { pull
   constructor (props) {
     super (props);
     this.state = {
@@ -18,10 +18,11 @@ class StyleSelector extends React.Component {
       page: 1,
       price: 0,
       salePrice: 0,
-      productID: 66642,
+      productID: this.props.product_id,
       reviews: [],
       clickedthumb: '',
       galleryIMGClicked: false,
+      setGallery: false,
       images: [
         {thumbnail_url: 'https://images.unsplash.com/photo-1501088430049-71…hcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
          url: 'https://images.unsplash.com/photo-1501088430049-71…hcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
@@ -29,13 +30,14 @@ class StyleSelector extends React.Component {
     }
     this.styleClickEvent = this.styleClickEvent.bind(this);
     this.styleHeader = this.styleHeader.bind(this);
+    this.toggleImages = this.toggleImages.bind(this);
   }
 
   getAllData() {
     // GET STYLES
     axios({
       method: 'get',
-      url: '/styles'
+      url: `/styles/?product_id=${this.state.productID}`
     })
     .then((res) => {
       // console.log('GET sent, styles retreived!:', res.data);
@@ -53,7 +55,7 @@ class StyleSelector extends React.Component {
     // GET PRODUCTS
     axios({
       method: 'get',
-      url: `/overview/?page=${this.state.page}&count=${this.state.count}`
+      url: `/overview/?page=${this.state.page}&count=${this.state.count}&product_id=${this.state.productID}`
     })
     .then((res) => {
       // console.log('GET sent, products retreived!:', res.data);
@@ -90,6 +92,13 @@ class StyleSelector extends React.Component {
 
   }
 
+  toggleImages () {
+    this.setState({
+      styleClicked: false,
+      galleryIMGClicked: true
+    })
+  }
+
   // UPDATES CLICK STATE OF THUMBNAIL
   styleClickEvent (event, name, styleObj, originalPrice, salePrice, img) {
     event.preventDefault();
@@ -106,7 +115,9 @@ class StyleSelector extends React.Component {
           styleSKU: skuArr,
           price: originalPrice,
           salePrice: salePrice,
-          clickedthumb:img
+          clickedthumb:img,
+          galleryIMGClicked: false,
+          setGallery: true
         })
       }
     })
@@ -137,9 +148,11 @@ class StyleSelector extends React.Component {
           clickedThumb={this.state.clickedthumb}
           thumbnailClicked={this.state.styleClicked}
           galleryIMG={this.state.galleryIMGClicked}
+          toggleImages={this.toggleImages}
+          setGallery={this.state.setGallery}
           />
         <ProductInfo
-          products={this.state.products[0]}
+          products={this.state.products}
           defaultPrice={this.state.price}
           salePrice={this.state.salePrice}
           reviews = {this.state.reviews}
