@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import axios from 'axios';
+import ReviewsApp from '../../Reviews/ReviewsApp.jsx'
 
 const Stars = ({reviews}) => {
   const [review, getReviews] =  useState([]);
@@ -70,13 +71,31 @@ const Stars = ({reviews}) => {
     }
   }
 
+  const myRef = useRef(null);
+  const handleScroll = () => {
+    console.log('scroll:', myRef);
+    myRef.current.scrollIntoView({behavior: 'smooth'});
+  }
+
   return (
     <div>
       {starRatings(average)}
-      Read All {numOfReviews} reviews
+      <div>Avg {average}/5</div>
+      <div
+      id='reviews-desc'
+      onClick={handleScroll}
+      >
+         Read All {numOfReviews} reviews
+      </div>
+      <div ref={myRef}>Scroll</div>
     </div>
   );
 
 }
 
+console.log('ReviewsApp:', ReviewsApp);
 export default Stars;
+
+const myRef = myRef;
+const handleScroll = handleScroll;
+export {myRef, handleScroll};

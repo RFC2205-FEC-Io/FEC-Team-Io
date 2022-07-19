@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import expand_icon from '../../../dist/expand_icon.png';
 import Modal from 'react-bootstrap/Modal';
 
-const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggleImages}) => {
+const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggleImages, setGallery}) => {
   const imageArr = [];
   const mainImage = 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80';
   const [listImg, addImage] = useState('');
@@ -53,28 +53,40 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
     const handleClose = () => setShow(false);
     if (!show) {
       return;
-    } else {
-    return (
-      <>
-        <Modal show={show} onHide={handleClose} animation={false}>
-          <img src={listImg}></img>
-        </Modal>
-      </>
-    );
-  }
+      } else {
+      return (
+        <>
+          <Modal show={show} onHide={handleClose} animation={false}>
+            <img src={listImg}></img>
+          </Modal>
+        </>
+      );
+    }
   }
 
-
-  return (
-    <div id='image-gallery'>
-      <div id='main-img'  style={setMainImg()}>
-        {images.map((image) => {
-          return (
+  const createGallery = () => {
+    if (setGallery) {
+      return images.map((image) => {
+        return (
           <div>
             <img id ='gallery'src={image.thumbnail_url} onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}/>
           </div>
           );
-        })}
+        });
+    }
+  }
+
+  return (
+    <div id='image-gallery'>
+      <div id='main-img'  style={setMainImg()}>
+        {/* {images.map((image) => {
+        return (
+          <div>
+            <img id ='gallery'src={image.thumbnail_url} onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}/>
+          </div>
+          );
+        })} */}
+        {createGallery()}
         <div id='view'>
           {/* <img src={expand_icon} onClick={expandView}> */}
           <img src={expand_icon} onClick={handleShow}>

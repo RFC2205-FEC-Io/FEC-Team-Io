@@ -22,6 +22,7 @@ class StyleSelector extends React.Component {
       reviews: [],
       clickedthumb: '',
       galleryIMGClicked: false,
+      setGallery: false,
       images: [
         {thumbnail_url: 'https://images.unsplash.com/photo-1501088430049-71…hcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
          url: 'https://images.unsplash.com/photo-1501088430049-71…hcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
@@ -115,7 +116,8 @@ class StyleSelector extends React.Component {
           price: originalPrice,
           salePrice: salePrice,
           clickedthumb:img,
-          galleryIMGClicked: false
+          galleryIMGClicked: false,
+          setGallery: true
         })
       }
     })
@@ -147,6 +149,7 @@ class StyleSelector extends React.Component {
           thumbnailClicked={this.state.styleClicked}
           galleryIMG={this.state.galleryIMGClicked}
           toggleImages={this.toggleImages}
+          setGallery={this.state.setGallery}
           />
         <ProductInfo
           products={this.state.products[0]}
