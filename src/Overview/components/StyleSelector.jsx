@@ -18,7 +18,7 @@ class StyleSelector extends React.Component {
       page: 1,
       price: 0,
       salePrice: 0,
-      productID: 66644,
+      productID: this.props.product_id,
       reviews: [],
       clickedthumb: '',
       galleryIMGClicked: false,
