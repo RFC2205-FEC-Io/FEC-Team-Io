@@ -9,7 +9,7 @@ class ReviewsApp extends React.Component {
     return (
       <div>
         {/* <ReviewStats /> */}
-        <ReviewsList />
+        <ReviewsList product_id={this.props.product_id}/>
       </div>
     );
   }

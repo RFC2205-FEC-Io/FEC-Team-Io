@@ -14,7 +14,7 @@ class ReviewsList extends React.Component {
     super(props);
     this.state = {
       reviewArray: [],
-      productID: 66642,
+      productID: this.props.product_id,
       displayCount: 2,
       addFormShow: false,
       sort: 'helpful',
