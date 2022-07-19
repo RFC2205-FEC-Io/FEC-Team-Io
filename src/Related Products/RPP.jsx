@@ -40,10 +40,11 @@ const RPP = () => {
   };
 
 
-  const CardClickHandler = (event, cardId) => {
+  const CardClickHandler = (CardId) => {
+    console.log('CardId: ', CardId)
     console.log("Product Card was clicked.")
     setShow(true)
-    setRelatedProductCardId(cardId)
+    setRelatedProductCardId(CardId)
   }
 
   const WindowClickHandler = (event) => {
