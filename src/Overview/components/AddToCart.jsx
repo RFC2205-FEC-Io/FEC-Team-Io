@@ -54,15 +54,12 @@ class AddToCart extends React.Component {
         if (countXL > 1) {
           sku.size = 'XXL';
         }
-        // console.log('i:', i, 'sku:', sku, 'countXL:', countXL);
       }
       return this.state.skus.map((sku) => {
-        // console.log('sku:'. sku);
           return (
           <option
             id={sku.size}
             key={sku.size}
-            // onClick={this.sizeClicked}
             value={sku.size}
           >
             {sku.size}
@@ -94,14 +91,11 @@ class AddToCart extends React.Component {
           }
         }
       })
-      // console.log('qtyArr:', qtyArr);
       return qtyArr.map((num) => {
         return (<option key={num}>{num}</option>);
       });
     }
   }
-
-  //    return (<option key={i}>{i}</option>);
 
   /* TOGGLES FOR LISTS */
   qtyClickEvent(event) {
@@ -112,7 +106,6 @@ class AddToCart extends React.Component {
   }
   sizeClickEvent(event) {
     event.preventDefault();
-    // console.log('event.target.innerHTML:', event.target)
     this.setState((prevState) => ({
       sizeClicked: !prevState.sizeClicked
     }));
@@ -123,13 +116,13 @@ class AddToCart extends React.Component {
     this.setState({
       sizeSelect: {value: event.target.value}
     })
-    // alert(this.state.sizeSelect.value);
   }
 
   cartButtonEvent (event) {
     event.preventDefault();
     console.log('Added To Cart!');
   }
+
   render (props) {
     return (
       <div id='add-to-cart'>

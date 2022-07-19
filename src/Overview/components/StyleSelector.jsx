@@ -29,6 +29,7 @@ class StyleSelector extends React.Component {
     }
     this.styleClickEvent = this.styleClickEvent.bind(this);
     this.styleHeader = this.styleHeader.bind(this);
+    this.toggleImages = this.toggleImages.bind(this);
   }
 
   getAllData() {
@@ -90,6 +91,13 @@ class StyleSelector extends React.Component {
 
   }
 
+  toggleImages () {
+    this.setState({
+      styleClicked: false,
+      galleryIMGClicked: true
+    })
+  }
+
   // UPDATES CLICK STATE OF THUMBNAIL
   styleClickEvent (event, name, styleObj, originalPrice, salePrice, img) {
     event.preventDefault();
@@ -106,7 +114,8 @@ class StyleSelector extends React.Component {
           styleSKU: skuArr,
           price: originalPrice,
           salePrice: salePrice,
-          clickedthumb:img
+          clickedthumb:img,
+          galleryIMGClicked: false
         })
       }
     })
@@ -137,6 +146,7 @@ class StyleSelector extends React.Component {
           clickedThumb={this.state.clickedthumb}
           thumbnailClicked={this.state.styleClicked}
           galleryIMG={this.state.galleryIMGClicked}
+          toggleImages={this.toggleImages}
           />
         <ProductInfo
           products={this.state.products[0]}

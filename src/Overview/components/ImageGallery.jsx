@@ -2,27 +2,26 @@ import React, {useState, useEffect} from 'react';
 import expand_icon from '../../../dist/expand_icon.png';
 import Modal from 'react-bootstrap/Modal';
 
-const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG}) => {
+const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggleImages}) => {
   const imageArr = [];
   const mainImage = 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80';
   const [listImg, addImage] = useState('');
   const [galleryIMGClicked, clicked] = useState(false);
-  // const clickedthumb = ;
 
   const setBackgroundImage = (event, imageURL) => {
     event.preventDefault();
     addImage(current => imageURL);
     clicked( current => true);
-    // console.log('galleryIMGClicked:', galleryIMGClicked, 'listImg:', listImg);
+
   }
 
 
   const setMainImg = () => {
-    if (thumbnailClicked && !galleryIMGClicked) {
+    if (thumbnailClicked) {
       return { backgroundImage: `url( ${clickedThumb})`};
     }  else if (galleryIMGClicked) {
       return { backgroundImage: `url( ${listImg})`};
-    } else {
+    } else if (!thumbnailClicked && !galleryIMGClicked){
       return { backgroundImage: `url( ${mainImage})`};
     }
   }
@@ -51,7 +50,6 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG}) => {
   const handleShow = () => setShow(true);
 
   const Example = (listImg) => {
-    // console.log('show:', show);
     const handleClose = () => setShow(false);
     if (!show) {
       return;
@@ -73,7 +71,7 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG}) => {
         {images.map((image) => {
           return (
           <div>
-            <img id ='gallery'src={image.thumbnail_url} onClick={()=> {setBackgroundImage(event, image.url)}}/>
+            <img id ='gallery'src={image.thumbnail_url} onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}/>
           </div>
           );
         })}

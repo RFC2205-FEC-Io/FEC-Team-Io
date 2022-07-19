@@ -27,11 +27,7 @@ class ReviewStats extends React.Component {
         });
       })
       .catch(err => {
-<<<<<<< HEAD
-        // alert('Error, no reviews summarize');
-=======
         console.log('Error, no reviews summarize');
->>>>>>> 040ad476764dc598db6a4aee76c104a8474bdc7d
       })
   };
 

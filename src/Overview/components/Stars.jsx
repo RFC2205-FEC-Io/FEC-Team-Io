@@ -72,7 +72,6 @@ const Stars = ({reviews}) => {
 
   return (
     <div>
-      {/* <img id='stars' src={_5star}/> */}
       {starRatings(average)}
       Read All {numOfReviews} reviews
     </div>
