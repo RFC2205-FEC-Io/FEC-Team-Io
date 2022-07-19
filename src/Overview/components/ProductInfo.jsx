@@ -42,9 +42,9 @@ class ProductInfo extends React.Component {
     if (this.state.salePrice === null || this.state.salePrice === 0) {
       return (
         <div id='product-info'>
-          <p id='category'>{this.state.default.category}</p>
-          <p id='name'>{this.state.default.name}</p>
-          <p id='default-price'>{this.state.default.default_price}</p>
+          <p id='category'>{this.state.products.category}</p>
+          <p id='name'>{this.state.products.name}</p>
+          <p id='default-price'>{this.state.price}</p>
           <p id='slogan'>{this.state.default.slogan}</p>
         </div>
       )
