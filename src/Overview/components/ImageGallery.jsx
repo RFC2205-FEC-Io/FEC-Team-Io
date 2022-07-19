@@ -66,6 +66,7 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
 
   const createGallery = () => {
     if (images.length <= 5 && setGallery) {
+      console.log('under 5');
       return images.map((image) => {
         return (
           <div>
@@ -76,59 +77,47 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
           </div>
         );
       });
+    } else if (images.length > 5 && setGallery) {
+      console.log('over 5');
+      var imgArr1 = images.slice(0, 5);
+      var imgArr2 = images.slice(-5, images.length);
+      console.log('imgArr1: ', imgArr1, 'imgArr2: ', imgArr2)
+      return (
+        <Carousel>
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          src="holder.js/800x400?text=First slide&bg=373940"
+        />
+          {imgArr1.map((image) => {
+            return (
+                <img
+                id ='gallery'src={image.thumbnail_url}
+                onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}
+                />
+            );
+          })}
+      </Carousel.Item>
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          src="holder.js/800x400?text=First slide&bg=373940"
+        />
+        {imgArr2.map((image) => {
+            return (
+                <img
+                id ='gallery'src={image.thumbnail_url}
+                onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}
+                />
+            );
+          })}
+      </Carousel.Item>
+      </Carousel>
+      );
     } else {
-      return images.map((image) => {
-        return (
-          <div>
-            <img
-            id ='gallery'src={image.thumbnail_url}
-            onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}
-            />
-          </div>
-        );
-      });
+      console.log('no images in gallery')
+      return;
     }
-    // return (
-      //   <Carousel>
-      //     <Carousel.Item>
-      //       <img
-      //         className="d-block w-100"
-      //         src="holder.js/800x400?text=First slide&bg=373940"
-      //         alt="First slide"
-      //       />
-      //       <Carousel.Caption>
-      //         <h3>First slide label</h3>
-      //         <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-      //       </Carousel.Caption>
-      //     </Carousel.Item>
-      //     <Carousel.Item>
-      //       <img
-      //         className="d-block w-100"
-      //         src="holder.js/800x400?text=Second slide&bg=282c34"
-      //         alt="Second slide"
-      //       />
-
-      //       <Carousel.Caption>
-      //         <h3>Second slide label</h3>
-      //         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      //       </Carousel.Caption>
-      //     </Carousel.Item>
-      //     <Carousel.Item>
-      //       <img
-      //         className="d-block w-100"
-      //         src="holder.js/800x400?text=Third slide&bg=20232a"
-      //         alt="Third slide"
-      //       />
-
-      //       <Carousel.Caption>
-      //         <h3>Third slide label</h3>
-      //         <p>
-      //           Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-      //         </p>
-      //       </Carousel.Caption>
-      //     </Carousel.Item>
-      //   </Carousel>
-      // );
   }
 
   return (

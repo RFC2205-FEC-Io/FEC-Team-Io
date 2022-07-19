@@ -93,7 +93,7 @@ const Stars = ({reviews}) => {
 
 }
 
-console.log('ReviewsApp:', ReviewsApp);
+// console.log('ReviewsApp:', ReviewsApp);
 export default Stars;
 
 const myRef = myRef;
