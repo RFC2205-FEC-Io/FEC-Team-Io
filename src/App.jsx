@@ -5,10 +5,17 @@ import RPP from "./Related Products/RPP.jsx";
 
 function App (props) {
   const [productId, setProductId] = useState(66642);
+
+  const CardClickHandler = (newId) => {
+    console.log('Related product card image was clicked. ')
+    setProductId(newId)
+  }
+
+
     return (
       <div>
         <StyleSelector product_id={productId}/>
-        <RPP product_id={productId}/>
+        <RPP product_id={productId} CardClickHandler={CardClickHandler}/>
         <ReviewsApp product_id={productId}/>
       </div>
     );

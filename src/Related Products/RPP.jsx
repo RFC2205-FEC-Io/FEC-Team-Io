@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ComparisonModalWindow from './Components/ComparisonModalComponent/ComparisonModalWindow.jsx';
 
 
-const RPP = () => {
+const RPP = (props) => {
     /*State*/
     const [index, setIndex] = useState(0);
     const [currentId, setCurrentId] = useState(66645);
@@ -53,10 +53,7 @@ const RPP = () => {
     fetchCardInfo();
   }
 
-  const CardClickHandler = () => {
-    console.log('Related product card image was clicked. ')
 
-  }
 
   const WindowClickHandler = (event) => {
     console.log("Window close button was clicked.")
@@ -179,7 +176,7 @@ const RPP = () => {
           <RelatedProductsCarousel
             relatedProductsInfoSummaries={relatedProductsInfoSummaries}
             StarClickHandler={StarClickHandler}
-            CardClickHandler={CardClickHandler}
+            CardClickHandler={props.CardClickHandler}
             index={index}
             onSelect={handleSelect}
             />
