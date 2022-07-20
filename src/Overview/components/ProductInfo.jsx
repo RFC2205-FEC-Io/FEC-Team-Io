@@ -15,7 +15,7 @@ class ProductInfo extends React.Component {
   }
 
   componentDidMount () {
-    console.log('ProductInfo Mounted!');
+    // console.log('ProductInfo Mounted!');
   }
 
   componentWillReceiveProps({products, defaultPrice, salePrice, reviews}) {
@@ -30,18 +30,18 @@ class ProductInfo extends React.Component {
   updatePrice () {
     if (this.state.salePrice === null || this.state.salePrice === 0) {
       return (
-        <div id='product-info'>
+        <div>
           <p id='category'>{this.state.products.category}</p>
-          <p id='name'>{this.state.products.name}</p>
+          <h2 id='name'>{this.state.products.name}</h2>
           <p id='default-price'>{this.state.price}</p>
           <p id='slogan'>{this.state.products.slogan}</p>
         </div>
       )
     } else {
       return (
-        <div id='product-info'>
+        <div>
           <p id='category'>{this.state.products.category}</p>
-          <p id='name'>{this.state.products.name}</p>
+          <h2 id='name'>{this.state.products.name}</h2>
           <p id='price'>{this.state.price}</p>
           <p id='salePrice'>{this.state.salePrice}</p>
         </div>
