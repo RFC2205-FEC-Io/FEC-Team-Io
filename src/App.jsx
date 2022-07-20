@@ -10,13 +10,14 @@ function App (props) {
     console.log('Related product card image was clicked. ')
     setProductId(newId)
   }
+  console.log('Product Id on App.jsx: ', productId);
 
 
     return (
       <div>
-        <StyleSelector product_id={productId}/>
+        {/*<StyleSelector product_id={productId}/>*/}
         <RPP product_id={productId} CardClickHandler={CardClickHandler}/>
-        <ReviewsApp product_id={productId}/>
+        {/*<ReviewsApp product_id={productId}/>*/}
       </div>
     );
 }

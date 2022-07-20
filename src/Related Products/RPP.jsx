@@ -11,11 +11,13 @@ import ComparisonModalWindow from './Components/ComparisonModalComponent/Compari
 const RPP = (props) => {
     /*State*/
     const [index, setIndex] = useState(0);
-    const [currentId, setCurrentId] = useState(66645);
     //const [relatedProductCardId, setRelatedProductCardId] = useState();
     const [relatedProductsInfoSummaries, setRelatedProductsInfoSummaries] = useState([]);
-    const [relatedProductCardInfo, setRelatedProductCardInfo] = useState({})
-    const [currentProductCardInfo, setCurrentProductCardInfo] = useState({})
+    const [relatedProductCardInfo, setRelatedProductCardInfo] = useState({});
+    const [currentProductCardInfo, setCurrentProductCardInfo] = useState({});
+    const [comparisonCardFeatures, setComparisonCardFeatures] = useState({});
+    const [currentCardFeatures, setCurrentCardFeatures] = useState({});
+    const [relatedCardFeatures, setRelatedCardFeatures] = useState({});
     const [show, setShow] = useState(false);
 
 
@@ -43,11 +45,39 @@ const RPP = (props) => {
 
 
   const StarClickHandler = (CardId) => {
-    console.log("Related Product Card Star Icon was clicked. Product id: ", CardId)
     const fetchCardInfo = async () => {
-      const cardInfo = await getTwoComparisonCardsInfo (currentId, CardId);
+      const cardInfo = await getTwoComparisonCardsInfo (props.product_id, CardId);
+      const currentCardFeatures = cardInfo[0].features;
+      const relatedCardFeatures = cardInfo[1].features;
+
+      const comparisonCardFeaturesArray = [];
+      for (let i = 0; i < currentCardFeatures.length; i++) {
+        if (comparisonCardFeaturesArray.indexOf(currentCardFeatures[i].feature) !== undefined) {
+          comparisonCardFeaturesArray.push(currentCardFeatures[i].feature)
+        }
+      }
+      for (let i = 0; i < relatedCardFeatures.length; i++) {
+        if (comparisonCardFeaturesArray.indexOf(relatedCardFeatures[i].feature) !== undefined) {
+          comparisonCardFeaturesArray.push(relatedCardFeatures[i].feature)
+        }
+      }
+
+
+      const currentFeatures = {};
+      for (let i = 0; i < currentCardFeatures.length; i++) {
+        currentFeatures[currentCardFeatures[i].feature] = currentCardFeatures[i].value;
+      }
+
+      const relatedFeatures = {};
+      for (let i = 0; i < relatedCardFeatures.length; i++) {
+        relatedFeatures[relatedCardFeatures[i].feature] = relatedCardFeatures[i].value;
+      }
+
       setCurrentProductCardInfo(cardInfo[0]);
       setRelatedProductCardInfo(cardInfo[1]);
+      setComparisonCardFeatures(comparisonCardFeaturesArray);
+      setCurrentCardFeatures(currentFeatures);
+      setRelatedCardFeatures(relatedFeatures);
       setShow(true)
     }
     fetchCardInfo();
@@ -65,10 +95,10 @@ const RPP = (props) => {
     var currentCardInfo = {};
     var relatedCardInfo = {};
     relatedProductsInfoSummaries.map((product) => {
+      console.log('product: ', product);
       if (product.id === idNumCurrent) {
         currentCardInfo = product;
-      }
-      if (product.id === idNumRelated) {
+      } else if (product.id === idNumRelated) {
         relatedCardInfo = product;
       }
     })
@@ -87,9 +117,11 @@ const RPP = (props) => {
   /* Get related products ids */
   const getAllData = () => {
     var infoSummary = [];
-    return axios.get(`/related/?product_id=${currentId}`)
+    return axios.get(`/related/?product_id=${props.product_id}`)
     .then(response => {
       const relatedIds = response.data;
+      relatedIds.push(props.product_id);
+      console.log('relatedIds: ', relatedIds);
       return relatedIds;
     })
     /* Get related products by their ids */
@@ -186,6 +218,9 @@ const RPP = (props) => {
           WindowClickHandler={WindowClickHandler}
           relatedProductCardInfo={relatedProductCardInfo}
           currentProductCardInfo={currentProductCardInfo}
+          comparisonCardFeatures={comparisonCardFeatures}
+          currentCardFeatures={currentCardFeatures}
+          relatedCardFeatures={relatedCardFeatures}
           show={show} />
        </Container>
       </div>
