@@ -2,7 +2,6 @@ import React, {useState, useEffect, useRef} from 'react';
 import expand_icon from '../../../dist/expand_icon.png';
 import Modal from 'react-bootstrap/Modal';
 import Carousel from 'react-bootstrap/Carousel';
-<<<<<<< HEAD
 import Overlay from 'react-bootstrap/Overlay';
 
 const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggleImages, setGallery}) => {
@@ -12,21 +11,12 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
     // ------------Sets one of the gallery images the main image in the gallery------------//
   const [listImg, addImage] = useState('');
   const [galleryIMGClicked, clicked] = useState(false);
-=======
-
-const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggleImages, setGallery}) => {
-  const imageArr = [];
-  const mainImage = 'Smiley Shades.png';
-  const [listImg, addImage] = useState('');
-  const [galleryIMGClicked, clicked] = useState(false);
-
->>>>>>> 71ab0a3d9d6bca7b7657dc9f68583338a56901c5
   const setBackgroundImage = (event, imageURL) => {
     event.preventDefault();
-    console.log('setBackgroundImage EVENT:', event.target);
+    console.log('setBackgroundImage EVENT:', event.target, 'className',event.target.className[event.target.className.length -1]);
     addImage(current => imageURL);
     clicked( current => true);
-
+    setIndex(Number(event.target.className[event.target.className.length -1]));
   }
 
   // ------------Sets the main image in the gallery------------
@@ -59,7 +49,7 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
     }
   }
 
-  const highlight = (event) => {
+  const highlightGalleryThumbnail = (event) => {
     console.log('highlight event:', event)
     if (galleryIMGClicked) {
       return {
@@ -72,13 +62,17 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
   const imageArr = [];
 
   const createGallery = () => {
+    var i = -1;
     if (images.length <= 7 && setGallery) {
       return images.map((image) => {
+        i++;
         return (
           <div>
             <img
             id ='gallery-thumbnail'src={image.thumbnail_url}
             onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}
+            key={i}
+            className={`galleryImg ${i}`}
             />
           </div>
         );
@@ -92,20 +86,26 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
       <Carousel interval={null}>
         <Carousel.Item>
           {imgArr1.map((image) => {
+            i++;
             return (
               <img
                 id ='gallery-thumbnail'src={image.thumbnail_url}
                 onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}
+                key={i}
+                className={`galleryImg ${i}`}
               />
               );
             })}
         </Carousel.Item>
         <Carousel.Item>
           {imgArr2.map((image) => {
+            i++;
             return (
               <img
                 id ='gallery-thumbnail'src={image.thumbnail_url}
                 onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}
+                key={i}
+                className={`galleryImg ${i}`}
               />
             );
           })}
@@ -118,11 +118,18 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
     }
   }
 
+  // ------------Keep track of carousel state------------
+    const [carouselIndex, setIndex] = useState(0);
+    const updateCarouselState = (selectedIndex, e) => {
+      setIndex(selectedIndex);
+    }
+    console.log('carouselIndex:', carouselIndex);
+
 // ------------Creates the main image Carousel------------
   const mainImageCarousel = () => {
     return (
       <div id='carousel-main' style={{height: '400px', width: '600px', /*border: 'solid 1px red'*/}}>
-    <Carousel interval={null} ref={target}>
+    <Carousel interval={null} ref={target} activeIndex={carouselIndex} onSelect={updateCarouselState}>
     {images.map((image) => {
       return (
         <Carousel.Item>
@@ -142,8 +149,11 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
     )
   };
 
-  // ------------Overlay gallery carousel over main carousel------------
+
   const target = useRef(null);
+
+
+
   return (
     <div id='image-gallery'>
       {/* <div id='main-img'  style={setMainImg()} >
@@ -155,6 +165,7 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
           {expandView(listImg)}
         </div>
       </div> */}
+    <button onClick={() =>{setIndex(1)}}>Jump Index</button>
     {createGallery()}
     {mainImageCarousel()}
   </div>
