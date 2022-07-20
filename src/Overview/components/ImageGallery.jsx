@@ -4,12 +4,10 @@ import Modal from 'react-bootstrap/Modal';
 import Carousel from 'react-bootstrap/Carousel';
 
 const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggleImages, setGallery}) => {
-  const imageArr = [];
   const mainImage = 'Smiley Shades.png';
-  const [listImg, addImage] = useState('');
-  const [galleryIMGClicked, clicked] = useState(false);
 
-    // ------------Sets one of the gallery images the main image in the gallery------------
+
+    // ------------Sets one of the gallery images the main image in the gallery------------//
   const setBackgroundImage = (event, imageURL) => {
     event.preventDefault();
     addImage(current => imageURL);
@@ -18,6 +16,8 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
   }
 
   // ------------Sets the main image in the gallery------------
+  const [listImg, addImage] = useState('');
+  const [galleryIMGClicked, clicked] = useState(false);
   const setMainImg = () => {
     if (thumbnailClicked) {
       return { backgroundImage: `url( ${clickedThumb})`};
@@ -32,7 +32,7 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
 
-  const Example = (listImg) => {
+  const expandView = (listImg) => {
     const handleClose = () => setShow(false);
     if (!show) {
       return;
@@ -48,6 +48,7 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
   }
 
  // ------------Creates the image gallery for the gallery thumbnails------------
+   const imageArr = [];
   const createGallery = () => {
     if (images.length <= 7 && setGallery) {
       console.log('under 5');
@@ -67,35 +68,35 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
       var imgArr2 = images.slice(-7, images.length);
       console.log('imgArr1: ', imgArr1, 'imgArr2: ', imgArr2)
       return (
-        <Carousel>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="holder.js/800x400?text=First slide&bg=373940"
-        />
+      <Carousel>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="holder.js/800x400?text=First slide&bg=373940"
+          />
           {imgArr1.map((image) => {
             return (
-                <img
+              <img
                 id ='gallery'src={image.thumbnail_url}
                 onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}
-                />
-            );
-          })}
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="holder.js/800x400?text=First slide&bg=373940"
-        />
-        {imgArr2.map((image) => {
+              />
+              );
+            })}
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="holder.js/800x400?text=First slide&bg=373940"
+          />
+          {imgArr2.map((image) => {
             return (
-                <img
+              <img
                 id ='gallery'src={image.thumbnail_url}
                 onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}
-                />
+              />
             );
           })}
-      </Carousel.Item>
+        </Carousel.Item>
       </Carousel>
       );
     } else {
@@ -112,9 +113,22 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
           <img src={expand_icon} onClick={handleShow}>
         </img></div>
         <div>
-          {Example(listImg)}
+          {expandView(listImg)}
         </div>
       </div>
+        {/* <Carousel id='carousel'>
+    {images.map((image) => {
+      return (
+        <Carousel.Item>
+          <img
+          id ='carousel-gallery'
+          src={image.thumbnail_url}
+          onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}
+          />
+        </Carousel.Item>
+      );
+    })}
+  </Carousel> */}
     </div>
   );
 }

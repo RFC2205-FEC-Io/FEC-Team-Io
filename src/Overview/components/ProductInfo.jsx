@@ -5,17 +5,6 @@ class ProductInfo extends React.Component {
   constructor (props) {
     super (props);
     this.state = {
-      default: {
-        campus: "hr-rfc",
-        category: "Jackets",
-        created_at: "2022-03-31T21:13:15.875Z",
-        default_price:"140.00",
-        description:"The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.",
-        id: 66642,
-        name: "Camo Onesie",
-        slogan: "Blend in to your crowd",
-        updated_at: "2022-03-31T21:13:15.875Z"
-      },
       products: {},
       price: 0,
       salePrice: 0,
@@ -45,7 +34,7 @@ class ProductInfo extends React.Component {
           <p id='category'>{this.state.products.category}</p>
           <p id='name'>{this.state.products.name}</p>
           <p id='default-price'>{this.state.price}</p>
-          <p id='slogan'>{this.state.default.slogan}</p>
+          <p id='slogan'>{this.state.products.slogan}</p>
         </div>
       )
     } else {
@@ -74,3 +63,5 @@ class ProductInfo extends React.Component {
 }
 
 export default ProductInfo;
+
+

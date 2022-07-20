@@ -68,6 +68,11 @@ a {
   display: flex;
   height: 20px;
 }
+
+#carousel-gallery {
+  width: 600px;
+  height: 400px;
+}
 /* OVERVIEW */
 
 /* Ratings and Reviews*/
