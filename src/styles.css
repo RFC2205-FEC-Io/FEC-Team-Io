@@ -21,7 +21,12 @@ display: flex;
   opacity: 0.65;
 }
 
-#carousel-gallery {
+#gallery-carousel {
+  display: flex;
+  flex-direction: column;
+}
+
+#carousel-main-img {
   display: flex;
   width: 600px;
   height: 400px;

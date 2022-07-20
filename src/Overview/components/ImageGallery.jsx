@@ -74,12 +74,11 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
         );
       });
     } else if (images.length > 7 && setGallery) {
-      var index2 = images.length - 7;
-      console.log('index2:', index2);
+      var divideIndex = images.length - 7
       var imgArr1 = images.slice(0, 7);
-      var imgArr2 = images.slice(-index2, images.length);
+      var imgArr2 = images.slice(-divideIndex, images.length);
       return (
-      <div id='gallery-carousel' style={{height: '50px', width: '400px', border: 'solid 1px yellow'}}>
+      <div id='gallery-carousel' style={{height: '50px', width: '400px', /*border: 'solid 1px yellow'*/}}>
       <Carousel interval={null}>
         <Carousel.Item>
           {imgArr1.map((image) => {
@@ -109,29 +108,16 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
     }
   }
 
-
-  // ------------Overlay gallery carousel over main carousel------------
-  const target = useRef(null);
-
-  return (
-    <div id='image-gallery'>
-      <div id='main-img'  style={setMainImg()} >
-        {createGallery()}
-        <div id='view'>
-          <img id='expander'src={expand_icon} onClick={handleShow}/>
-        </div>
-        <div>
-          {expandView(listImg)}
-        </div>
-      </div>
-    {createGallery()}
-    <div id='carousel' style={{border: 'solid 1px red', height: '400px', width: '600px'}}>
+// ------------Creates the main image Carousel------------
+  const mainImageCarousel = () => {
+    return (
+      <div id='carousel-main' style={{height: '400px', width: '600px', /*border: 'solid 1px red'*/}}>
     <Carousel interval={null} ref={target}>
     {images.map((image) => {
       return (
         <Carousel.Item>
           <img
-          id ='carousel-gallery' // Lawrence, images don't resize their dimensions with the carousel, they both need separate CSS
+          id ='carousel-main-img' // Lawrence, images don't resize their dimensions with the carousel, they both need separate CSS
           src={image.thumbnail_url}
           onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}
           />
@@ -143,6 +129,24 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
     })}
   </Carousel>
   </div>
+    )
+  };
+
+  // ------------Overlay gallery carousel over main carousel------------
+  const target = useRef(null);
+  return (
+    <div id='image-gallery'>
+      {/* <div id='main-img'  style={setMainImg()} >
+        {createGallery()}
+        <div id='view'>
+          <img id='expander'src={expand_icon} onClick={handleShow}/>
+        </div>
+        <div>
+          {expandView(listImg)}
+        </div>
+      </div> */}
+    {createGallery()}
+    {mainImageCarousel()}
   </div>
   );
 }
