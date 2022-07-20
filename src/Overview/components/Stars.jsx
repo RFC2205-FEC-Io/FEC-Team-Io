@@ -87,7 +87,7 @@ const Stars = ({reviews}) => {
       >
          Read All {numOfReviews} reviews
       </div>
-      <div ref={myRef}>Scroll</div>
+      {/* <div ref={myRef}>Scroll</div> */}
     </div>
   );
 

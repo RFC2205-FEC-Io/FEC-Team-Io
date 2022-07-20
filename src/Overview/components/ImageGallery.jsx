@@ -9,6 +9,7 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
   const [listImg, addImage] = useState('');
   const [galleryIMGClicked, clicked] = useState(false);
 
+    // ------------Sets one of the gallery images the main image in the gallery------------
   const setBackgroundImage = (event, imageURL) => {
     event.preventDefault();
     addImage(current => imageURL);
@@ -16,6 +17,7 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
 
   }
 
+  // ------------Sets the main image in the gallery------------
   const setMainImg = () => {
     if (thumbnailClicked) {
       return { backgroundImage: `url( ${clickedThumb})`};
@@ -26,26 +28,7 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
     }
   }
 
-  // const [view, changeView] = useState(false);
-  // const expandView= () => changeView(true);
-
-  // const Modal = (listImg) => {
-  //   console.log('show:', view);
-  //   const revertView = () => changeView(false);
-  //   if (!view) {
-  //     return <div>Closed</div>;
-  //   } else {
-  //   return (
-  //     <>
-  //       <Modal ={view} onHide={revertView} animation={false}>
-  //         <img src={listImg}></img>
-  //       </Modal>
-  //     </>
-  //   );
-  // }
-  // }
-
-
+// ------------Creates the expanded view for the main image------------
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
 
@@ -64,8 +47,9 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
     }
   }
 
+ // ------------Creates the image gallery for the gallery thumbnails------------
   const createGallery = () => {
-    if (images.length <= 5 && setGallery) {
+    if (images.length <= 7 && setGallery) {
       console.log('under 5');
       return images.map((image) => {
         return (
@@ -77,10 +61,10 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
           </div>
         );
       });
-    } else if (images.length > 5 && setGallery) {
+    } else if (images.length > 7 && setGallery) {
       console.log('over 5');
-      var imgArr1 = images.slice(0, 5);
-      var imgArr2 = images.slice(-5, images.length);
+      var imgArr1 = images.slice(0, 7);
+      var imgArr2 = images.slice(-7, images.length);
       console.log('imgArr1: ', imgArr1, 'imgArr2: ', imgArr2)
       return (
         <Carousel>
@@ -125,12 +109,10 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
       <div id='main-img'  style={setMainImg()}>
         {createGallery()}
         <div id='view'>
-          {/* <img src={expand_icon} onClick={expandView}> */}
           <img src={expand_icon} onClick={handleShow}>
         </img></div>
         <div>
           {Example(listImg)}
-          {/* {Modal(listImg)} */}
         </div>
       </div>
     </div>
