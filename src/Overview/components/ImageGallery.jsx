@@ -2,6 +2,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import expand_icon from '../../../dist/expand_icon.png';
 import Modal from 'react-bootstrap/Modal';
 import Carousel from 'react-bootstrap/Carousel';
+<<<<<<< HEAD
 import Overlay from 'react-bootstrap/Overlay';
 
 const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggleImages, setGallery}) => {
@@ -11,6 +12,15 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
     // ------------Sets one of the gallery images the main image in the gallery------------//
   const [listImg, addImage] = useState('');
   const [galleryIMGClicked, clicked] = useState(false);
+=======
+
+const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggleImages, setGallery}) => {
+  const imageArr = [];
+  const mainImage = 'Smiley Shades.png';
+  const [listImg, addImage] = useState('');
+  const [galleryIMGClicked, clicked] = useState(false);
+
+>>>>>>> 71ab0a3d9d6bca7b7657dc9f68583338a56901c5
   const setBackgroundImage = (event, imageURL) => {
     event.preventDefault();
     console.log('setBackgroundImage EVENT:', event.target);
