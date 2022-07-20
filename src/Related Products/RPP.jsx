@@ -46,18 +46,23 @@ const RPP = (props) => {
 
   const StarClickHandler = (CardId) => {
     const fetchCardInfo = async () => {
+      /*Wait until getTwoComparisonCardsInfo function completes */
       const cardInfo = await getTwoComparisonCardsInfo (props.product_id, CardId);
+
+
+      /*Create an array with a list of all features from both products being compared */
+      const comparisonCardFeaturesArray = [];
       const currentCardFeatures = cardInfo[0].features;
       const relatedCardFeatures = cardInfo[1].features;
 
-      const comparisonCardFeaturesArray = [];
       for (let i = 0; i < currentCardFeatures.length; i++) {
-        if (comparisonCardFeaturesArray.indexOf(currentCardFeatures[i].feature) !== undefined) {
+        if (comparisonCardFeaturesArray.indexOf(currentCardFeatures[i].feature) === -1) {
           comparisonCardFeaturesArray.push(currentCardFeatures[i].feature)
         }
       }
+
       for (let i = 0; i < relatedCardFeatures.length; i++) {
-        if (comparisonCardFeaturesArray.indexOf(relatedCardFeatures[i].feature) !== undefined) {
+        if (comparisonCardFeaturesArray.indexOf(relatedCardFeatures[i].feature) === -1) {
           comparisonCardFeaturesArray.push(relatedCardFeatures[i].feature)
         }
       }
@@ -86,16 +91,13 @@ const RPP = (props) => {
 
 
   const WindowClickHandler = (event) => {
-    console.log("Window close button was clicked.")
     setShow(false)
   }
 
   const getTwoComparisonCardsInfo = (idNumCurrent, idNumRelated) => {
-    console.log('getClickedCardInfoTriggered with ' + idNumCurrent + ' as idNumCurrent and ' + idNumRelated + ' as idNumRelated')
     var currentCardInfo = {};
     var relatedCardInfo = {};
     relatedProductsInfoSummaries.map((product) => {
-      console.log('product: ', product);
       if (product.id === idNumCurrent) {
         currentCardInfo = product;
       } else if (product.id === idNumRelated) {
@@ -106,7 +108,6 @@ const RPP = (props) => {
     comparisonCards.push(currentCardInfo);
     comparisonCards.push(relatedCardInfo);
     return comparisonCards;
-    console.log('comparisonCards returning from getTwoComparisonCardsInfo: ', comparisonCards)
   };
 
  //XIconButtonClickHandler (event) {
@@ -121,7 +122,6 @@ const RPP = (props) => {
     .then(response => {
       const relatedIds = response.data;
       relatedIds.push(props.product_id);
-      console.log('relatedIds: ', relatedIds);
       return relatedIds;
     })
     /* Get related products by their ids */

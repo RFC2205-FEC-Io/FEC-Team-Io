@@ -6,7 +6,6 @@ import ComparisonModalTable from './ComparisonModalTable.jsx';
 
 
 const ComparisonModalWindow = (props) => {
-  console.log('Props: ', props);
       return (
         <Modal show={props.show} size="lg">
           <Modal.Header>

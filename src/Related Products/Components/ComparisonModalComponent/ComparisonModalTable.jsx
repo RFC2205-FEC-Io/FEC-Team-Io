@@ -36,16 +36,16 @@ function ComparisonModalTable(props) {
           <td>Price</td>
           <td>{props.relatedProductCardInfo.default_price}</td>
         </tr>
-        <tr>
+        {/*<tr>
           <td colSpan={3}>Features</td>
-        </tr>
+        </tr>*/}
           {props.comparisonCardFeatures.map((feature, i) => {
             return (
               <Feature feature={feature} currentCardFeatures={props.currentCardFeatures}
               relatedCardFeatures={props.relatedCardFeatures} key={i} />
             )
             })}
-        <tr>
+        {/*<tr>
           <td colSpan={3}>Average Ratings</td>
         </tr>
         <tr>
@@ -83,7 +83,7 @@ function ComparisonModalTable(props) {
           <td>
           <TableStaticStarRating averageRating={3.7} className=".table-static-star-image-wrapper" />
           </td>
-        </tr>
+          </tr>*/}
       </tbody>
     </Table>
   );

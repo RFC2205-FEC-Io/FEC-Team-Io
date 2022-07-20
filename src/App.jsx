@@ -7,7 +7,6 @@ function App (props) {
   const [productId, setProductId] = useState(66642);
 
   const CardClickHandler = (newId) => {
-    console.log('Related product card image was clicked. ')
     setProductId(newId)
   }
   console.log('Product Id on App.jsx: ', productId);
