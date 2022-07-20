@@ -68,7 +68,7 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
       var imgArr2 = images.slice(-7, images.length);
       console.log('imgArr1: ', imgArr1, 'imgArr2: ', imgArr2)
       return (
-      <Carousel>
+      <Carousel interval={null}>
         <Carousel.Item>
           <img
             className="d-block w-100"
@@ -116,7 +116,7 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
           {expandView(listImg)}
         </div>
       </div>
-        {/* <Carousel id='carousel'>
+    {/* <Carousel id='carousel' interval={null}>
     {images.map((image) => {
       return (
         <Carousel.Item>
