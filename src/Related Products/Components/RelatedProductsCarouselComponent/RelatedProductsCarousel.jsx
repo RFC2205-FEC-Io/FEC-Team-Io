@@ -9,6 +9,8 @@ import RelatedProductCard from './RelatedProductCard.jsx';
 
 const RelatedProductsCarousel = (props) => {
 
+  console.log('Related Products Carousel props: ', props)
+
   if (props.relatedProductsInfoSummaries.length <= 4) {
     return (
       <Carousel activeIndex={props.index} onSelect={props.handleSelect}>
