@@ -10,7 +10,7 @@ display: flex;
   background-size: cover;
   width: 600px;
   height: 400px;
-  /* cursor: zoom-in; */
+  cursor: zoom-in;
   background-repeat: no-repeat;
 }
 
@@ -19,6 +19,7 @@ display: flex;
   width: 50px;
   margin-left: 5px;
   opacity: 0.65;
+  position: relative;
 }
 
 #gallery-carousel {
@@ -30,6 +31,7 @@ display: flex;
   display: flex;
   width: 600px;
   height: 400px;
+  cursor: zoom-in;
 }
 #expander {
   cursor: pointer;

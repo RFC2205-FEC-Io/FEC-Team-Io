@@ -4,12 +4,12 @@ import ReviewsApp from "./Reviews/ReviewsApp.jsx"
 import RPP from "./Related Products/RPP.jsx";
 
 function App (props) {
-  const [productId, setProductId] = useState(66646);
+  const [productId, setProductId] = useState(66642);
     return (
       <div>
         <StyleSelector product_id={productId}/>
-        {/* <RPP product_id={productId}/>
-        <ReviewsApp product_id={productId}/> */}
+        <RPP product_id={productId}/>
+        <ReviewsApp product_id={productId}/>
       </div>
     );
 }

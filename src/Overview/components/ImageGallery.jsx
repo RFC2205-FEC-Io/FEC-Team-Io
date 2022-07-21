@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import Carousel from 'react-bootstrap/Carousel';
 import Overlay from 'react-bootstrap/Overlay';
 import Button from 'react-bootstrap/Button';
-
+import Tooltip from 'react-bootstrap/Tooltip';
 const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggleImages, setGallery}) => {
   const mainImage = 'Smiley Shades.png';
 
@@ -133,27 +133,39 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
     {images.map((image) => {
       return (
         <Carousel.Item>
-          <img
-          id ='carousel-main-img' // Lawrence, images don't resize their dimensions with the carousel, they both need separate CSS
-          src={image.thumbnail_url}
-          onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}
-          onClick={showModal}
-          />
-        <div>
+            {/* <img
+            id ='carousel-main-img' // Lawrence, images don't resize their dimensions with the carousel, they both need separate CSS
+            src={image.thumbnail_url}
+            onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}
+            onClick={showModal}
+            />
+          <div>
+          {expandView(listImg)}
+        </div> */}
+          <div
+            id ='carousel-main-img' // Lawrence, images don't resize their dimensions with the carousel, they both need separate CSS
+            src={image.thumbnail_url}
+            onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}
+            // onClick={showModal}
+            style={{backgroundImage: `url(${image.thumbnail_url})`, backgroundSize: 'cover'}}
+            >
+            {createGallery()}
+            </div>
+          <div>
           {expandView(listImg)}
         </div>
         </Carousel.Item>
-      );
-    })}
-  </Carousel>
-  {/* <button onClick={showModal}>Open Modal</button> */}
-  </div>
+        );
+      })}
+    </Carousel>
+    </div>
     )
   };
 
 
-  const target = useRef(null);
 
+    const [show, setShow] = useState(false);
+    const target = useRef(null);
   return (
     <div id='image-gallery'>
       {/* <div id='main-img'  style={setMainImg()} >
@@ -165,7 +177,7 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
           {expandView(listImg)}
         </div>
       </div> */}
-    {createGallery()}
+    {/* {createGallery()} */}
     {mainImageCarousel()}
   </div>
   );
@@ -173,25 +185,3 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
 
 export default ImageGallery;
 
-{/* <>
-<Button variant="danger" ref={target} onClick={() => setModal(!show)}>
-  Click me to see
-</Button>
-<Overlay target={target.current} show={show} placement="right">
-  {({ placement, arrowProps, show: _show, popper, ...props }) => (
-    <div
-      {...props}
-      style={{
-        position: 'absolute',
-        backgroundColor: 'rgba(255, 100, 100, 0.85)',
-        padding: '2px 10px',
-        color: 'white',
-        borderRadius: 3,
-        ...props.style,
-      }}
-    >
-      Simple tooltip
-    </div>
-  )}
-</Overlay>
-</> */}
