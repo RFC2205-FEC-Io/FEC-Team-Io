@@ -18,7 +18,7 @@ const RelatedProductCard = (props) => {
       <Card.Img
         className="image-wrapper"
         src={props.product.styles[0].photos[0].url || "Smiley Shades.png"}
-        onClick={() => props.CardClickHandler()}
+        onClick={() => props.CardClickHandler(props.product.id)}
       />
       <Card.Text style={{textAlign: "center"}}>
         {props.product.category}
