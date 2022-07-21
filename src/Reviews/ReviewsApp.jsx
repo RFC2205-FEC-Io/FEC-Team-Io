@@ -3,16 +3,14 @@ import React from "react";
 import ReviewsList from "./components/ReviewsList.jsx";
 import ReviewStats from "./components/ReviewStats.jsx";
 import {myRef, handleScroll} from '../Overview/components/Stars.jsx';
-class ReviewsApp extends React.Component {
-  render() {
-    const { name } = this.props;
+
+const ReviewsApp = ({product_id, myRef, handleScroll}) => {
+
     return (
       <div id='reviews-app' ref={myRef}>
-        {/* <ReviewStats /> */}
-        <ReviewsList product_id={this.props.product_id}/>
+        <ReviewsList product_id={product_id}/>
       </div>
     );
-  }
 }
 
 export default ReviewsApp;

@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, createContext } from "react";
 import axios from "axios";
 import {Form, Button} from 'react-bootstrap';
+import styled from "styled-components";
 import ReviewsList from "./ReviewsList";
 import DynamicStars from "./DynamicStars.jsx";
 
 function ReviewFormHooks({characteristics, id}) {
 
   //-----------------------State Hooks ---------------------------
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(3);
   const [summary, setSummary] = useState('');
   const [body, setBody] = useState('');
   const [recommend, setRecommend] = useState(true);
@@ -16,6 +17,7 @@ function ReviewFormHooks({characteristics, id}) {
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
   const [photos, setPhotos] = useState([]);
+
 
   //------------------ Embedded Functions ------------------------
   const handleRating = (e) => {
@@ -56,13 +58,12 @@ function ReviewFormHooks({characteristics, id}) {
   const charMap = () => {
     var charList = [];
     for (var char in chars) {
-      charList.push(<div><Form.Range id={char} onChange={handleChars} min="1" max="5" step="1" value={charRange} required /><br /></div>)
+      charList.push(<div><label>{char}</label><Form.Range id={char} onChange={handleChars} min="1" max="5" step="1" value={charRange} required /><br /></div>)
     }
     return <div><label align="left">{char}</label>{charList}</div>
   }
 
   const bodyMinCalculator = () => {
-    // let reviewBody = document.getElementsByName("reviewFormBody");
     if (body.length < 50) {
       return (
         <div>Your Review needs {50 - body.length} more characters</div>
@@ -74,8 +75,9 @@ function ReviewFormHooks({characteristics, id}) {
     }
   }
 
-  const handleStarsClick = e => {
+  const handleStarsClick = (e) => {
     event.preventDefault();
+    // console.log('data: ', data)
     setRating(e.target.value)
   }
 
@@ -85,7 +87,7 @@ function ReviewFormHooks({characteristics, id}) {
       <Form>
         <Form.Group>
           <Form.Label>Rating *</Form.Label>
-          <DynamicStars  handleStarsClick={handleStarsClick} rating={rating}/>
+          <DynamicStars setRating={setRating} rating={rating} handleStarsClick={handleStarsClick}/>
           <br />
         </Form.Group>
         <Form.Group>
