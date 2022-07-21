@@ -4,7 +4,7 @@ import ReviewsApp from "./Reviews/ReviewsApp.jsx"
 import RPP from "./Related Products/RPP.jsx";
 
 function App (props) {
-  const [productId, setProductId] = useState(66642);
+  const [productId, setProductId] = useState(66645);
 
   const CardClickHandler = (newId) => {
     setProductId(newId)
@@ -14,9 +14,9 @@ function App (props) {
 
     return (
       <div>
-        {/*<StyleSelector product_id={productId}/>*/}
+        <StyleSelector product_id={productId}/>
         <RPP product_id={productId} CardClickHandler={CardClickHandler}/>
-        {/*<ReviewsApp product_id={productId}/>*/}
+        <ReviewsApp product_id={productId}/>
       </div>
     );
 }
