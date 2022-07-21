@@ -1,14 +1,40 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import {Modal, Button} from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
+import styled from "styled-components";
 import ReviewsApp from "../ReviewsApp.jsx";
 import ReviewTile from "./ReviewTile.jsx";
-import ReviewForm from "./ReviewForm.jsx";
 import ReviewFormHooks from "./ReviewFormHooks.jsx";
 import ReviewStats from "./ReviewStats.jsx";
-import FormModal from "./FormModal.jsx";
 
-//viable product id: 66642
+/*------------------------- STYLED COMPONENTS------------------------------*/
+
+const Stats = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: flex-start;
+background-color: white;
+padding: 5px;
+margin: 5px;
+`;
+const Tile = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: flex-start;
+box-shadow: 10px 5px 5px #C0C0C0;
+background-color: white;
+padding: 5px;
+margin: 5px;
+`;
+const ButtonStyle = styled.button`
+height: 30px;
+margin: 10px 10px;
+border-radius: 10px;
+border: none;
+line-height: 85%;
+`;
+
+
 class ReviewsList extends React.Component {
   constructor(props) {
     super(props);
@@ -35,17 +61,10 @@ class ReviewsList extends React.Component {
       this.getReviews(1, 50, this.state.sort);
     }
   }
-  //the code block below should map from reviewArray in state to displayList per current displayCount. Having difficulty figuring out where to put it.
-  // for (var i = 0; i < this.state.displayCount; i++) {
-  //   console.log("reviewArray[i]: ", this.state.reviewArray[i])
-  //   this.state.displayList.push(this.state.reviewArray[i]);
-  // }
-  // console.log('displayList: ', this.state.displayList)
 
   getReviews(page, count, sort) {
     return axios.get(`/reviews/?product_id=${this.state.productID}&count=${count}&sort=${sort}`)
       .then(res => {
-        // console.log('res.data: ', res.data);
         this.setState({ reviewArray: res.data.results });
 
       })
@@ -126,6 +145,7 @@ class ReviewsList extends React.Component {
               putHelpful={this.putHelpful}
               reportReview={this.reportReview}
             />
+            <br />
           </div>)
       }
     };
@@ -136,7 +156,6 @@ class ReviewsList extends React.Component {
     this.setState({
       addFormShow: !this.state.addFormShow
     });
-// console.log('addFormShow: ', this.state.addFormShow)
   };
 
   handleShow = () => {
@@ -152,16 +171,21 @@ class ReviewsList extends React.Component {
   }
 
   render() {
-    // this.mapDisplayList()
     return (
       <div>
-        <ReviewStats productID={this.state.productID} />
-        <div className="reviewTileList">
-          {this.mapDisplayList()}
-        </div>
-        {/* <button id="ReviewFormButton" onClick={}>Add A Review +</button> */}
-        <button id="ReviewDisplayIncrease" onClick={this.displayCount}>See More Reviews</button><br></br>
-        <button className="btn btn-success" onClick={this.handleShow}>Add a Review</button>
+        <Stats>
+          <ReviewStats productID={this.state.productID} />
+        </Stats>
+        <Tile>
+        {this.mapDisplayList()}
+        </Tile>
+        <ButtonStyle>
+          <button className="btn btn-success" onClick={this.displayCount}>See More Reviews</button>
+        </ButtonStyle>
+        <br></br>
+        <ButtonStyle>
+          <button className="btn btn-success" onClick={this.handleShow}>Add a Review</button>
+        </ButtonStyle>
         <Modal show={this.state.addFormShow} onHide={this.handleClose}>
           <Modal.Header>
             <Modal.Title>
@@ -169,7 +193,7 @@ class ReviewsList extends React.Component {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <ReviewFormHooks characteristics={this.state.characteristics} id={this.state.productID}/>
+            <ReviewFormHooks characteristics={this.state.characteristics} id={this.state.productID} />
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleClose}>
@@ -177,9 +201,6 @@ class ReviewsList extends React.Component {
             </Button>
           </Modal.Footer>
         </Modal>
-        {/* <FormModal  show={this.state.addFormShow} >
-          <ReviewForm productID={this.state.productID} starFilter={this.starFilter} onClose={this.showModal}/>
-        </FormModal> */}
       </div>
     );
   }
