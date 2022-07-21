@@ -11,12 +11,12 @@ body {
 `
 
 function App (props) {
-  const [productId, setProductId] = useState(66642);
+  const [productId, setProductId] = useState(66645);
     return (
       <div>
         <GlobalStyle />
-        {/* <StyleSelector product_id={productId}/>
-        <RPP product_id={productId}/> */}
+        <StyleSelector product_id={productId}/>
+        <RPP product_id={productId}/>
         <ReviewsApp product_id={productId}/>
       </div>
     );
