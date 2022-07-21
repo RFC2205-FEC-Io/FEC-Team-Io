@@ -3,6 +3,7 @@ import expand_icon from '../../../dist/expand_icon.png';
 import Modal from 'react-bootstrap/Modal';
 import Carousel from 'react-bootstrap/Carousel';
 import Overlay from 'react-bootstrap/Overlay';
+import Button from 'react-bootstrap/Button';
 
 const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggleImages, setGallery}) => {
   const mainImage = 'Smiley Shades.png';
@@ -13,10 +14,10 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
   const [galleryIMGClicked, clicked] = useState(false);
   const setBackgroundImage = (event, imageURL) => {
     event.preventDefault();
-    console.log('setBackgroundImage EVENT:', event.target, 'className',event.target.className[event.target.className.length -1]);
     addImage(current => imageURL);
     clicked( current => true);
-    setIndex(Number(event.target.className[event.target.className.length -1]));
+    setMainCarouselIndex(Number(event.target.className[event.target.className.length -1]));
+
   }
 
   // ------------Sets the main image in the gallery------------
@@ -31,34 +32,34 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
   }
 
 // ------------Creates the expanded view for the main image------------
-  const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true);
-
+  const [modal, setModal] = useState(false);
+  var countShow = 0;
+  var countClose = 0;
+  const showModal= () => {setModal(true); console.log('<- Modal opened!', 'countShow:', countShow); countShow ++;};
+  const closeModal = () => {setModal(false); console.log('<- Modal closed!','countClose:', countClose); countClose ++};
   const expandView = (listImg) => {
-    const handleClose = () => setShow(false);
-    if (!show) {
+    if (!modal) {
       return;
       } else {
       return (
-        <>
-          <Modal show={show} onHide={handleClose} animation={false}>
-            <img src={listImg}></img>
-          </Modal>
-        </>
+        <Modal show={modal} animation={false}>
+          <Modal.Body onClick={closeModal}>
+          <img src={listImg}></img>
+          </Modal.Body>
+        </Modal>
       );
     }
   }
-
+ // ------------Highlight the gallery thumbnail when selected------------
   const highlightGalleryThumbnail = (event) => {
     console.log('highlight event:', event)
     if (galleryIMGClicked) {
-      return {
-        opacity: 1
-      }
+      return {opacity: 1};
+      } else {
+      return {};
     }
   }
-
- // ------------Creates the image gallery for the gallery thumbnails------------
+ // ------------Creates the carousel for the gallery thumbnails------------
   const imageArr = [];
 
   const createGallery = () => {
@@ -119,16 +120,15 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
   }
 
   // ------------Keep track of carousel state------------
-    const [carouselIndex, setIndex] = useState(0);
+    const [carouselIndex, setMainCarouselIndex] = useState(0);
     const updateCarouselState = (selectedIndex, e) => {
-      setIndex(selectedIndex);
+      setMainCarouselIndex(selectedIndex);
     }
-    console.log('carouselIndex:', carouselIndex);
 
 // ------------Creates the main image Carousel------------
   const mainImageCarousel = () => {
     return (
-      <div id='carousel-main' style={{height: '400px', width: '600px', /*border: 'solid 1px red'*/}}>
+    <div id='carousel-main' style={{height: '400px', width: '600px', /*border: 'solid 1px red'*/}}>
     <Carousel interval={null} ref={target} activeIndex={carouselIndex} onSelect={updateCarouselState}>
     {images.map((image) => {
       return (
@@ -137,6 +137,7 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
           id ='carousel-main-img' // Lawrence, images don't resize their dimensions with the carousel, they both need separate CSS
           src={image.thumbnail_url}
           onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}
+          onClick={showModal}
           />
         <div>
           {expandView(listImg)}
@@ -145,6 +146,7 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
       );
     })}
   </Carousel>
+  {/* <button onClick={showModal}>Open Modal</button> */}
   </div>
     )
   };
@@ -152,20 +154,17 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
 
   const target = useRef(null);
 
-
-
   return (
     <div id='image-gallery'>
       {/* <div id='main-img'  style={setMainImg()} >
         {createGallery()}
         <div id='view'>
-          <img id='expander'src={expand_icon} onClick={handleShow}/>
+          <img id='expander'src={expand_icon} onClick={showModal}}/>
         </div>
         <div>
           {expandView(listImg)}
         </div>
       </div> */}
-    <button onClick={() =>{setIndex(1)}}>Jump Index</button>
     {createGallery()}
     {mainImageCarousel()}
   </div>
@@ -173,3 +172,26 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
 }
 
 export default ImageGallery;
+
+{/* <>
+<Button variant="danger" ref={target} onClick={() => setModal(!show)}>
+  Click me to see
+</Button>
+<Overlay target={target.current} show={show} placement="right">
+  {({ placement, arrowProps, show: _show, popper, ...props }) => (
+    <div
+      {...props}
+      style={{
+        position: 'absolute',
+        backgroundColor: 'rgba(255, 100, 100, 0.85)',
+        padding: '2px 10px',
+        color: 'white',
+        borderRadius: 3,
+        ...props.style,
+      }}
+    >
+      Simple tooltip
+    </div>
+  )}
+</Overlay>
+</> */}
