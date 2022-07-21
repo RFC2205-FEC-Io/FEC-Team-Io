@@ -128,13 +128,13 @@ class StyleSelector extends React.Component { pull
     if (!this.state.styleClicked) {
       return  (
         <div>
-          <h3>Style > Select a Style </h3>
+          <p><em>Style ></em> Select a Style </p>
         </div>
       );
     } else {
       return  (
         <div>
-          <h3>Style > {this.state.styleName}</h3>
+          <p><em>Style ></em> <strong>{this.state.styleName}</strong></p>
         </div>
       );
     }
@@ -151,6 +151,7 @@ class StyleSelector extends React.Component { pull
           toggleImages={this.toggleImages}
           setGallery={this.state.setGallery}
           />
+        <div id='sidebar'>
         <ProductInfo
           products={this.state.products}
           defaultPrice={this.state.price}
@@ -166,10 +167,13 @@ class StyleSelector extends React.Component { pull
             name={this.state.styleName}
           />
           </div>
+        <div id='add-to-cart'>
         <AddToCart
           SKU={this.state.styleSKU}
           styleClicked={this.state.styleClicked}
         />
+        </div>
+        </div>
       </div>
     );
   }
