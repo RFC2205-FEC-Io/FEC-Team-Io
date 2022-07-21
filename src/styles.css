@@ -1,17 +1,46 @@
-/* h1 {
-  color: white;
-  background-color: black;
-} */
-
-/* OVERVIEW */
+/*//////////OVERVIEW //////////*/
 #main {
 display: flex;
 }
 
+/*----------IMAGE GALLERY----------*/
+#main-img{
+  display: flex;
+  background-image: url('https://thumbs.dreamstime.com/z/no-thumbnail-image-placeholder-forums-blogs-websites-148010362.jpg');
+  background-size: cover;
+  width: 600px;
+  height: 400px;
+  cursor: zoom-in;
+  background-repeat: no-repeat;
+}
+
+#gallery-thumbnail {
+  height: 50px;
+  width: 50px;
+  margin-left: 5px;
+  opacity: 0.65;
+  position: relative;
+}
+
+#gallery-carousel {
+  display: flex;
+  flex-direction: column;
+}
+
+#carousel-main-img {
+  display: flex;
+  width: 600px;
+  height: 400px;
+  cursor: zoom-in;
+}
+#expander {
+  cursor: pointer;
+}
+/*----------STYLE SELECTOR----------*/
 #styles-selector {
   display: flex;
 }
-
+  /*----------STYLE----------*/
 #styles {
   display: flex;
 }
@@ -21,29 +50,7 @@ display: flex;
   width: 50px;
   border-radius: 50%;
   background-size: cover;
-}
-
-#price{
-  text-decoration: line-through;
-}
-
-#salePrice{
-  color: red;
-}
-
-#main-img{
-  display: flex;
-  background-image: url('https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80');
-  background-size: cover;
-  width: 400px;
-  height: 400px;
-  background-repeat: no-repeat;
-}
-
-#gallery {
-  height: 50px;
-  width: 50px;
-  margin-left: 5px;
+  padding: 0 50 0 50 ;
 }
 
 .check-mark {
@@ -51,6 +58,15 @@ display: flex;
   width: auto;
   position: relative;
 }
+/*----------PRODUCT INFO.----------*/
+#price{
+  text-decoration: line-through;
+}
+
+#salePrice{
+  color: red;
+}
+  /*-----STARS.-----*/
 #stars {
   height: 20px;
   width: auto;
@@ -58,19 +74,19 @@ display: flex;
 
 a {
   display: flex;
+  flex-direction: row;
   height: 20px;
   width: auto;
 }
-
-.social-icon {
-  padding-left: 5px;
+ /*-----SOCIAL MEDIA-----*/
+#social-media {
+  display: flex;
+  height: 20px;
 }
-/* OVERVIEW */
 
-/* Ratings and Reviews*/
-
-/* input[type="radio"] {
-  display: none;
-} */
-
-/* Ratings and Reviews*/
+/*----------ADD TO CART----------*/
+#add-to-cart {
+  display: flex;
+  flex-direction: row;
+}
+/*//////////OVERVIEW //////////*/

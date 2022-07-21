@@ -15,15 +15,13 @@ app.use(express.static("dist"));
 
 axios.defaults.headers.common['Authorization'] = API_KEY;
 
-/* == OVERVIEW == */
+/* API handler for general information about product */
 app.get('/overview', (req, res) => {
-  console.log('req.query:', req.query);
   const page = req.query.page;
   const count = req.query.count;
   const product_id = req.query.product_id;
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products/${product_id}`)
     .then((response) => {
-      //console.log('GET sent, products retreived!:', response.data);
       res.send(response.data);
     })
     .catch((err) => {
@@ -31,12 +29,11 @@ app.get('/overview', (req, res) => {
     });
 })
 
+/* API handler for various styles of the product*/
 app.get('/styles', (req, res) => {
   const product_id = req.query.product_id;
-  console.log('req.query STYLE:', req.query);
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products/${product_id}/styles`)
     .then((response) => {
-      // console.log('GET sent, Styles retreived!:', response.data);
       res.send(response.data);
     })
     .catch((err) => {

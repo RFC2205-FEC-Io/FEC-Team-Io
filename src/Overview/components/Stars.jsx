@@ -87,13 +87,13 @@ const Stars = ({reviews}) => {
       >
          Read All {numOfReviews} reviews
       </div>
-      <div ref={myRef}>Scroll</div>
+      {/* <div ref={myRef}>Scroll</div> */}
     </div>
   );
 
 }
 
-console.log('ReviewsApp:', ReviewsApp);
+// console.log('ReviewsApp:', ReviewsApp);
 export default Stars;
 
 const myRef = myRef;
