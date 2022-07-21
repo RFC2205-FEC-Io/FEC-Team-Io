@@ -4,9 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './ComparisonModalStyles.css'
 import TableStaticStarRating from './TableStaticStarRating.jsx';
 import ProductPrice from '../ComparisonModalComponent/ComparisonModalTable.jsx';
+import Feature from'./Feature.jsx';
 
 function ComparisonModalTable(props) {
-  console.log('Props: ', props)
   return (
     <Table striped="columns" size="sm">
       <thead>
@@ -36,32 +36,16 @@ function ComparisonModalTable(props) {
           <td>Price</td>
           <td>{props.relatedProductCardInfo.default_price}</td>
         </tr>
-        <tr>
-          <td>Canvas</td>
-          <td>Fabric</td>
-          <td>Leather</td>
-        </tr>
-        <tr>
-          <td>Brass</td>
-          <td>Buttons</td>
-          <td>Pearl</td>
-        </tr>
-        <tr>
-          <td>Not applicable</td>
-          <td>Lenses</td>
-          <td>Polarizing</td>
-        </tr>
-        <tr>
-          <td>50 spf</td>
-          <td>UV Protection</td>
-          <td>25 spf</td>
-        </tr>
-        <tr>
-          <td>Blue</td>
-          <td>Frames</td>
-          <td>Gold</td>
-        </tr>
-        <tr>
+        {/*<tr>
+          <td colSpan={3}>Features</td>
+        </tr>*/}
+          {props.comparisonCardFeatures.map((feature, i) => {
+            return (
+              <Feature feature={feature} currentCardFeatures={props.currentCardFeatures}
+              relatedCardFeatures={props.relatedCardFeatures} key={i} />
+            )
+            })}
+        {/*<tr>
           <td colSpan={3}>Average Ratings</td>
         </tr>
         <tr>
@@ -99,7 +83,7 @@ function ComparisonModalTable(props) {
           <td>
           <TableStaticStarRating averageRating={3.7} className=".table-static-star-image-wrapper" />
           </td>
-        </tr>
+          </tr>*/}
       </tbody>
     </Table>
   );

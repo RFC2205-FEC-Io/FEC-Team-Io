@@ -16,7 +16,11 @@ const ComparisonModalWindow = (props) => {
           <Modal.Body>
             <ComparisonModalTable
             currentProductCardInfo={props.currentProductCardInfo}
-            relatedProductCardInfo={props.relatedProductCardInfo} />
+            relatedProductCardInfo={props.relatedProductCardInfo}
+            comparisonCardFeatures={props.comparisonCardFeatures}
+            currentCardFeatures={props.currentCardFeatures}
+            relatedCardFeatures={props.relatedCardFeatures}
+            />
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={props.WindowClickHandler}>
