@@ -15,16 +15,27 @@ class ProductInfo extends React.Component {
   }
 
   componentDidMount () {
-    // console.log('ProductInfo Mounted!');
+    this.setState({
+      products: this.props.products,
+      price: this.props.defaultPrice,
+      salePrice: this.props.salePrice,
+      reviews: this.props.reviews
+    })
   }
 
-  componentWillReceiveProps({products, defaultPrice, salePrice, reviews}) {
-    this.setState({
-      products: products,
-      price: defaultPrice,
-      salePrice: salePrice,
-      reviews: reviews
-    })
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.products !== this.props.products) {
+      this.setState({products: this.props.products});
+    }
+    if (prevState.price !== this.props.defaultPrice) {
+      this.setState({price: this.props.defaultPrice});
+    }
+    if (prevState.salePrice!== this.props.salePrice) {
+      this.setState({salePrice: this.props.salePrice});
+    }
+    if (prevState.products !== this.props.products) {
+      this.setState({reviews: this.props.reviews});
+    }
   }
 
   updatePrice () {

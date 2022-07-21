@@ -83,13 +83,16 @@ class StyleSelector extends React.Component { pull
 
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.getAllData();
   }
-
-  componentDidMount() {
-    // console.log('StyleSelector MOUNTED!:', this.state);
-
+  componentDidUpdate (prevProps, prevState) {
+    if (prevState.productID !== this.props.product_id) {
+      this.setState({
+        productID: this.props.product_id
+      });
+      this.getAllData();
+    }
   }
 
   toggleImages () {
