@@ -83,7 +83,7 @@ const Stars = ({reviews}) => {
       <div id='reviews-desc' onClick={handleScroll}>
          <a href='#reviews-app'>  Read all {numOfReviews} reviews</a>
       </div>
-      <div ref={myRef}>Scroll</div>
+      <div ref={myRef}></div>
     </div>
   );
 
