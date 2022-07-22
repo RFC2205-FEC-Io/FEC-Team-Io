@@ -37,16 +37,13 @@ class StyleSelector extends React.Component { pull
     // GET STYLES
     axios({
       method: 'get',
-      url: `/styles/?product_id=${this.state.productID}`
+      url: `/styles/?product_id=${this.props.product_id}`
     })
     .then((res) => {
       // console.log('GET sent, styles retreived!:', res.data);
       this.setState({
         styles: res.data.results
       });
-    })
-    .then(() => {
-
     })
     .catch((err) => {
       throw err;
@@ -55,7 +52,7 @@ class StyleSelector extends React.Component { pull
     // GET PRODUCTS
     axios({
       method: 'get',
-      url: `/overview/?page=${this.state.page}&count=${this.state.count}&product_id=${this.state.productID}`
+      url: `/overview/?product_id=${this.props.product_id}`
     })
     .then((res) => {
       // console.log('GET sent, products retreived!:', res.data);
@@ -70,7 +67,7 @@ class StyleSelector extends React.Component { pull
     // GET REVIEWS
     axios({
       method: 'get',
-      url: `/reviews/?product_id=${this.state.productID}&count=${this.state.count}`
+      url: `/reviews/?product_id=${this.props.product_id}&count=${this.state.count}`
     })
     .then((res) => {
       this.setState({
@@ -83,13 +80,16 @@ class StyleSelector extends React.Component { pull
 
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.getAllData();
   }
-
-  componentDidMount() {
-    // console.log('StyleSelector MOUNTED!:', this.state);
-
+  componentDidUpdate (prevProps, prevState) {
+    if (prevState.productID !== this.props.product_id) {
+      this.setState({
+            productID: this.props.product_id
+          });
+      this.getAllData();
+    }
   }
 
   toggleImages () {

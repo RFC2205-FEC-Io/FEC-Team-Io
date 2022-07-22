@@ -78,16 +78,12 @@ const Stars = ({reviews}) => {
   }
 
   return (
-    <div>
+    <div id='star-ratings'>
       {starRatings(average)}
-      <div>Avg {average}/5</div>
-      <div
-      id='reviews-desc'
-      onClick={handleScroll}
-      >
-         Read All {numOfReviews} reviews
+      <div id='reviews-desc' onClick={handleScroll}>
+         <a href='#reviews-app'>  Read all {numOfReviews} reviews</a>
       </div>
-      {/* <div ref={myRef}>Scroll</div> */}
+      <div ref={myRef}>Scroll</div>
     </div>
   );
 
