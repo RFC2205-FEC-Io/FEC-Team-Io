@@ -70,7 +70,7 @@ class ReviewsList extends React.Component {
       this.getReviews(1, 50, this.state.sort);
     }
     if (prevState.productID !== this.props.product_id) {
-      this.setState({ productID: this.props.product_id });
+      this.setState({productID: this.props.product_id});
       this.getReviews(1, 50, this.state.sort);
     }
   }

@@ -18,7 +18,7 @@ function App (props) {
     return (
       <div>
         <GlobalStyle />
-        {/* <StyleSelector product_id={productId}/> */}
+        <StyleSelector product_id={productId}/>
         <RPP product_id={productId} CardClickHandler={CardClickHandler}/>
         <ReviewsApp product_id={productId}/>
       </div>
