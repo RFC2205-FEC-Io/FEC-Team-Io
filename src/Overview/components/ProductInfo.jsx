@@ -63,11 +63,13 @@ class ProductInfo extends React.Component {
   render (props) {
     return (
       <div id='product-info'>
-        {this.updatePrice()}
         <Stars
           reviews={this.state.reviews}
         />
         <SocialMedia/>
+        <div id='product-desc'>
+        {this.updatePrice()}
+        </div>
       </div>
     );
   }

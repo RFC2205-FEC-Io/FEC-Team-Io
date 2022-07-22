@@ -22,6 +22,7 @@ app.get('/overview', (req, res) => {
   const product_id = req.query.product_id;
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products/${product_id}`)
     .then((response) => {
+      console.log('ProductInfo DATA retreived!:', response.data);
       res.send(response.data);
     })
     .catch((err) => {
