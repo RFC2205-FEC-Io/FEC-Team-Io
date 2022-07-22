@@ -4,7 +4,8 @@
   flex-direction: "column";
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 75vh;
+  margin-bottom: 40px;
 }
 
 /* Styling for Star Icon Button and X Icon Button (Related Products and Comparisons) */
@@ -24,6 +25,7 @@ button[type="submit"] {
 }
 
 /*Styling for Product Cards and Carousel*/
+
 image[type="submit"] {
   display: none;
 }
@@ -31,21 +33,25 @@ image[type="submit"] {
 @media screen and (min-width: 568px) {
 
   .cards-wrapper {
-  display: flex;
+    display: flex;
 }
 
 .card {
   cursor: pointer;
   transition: color 200ms;
-  margin: 0 .5em;
+  margin: .5em .5em;
+  max-height: 500px;
   width: calc(100%/4);
+  box-shadow: 2px 2px lightblue;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
 }
 
 .image-wrapper {
   margin: 0 auto;
-  height:500px;
   align-items: center;
   justify-content: center;
+  max-height: 200px;
 }
 }
 

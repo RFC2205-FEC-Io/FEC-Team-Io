@@ -4,15 +4,21 @@ import _, { groupBy } from 'underscore';
 import { Container, Navbar } from 'react-bootstrap';
 import './Components/RelatedProductsCarouselComponent/RelatedProductStyles.css';
 import RelatedProductsCarousel from './Components/RelatedProductsCarouselComponent/RelatedProductsCarousel.jsx';
+import YourOutfitCarousel from './Components/YourOutfitCarouselComponent/YourOutfitCarousel.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ComparisonModalWindow from './Components/ComparisonModalComponent/ComparisonModalWindow.jsx';
+import RelatedProductsBanner from './Components/RelatedProductsCarouselComponent/RelatedProductsBanner.jsx';
+
 
 
 const RPP = (props) => {
     /*State*/
     const [index, setIndex] = useState(0);
+    const [currentProductId, setCurrentProductId] = useState(props.product_id);
+    //const [yourOutfitProductIds, setYourOutfitProductIds] = useState();
     //const [relatedProductCardId, setRelatedProductCardId] = useState();
     const [relatedProductsInfoSummaries, setRelatedProductsInfoSummaries] = useState([]);
+    const [yourOutfitProductsInfoSummaries, setYourOutfitProductsInfoSummaries] = useState([]);
     const [relatedProductCardInfo, setRelatedProductCardInfo] = useState({});
     const [currentProductCardInfo, setCurrentProductCardInfo] = useState({});
     const [comparisonCardFeatures, setComparisonCardFeatures] = useState({});
@@ -28,7 +34,7 @@ const RPP = (props) => {
       setRelatedProductsInfoSummaries(data);
     };
     fetchData();
-   }, []);
+   }, [currentProductId]);
 
    const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
@@ -44,10 +50,14 @@ const RPP = (props) => {
   };
 
 
+  const ResetCurrentProductId = (newId) => {
+    setCurrentProductId(newId)
+  }
+
   const StarClickHandler = (CardId) => {
     const fetchCardInfo = async () => {
       /*Wait until getTwoComparisonCardsInfo function completes */
-      const cardInfo = await getTwoComparisonCardsInfo (props.product_id, CardId);
+      const cardInfo = await getTwoComparisonCardsInfo (currentProductId, CardId);
 
 
       /*Create an array with a list of all features from both products being compared */
@@ -110,15 +120,29 @@ const RPP = (props) => {
     return comparisonCards;
   };
 
- //XIconButtonClickHandler (event) {
-  //console.log("X Icon Button was clicked.")
+const AddCardClickHandler = (event) => {
+  console.log('Add card to outfit was clicked')
+  var newOutfitArray = [];
+  console.log('yourOutfitProductsInfoSummaries: ', yourOutfitProductsInfoSummaries)
+  newOutfitArray.push(yourOutfitProductsInfoSummaries)
+  relatedProductsInfoSummaries.map((product) => {
+    if (product.id === currentProductId) {
+      newOutfitArray.push(product)
+    }
+  })
+  setYourOutfitProductsInfoSummaries(newOutfitArray);
+}
+
+ const XIconButtonClickHandler = (event) => {
+  console.log("X Icon Button was clicked.")
+ }
 
   //-------- Get requests -----------------//
 
   /* Get related products ids */
   const getAllData = () => {
     var infoSummary = [];
-    return axios.get(`/related/?product_id=${props.product_id}`)
+    return axios.get(`/related/?product_id=${currentProductId}`)
     .then(response => {
       const relatedIds = response.data;
       relatedIds.push(props.product_id);
@@ -204,15 +228,19 @@ const RPP = (props) => {
 
     return (
       <div className="RPP" style={{ display: "flex", flexDirection: "column" }}>
-        <Container>
           <RelatedProductsCarousel
             relatedProductsInfoSummaries={relatedProductsInfoSummaries}
             StarClickHandler={StarClickHandler}
             CardClickHandler={props.CardClickHandler}
+            ResetCurrentProductId={ResetCurrentProductId}
             index={index}
-            onSelect={handleSelect}
+            handleSelect={handleSelect}
             />
-        </Container>
+         {/* <YourOutfitCarousel
+             yourOutfitProductsInfoSummaries={yourOutfitProductsInfoSummaries}
+             XIconButtonClickHandler={XIconButtonClickHandler}
+             AddCardClickHandler={AddCardClickHandler}
+    */}
         <Container>
           <ComparisonModalWindow
           WindowClickHandler={WindowClickHandler}

@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
+import '../RelatedProductsCarouselComponent/RelatedProductStyles.css'
 
 const ProductPrice = ({ product }) => {
   if (product.styles[0].sale_price === null) {
