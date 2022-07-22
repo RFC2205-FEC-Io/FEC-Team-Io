@@ -71,7 +71,7 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
           return (
             <div>
               <img
-              id ='gallery-thumbnail-static'src='/Smiley%20Shades.png'
+              id ='gallery-thumbnail'src='/Smiley%20Shades.png'
               onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}
               key={i}
               className={`galleryImg ${i}`}
@@ -152,7 +152,7 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
             src={image.thumbnail_url}
             onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}
             onClick={showModal}
-            style={{backgroundImage: `url(${image.thumbnail_url})`, backgroundSize: 'cover', zIndex:'1'}}
+            style={{backgroundImage: `url(${image.url})`, backgroundSize: 'cover', zIndex:'1'}}
             >
             </div>
           <div>
@@ -172,17 +172,7 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
     const target = useRef(null);
   return (
     <div id='image-gallery'
-    style={{display: 'grid', /*border: 'solid 2px green'*/ }}
     >
-      {/* <div id='main-img'  style={setMainImg()} >
-        {createGallery()}
-        <div id='view'>
-          <img id='expander'src={expand_icon} onClick={showModal}}/>
-        </div>
-        <div>
-          {expandView(listImg)}
-        </div>
-      </div> */}
     {mainImageCarousel()}
     {createGallery()}
   </div>
