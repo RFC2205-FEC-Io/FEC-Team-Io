@@ -115,10 +115,11 @@ height: 500px;
 #salePrice{
   color: red;
 }
-  /*-----STARS.-----*/
+  /*-----STARS-----*/
 #star-ratings {
   display: flex;
   flex-direction: row;
+  padding-bottom: 5px;
 }
 #stars {
   height: 20px;

@@ -8,7 +8,6 @@ import Tooltip from 'react-bootstrap/Tooltip';
 const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggleImages, setGallery}) => {
   const mainImage = 'Smiley Shades.png';
 
-
     // ------------Sets one of the gallery images the main image in the gallery------------//
   const [listImg, addImage] = useState(images[0].url);
   const [galleryIMGClicked, clicked] = useState(false);
