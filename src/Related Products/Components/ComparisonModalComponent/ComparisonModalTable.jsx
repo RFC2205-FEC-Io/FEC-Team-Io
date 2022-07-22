@@ -12,7 +12,7 @@ function ComparisonModalTable(props) {
       <thead>
         <tr>
           <th>{props.currentProductCardInfo.name}</th>
-          <th>Characteristic</th>
+          <th width="180">Characteristic</th>
           <th>{props.relatedProductCardInfo.name}</th>
         </tr>
       </thead>
@@ -24,6 +24,15 @@ function ComparisonModalTable(props) {
           <td>Picture</td>
           <td>
           <img src={props.relatedProductCardInfo.styles[0].photos[0].thumbnail_url || "Smiley Shades.png"} className="modal-image-wrapper" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <TableStaticStarRating averageRating={props.currentProductCardInfo.averageRating} />
+          </td>
+          <td>Average Overall Rating</td>
+          <td>
+          <TableStaticStarRating averageRating={props.relatedProductCardInfo.averageRating} className=".table-static-star-image-wrapper" />
           </td>
         </tr>
         <tr>
