@@ -6,6 +6,53 @@ import StaticStars from "./StaticStars.jsx";
 
 /*------------------------- STYLED COMPONENTS------------------------------*/
 
+const Tile = styled.div`
+box-shadow: 10px 5px 5px #C0C0C0;
+background-color: white;
+width: fit-content;
+`;
+
+const TileHeader = styled.div`
+display: grid;
+grid-template-columns: 300px 1fr;
+grid-gap: 30px;
+background-color: gainsboro ;
+padding: 5px;
+margin: 5px;
+`;
+
+const Stars = styled.div`
+display: flex;
+justify-content: flex-start;
+background-color: gainsboro ;
+`;
+
+const ReviewerDate = styled.div`
+display: flex;
+justify-content: flex-end;
+font-style: italic;
+font-size: 12px;
+font-family: "Roboto";
+font-weight: 400px;
+inline-size: 500px;
+overflow-wrap: break-word;
+hyphens: manual;
+`;
+
+const Summary = styled.span`
+font-style: bold;
+justify-items: left;
+display: flex;
+justify-content: center;
+`;
+
+const Recommend = styled(ReviewerDate)`
+font-size: 11px;
+justify-content: flex-start;
+bottom-padding: 5px;
+bottom-margin: 5px;
+`;
+
 const Body = styled.div`
   font-family: "Roboto";
   font-weight: 100px;
@@ -23,35 +70,11 @@ const Button = styled.button`
 
 `;
 
-const Header = styled.h3`
-grid-row: 1;
-grid-column-start: 1;
-grid-column-end: 3;
-justify-items: left;
+const Helpful = styled(ReviewerDate)`
+justify-content: flex-start;
 `;
 
-const Summary = styled(Header)`
-justify-items: center;
-`;
-
-const Helpful = styled.span`
-font-family: "Roboto";
-font-weight: 100px;
-inline-size: 500px;
-overflow-wrap: break-word;
-hyphens: manual;
-`;
-
-const ReviewerDate = styled(Helpful)`
-font-style: italic;
-font-size: 12px;
-`;
-
-const Recommend = styled(Helpful)`
-font-size: 12px;
-`;
-
-const ReviewTile = ({reviewID, rating, summary, recommend, response, body, date, reviewerName, helpfulness, photos, putHelpful, reportReview}) => {
+const ReviewTile = ({ reviewID, rating, summary, recommend, response, body, date, reviewerName, helpfulness, photos, putHelpful, reportReview }) => {
   function recommendation(recommend) {
     if (recommend === true) {
       return <p>&#10003;</p>;
@@ -75,7 +98,7 @@ const ReviewTile = ({reviewID, rating, summary, recommend, response, body, date,
     if (response === null || response === '') {
       return null;
     } else {
-      return <p id='response'> {`Response from Seller:\n${response}`}</p>
+      return <div><p id='response'> {`Response from Seller:\n${response}`}</p><br/></div>
     }
   }
 
@@ -94,28 +117,31 @@ const ReviewTile = ({reviewID, rating, summary, recommend, response, body, date,
     var day = date.slice(8, 10);
     return `${months[month]} ${day}, ${year}`;
   }
-  //PUT request for updating helpful
-  //PUT request for updating report
-  //As of 7/11/22 @ 3:42, conditional rendering for recommend does not work. Unsure where to go.
+
   return (
-    <div id="reviewTile" className={reviewID}>
-      <Header>
-      <h3 id="ratingsHeader">Ratings:</h3>
-      </Header>
-      <StaticStars rating={rating} />
+    <div id="reviewTile" className={reviewID} >
+      <Tile>
+      <TileHeader>
+      <Stars>
+        <StaticStars rating={rating} />
+      </Stars>
       <ReviewerDate id="reviewDate">Reviewed On: {dateFormatter(date)} by {reviewerName}</ReviewerDate>
+      </TileHeader>
       <Summary>
-      <h3 id="reviewSummary">{summary}</h3>
+        <h3 id="reviewSummary">{summary}</h3>
       </Summary>
       <Body>{bodyLengthCheck(body)}</Body>
       <Recommend>{recommendCheck(recommend)}</Recommend>
+      <br/>
       <Response>{responseCheck(response)}</Response>
-      <div>{photos.map(photo => <img id="reviewPhoto" src={photo.url} width="35" height="40" />)}</div>
+      <div>{photos.map(photo => <span><img id="reviewPhoto" src={photo.url} width="35" height="40" />&nbsp;&nbsp;&nbsp;</span>)}</div>
+      <br/>
       <Helpful id="reviewHelpfulness">
-        Helpful? <u className={`${reviewID}1`} onClick={putHelpful}>Yes</u> {helpfulness}| <u onClick={reportReview}>Report</u>
+        Helpful?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u className={`${reviewID}1`} onClick={putHelpful}>Yes</u>&nbsp;&nbsp;&#40;{helpfulness}&#41;&nbsp;&nbsp;|&nbsp;&nbsp; <u onClick={reportReview}>Report</u>
       </Helpful>
+      </Tile>
     </div>
-    )
+  )
 }
 
 export default ReviewTile;
