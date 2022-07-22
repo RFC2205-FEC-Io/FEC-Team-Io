@@ -126,13 +126,13 @@ class AddToCart extends React.Component {
   render (props) {
     return (
       <div id='add-to-cart'>
-        <select name='select-size' onClick={this.sizeClickEvent} value={this.state.sizeSelect.value} onChange={this.selectSize}>
+        <select id ='select-size' name='select-size' onClick={this.sizeClickEvent} value={this.state.sizeSelect.value} onChange={this.selectSize}>
           {this.sizeDropDownList()}
         </select>
-        <select name='select-qty' onClick={this.qtyClickEvent}>
+        <select id ='select-qty' name='select-qty' onClick={this.qtyClickEvent}>
         {this.qtyDropDownList()}
         </select>
-        <button onClick={this.cartButtonEvent}>Add To Bag</button>
+        <button id='add-to-bag' onClick={this.cartButtonEvent}>Add To Bag</button>
       </div>
     );
   }

@@ -15,34 +15,45 @@ class ProductInfo extends React.Component {
   }
 
   componentDidMount () {
-    // console.log('ProductInfo Mounted!');
+    this.setState({
+      products: this.props.products,
+      price: this.props.defaultPrice,
+      salePrice: this.props.salePrice,
+      reviews: this.props.reviews
+    })
   }
 
-  componentWillReceiveProps({products, defaultPrice, salePrice, reviews}) {
-    this.setState({
-      products: products,
-      price: defaultPrice,
-      salePrice: salePrice,
-      reviews: reviews
-    })
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.products !== this.props.products) {
+      this.setState({products: this.props.products});
+    }
+    if (prevState.price !== this.props.defaultPrice) {
+      this.setState({price: this.props.defaultPrice});
+    }
+    if (prevState.salePrice!== this.props.salePrice) {
+      this.setState({salePrice: this.props.salePrice});
+    }
+    if (prevState.products !== this.props.products) {
+      this.setState({reviews: this.props.reviews});
+    }
   }
 
   updatePrice () {
     if (this.state.salePrice === null || this.state.salePrice === 0) {
       return (
         <div>
-          <p id='category'>{this.state.products.category}</p>
+         <em> <p id='category'>{this.state.products.category}</p></em>
           <h2 id='name'>{this.state.products.name}</h2>
-          <p id='default-price'>{this.state.price}</p>
+          <p id='default-price'>${this.state.price}</p>
           <p id='slogan'>{this.state.products.slogan}</p>
         </div>
       )
     } else {
       return (
         <div>
-          <p id='category'>{this.state.products.category}</p>
+          <em><p id='category'>{this.state.products.category}</p></em>
           <h2 id='name'>{this.state.products.name}</h2>
-          <p id='price'>{this.state.price}</p>
+          <p id='price'>${this.state.price}</p>
           <p id='salePrice'>{this.state.salePrice}</p>
         </div>
       )
@@ -52,11 +63,13 @@ class ProductInfo extends React.Component {
   render (props) {
     return (
       <div id='product-info'>
-        {this.updatePrice()}
         <Stars
           reviews={this.state.reviews}
         />
         <SocialMedia/>
+        <div id='product-desc'>
+        {this.updatePrice()}
+        </div>
       </div>
     );
   }

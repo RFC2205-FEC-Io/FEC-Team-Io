@@ -8,9 +8,8 @@ import Tooltip from 'react-bootstrap/Tooltip';
 const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggleImages, setGallery}) => {
   const mainImage = 'Smiley Shades.png';
 
-
     // ------------Sets one of the gallery images the main image in the gallery------------//
-  const [listImg, addImage] = useState('');
+  const [listImg, addImage] = useState(images[0].url);
   const [galleryIMGClicked, clicked] = useState(false);
   const setBackgroundImage = (event, imageURL) => {
     event.preventDefault();
@@ -44,7 +43,7 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
       return (
         <Modal show={modal} animation={false}>
           <Modal.Body onClick={closeModal}>
-          <img src={listImg}></img>
+          <img src={listImg} className="img-fluid"></img>
           </Modal.Body>
         </Modal>
       );
@@ -67,10 +66,22 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
     if (images.length <= 7 && setGallery) {
       return images.map((image) => {
         i++;
+        if (!image.thumbnail_url) {
+          return (
+            <div>
+              <img
+              id ='gallery-thumbnail'src='/Smiley%20Shades.png'
+              onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}
+              key={i}
+              className={`galleryImg ${i}`}
+              />
+            </div>
+          );
+        }
         return (
           <div>
             <img
-            id ='gallery-thumbnail'src={image.thumbnail_url}
+            id ='gallery-thumbnail-static'src={image.thumbnail_url}
             onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}
             key={i}
             className={`galleryImg ${i}`}
@@ -83,9 +94,10 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
       var imgArr1 = images.slice(0, 7);
       var imgArr2 = images.slice(-divideIndex, images.length);
       return (
-      <div id='gallery-carousel' style={{height: '50px', width: '400px', /*border: 'solid 1px yellow'*/}}>
-      <Carousel interval={null}>
-        <Carousel.Item>
+      <div id='gallery-carousel'>
+      <Carousel interval={null} style={{zIndex: '9'/* border: 'solid 2px pink'*/}}>
+        <Carousel.Item
+        >
           {imgArr1.map((image) => {
             i++;
             return (
@@ -98,7 +110,8 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
               );
             })}
         </Carousel.Item>
-        <Carousel.Item>
+        <Carousel.Item
+        >
           {imgArr2.map((image) => {
             i++;
             return (
@@ -129,27 +142,17 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
   const mainImageCarousel = () => {
     return (
     <div id='carousel-main' style={{height: '400px', width: '600px', /*border: 'solid 1px red'*/}}>
-    <Carousel interval={null} ref={target} activeIndex={carouselIndex} onSelect={updateCarouselState}>
+    <Carousel interval={null} ref={target} activeIndex={carouselIndex} onSelect={updateCarouselState} style={{zIndex:'1'}}>
     {images.map((image) => {
       return (
         <Carousel.Item>
-            {/* <img
-            id ='carousel-main-img' // Lawrence, images don't resize their dimensions with the carousel, they both need separate CSS
-            src={image.thumbnail_url}
-            onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}
-            onClick={showModal}
-            />
-          <div>
-          {expandView(listImg)}
-        </div> */}
           <div
             id ='carousel-main-img' // Lawrence, images don't resize their dimensions with the carousel, they both need separate CSS
             src={image.thumbnail_url}
             onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}
-            // onClick={showModal}
-            style={{backgroundImage: `url(${image.thumbnail_url})`, backgroundSize: 'cover'}}
+            onClick={showModal}
+            style={{backgroundImage: `url(${image.url})`, backgroundSize: 'cover', zIndex:'1'}}
             >
-            {createGallery()}
             </div>
           <div>
           {expandView(listImg)}
@@ -167,18 +170,10 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
     const [show, setShow] = useState(false);
     const target = useRef(null);
   return (
-    <div id='image-gallery'>
-      {/* <div id='main-img'  style={setMainImg()} >
-        {createGallery()}
-        <div id='view'>
-          <img id='expander'src={expand_icon} onClick={showModal}}/>
-        </div>
-        <div>
-          {expandView(listImg)}
-        </div>
-      </div> */}
-    {/* {createGallery()} */}
+    <div id='image-gallery'
+    >
     {mainImageCarousel()}
+    {createGallery()}
   </div>
   );
 }

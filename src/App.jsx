@@ -17,13 +17,9 @@ body {
 
 function App (props) {
   const [productId, setProductId] = useState(66645);
-
   const CardClickHandler = (newId) => {
     setProductId(newId)
   }
-  console.log('Product Id on App.jsx: ', productId);
-
-
     return (
       <div>
         <GlobalStyle />
