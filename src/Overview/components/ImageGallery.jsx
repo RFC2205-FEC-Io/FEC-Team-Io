@@ -10,7 +10,7 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
 
 
     // ------------Sets one of the gallery images the main image in the gallery------------//
-  const [listImg, addImage] = useState('');
+  const [listImg, addImage] = useState(images[0].url);
   const [galleryIMGClicked, clicked] = useState(false);
   const setBackgroundImage = (event, imageURL) => {
     event.preventDefault();
