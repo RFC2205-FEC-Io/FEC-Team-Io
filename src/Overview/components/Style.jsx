@@ -2,6 +2,7 @@ import React from 'react';
 import check_mark from '../../../dist/check_mark.png';
 const Style = ({styles, styleClick, clicked, name}) => {
   var addStyle = () => {
+    var placeholder = '/Smiley%20Shades.png';
     return styles.map ((style) => {
       if (style.name === name && clicked) {
         return (
@@ -27,7 +28,7 @@ const Style = ({styles, styleClick, clicked, name}) => {
           }}
           >
         </div>
-        );
+      );
     }
   })
 }
@@ -39,3 +40,18 @@ const Style = ({styles, styleClick, clicked, name}) => {
 }
 
 export default Style;
+
+        // if (!style.photos.thumbnail_url) {
+        //   return (
+        //     <div
+        //       key={style.name}
+        //       id='style-img'
+        //       style={{backgroundImage: `url(${placeholder})`}}
+        //       onClick={(event, name, styleObj, originalPrice, salePrice, img) => {
+        //         styleClick (event, style.name, style, style.original_price, style.sale_price, placeholder);
+        //       }}
+        //       >
+        //     <img class='check-mark 'src={check_mark}></img>
+        //     </div>
+        //   );
+        // }

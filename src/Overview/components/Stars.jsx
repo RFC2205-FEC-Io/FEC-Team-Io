@@ -81,7 +81,7 @@ const Stars = ({reviews}) => {
     <div id='star-ratings'>
       {starRatings(average)}
       <div id='reviews-desc' onClick={handleScroll}>
-         Read All {numOfReviews} reviews
+         Read all {numOfReviews} reviews
       </div>
       {/* <div ref={myRef}>Scroll</div> */}
     </div>

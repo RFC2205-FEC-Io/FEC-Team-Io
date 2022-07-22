@@ -1,8 +1,16 @@
 /*//////////OVERVIEW //////////*/
 #main {
 display: flex;
+flex-direction: row;
+gap: 50px;
+margin: 50px;
+justify-content: center;
+/* border: solid 2px red; */
 }
-
+#sidebar {
+  box-shadow: 10px 5px 5px #c0c0c0;
+  /* border: solid 2px green; */
+}
 /*----------IMAGE GALLERY----------*/
 #main-img{
   display: flex;
@@ -19,16 +27,15 @@ display: flex;
   width: 50px;
   margin-left: 5px;
   opacity: 0.65;
-  bottom: 300px;
+  bottom: 200px;
   z-index: 9;
-  /* border: solid 2px blue; */
 }
 #gallery-thumbnail-static {
   height: 50px;
   width: 50px;
   margin-left: 5px;
   opacity: 0.65;
-  bottom: 300px;
+  bottom: 350px;
   z-index: 9;
   position: relative;
 }
@@ -36,6 +43,11 @@ display: flex;
 #gallery-carousel {
   display: flex;
   flex-direction: column;
+  height: 50px;
+  width: 70px;
+  position: absolute;
+  z-index: 9;
+  top: 90px;
 }
 
 #carousel-main-img {
@@ -43,13 +55,14 @@ display: flex;
   width: 600px;
   height: 400px;
   cursor: zoom-in;
+  /* border: solid 2px yellow; */
 }
 #expander {
   cursor: pointer;
 }
 /*----------STYLE SELECTOR----------*/
-#styles-selector {
-  display: flex;
+#style-selector {
+  display: grid;
 }
   /*----------STYLE----------*/
 #styles {
@@ -98,9 +111,10 @@ a {
 }
  /*-----SOCIAL MEDIA-----*/
 #social-media {
-  padding: 10px;
+  /* padding: 10px; */
   display: flex;
   height: 20px;
+  gap: 10px;
 }
 
 /*----------ADD TO CART----------*/

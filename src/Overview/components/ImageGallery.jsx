@@ -44,7 +44,7 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
       return (
         <Modal show={modal} animation={false}>
           <Modal.Body onClick={closeModal}>
-          <img src={listImg}></img>
+          <img src={listImg} className="img-fluid"></img>
           </Modal.Body>
         </Modal>
       );
@@ -67,6 +67,18 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
     if (images.length <= 7 && setGallery) {
       return images.map((image) => {
         i++;
+        if (!image.thumbnail_url) {
+          return (
+            <div>
+              <img
+              id ='gallery-thumbnail-static'src='/Smiley%20Shades.png'
+              onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}
+              key={i}
+              className={`galleryImg ${i}`}
+              />
+            </div>
+          );
+        }
         return (
           <div>
             <img
@@ -83,27 +95,23 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
       var imgArr1 = images.slice(0, 7);
       var imgArr2 = images.slice(-divideIndex, images.length);
       return (
-      <div id='gallery-carousel' style={{height: '50px', width: '70px', /*border: 'solid 2px yellow'*/ position: 'absolute',zIndex: '9'}}>
+      <div id='gallery-carousel'>
       <Carousel interval={null} style={{zIndex: '9'/* border: 'solid 2px pink'*/}}>
         <Carousel.Item
-        style={{ zIndex: '9', position: 'relative', bottom: '40px', display: 'flex', flexDirection:'column' /*border: 'solid 2px orange'*/}}
         >
           {imgArr1.map((image) => {
             i++;
             return (
-              <div style={{/*border: 'solid 2px purple'*/ zIndex: '1000'}}>
               <img
                 id ='gallery-thumbnail'src={image.thumbnail_url}
                 onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}
                 key={i}
                 className={`galleryImg ${i}`}
               />
-              </div>
               );
             })}
         </Carousel.Item>
         <Carousel.Item
-          style={{/*border: 'solid 2px orange'*/ zIndex: '9', position: 'relative', bottom: '40px'}}
         >
           {imgArr2.map((image) => {
             i++;
@@ -113,7 +121,6 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
                 onClick={()=> {setBackgroundImage(event, image.url); toggleImages()}}
                 key={i}
                 className={`galleryImg ${i}`}
-                style={{border: 'solid 2px blue', zIndex: '1000'}}
               />
             );
           })}
@@ -165,7 +172,7 @@ const ImageGallery = ({images, clickedThumb, thumbnailClicked, galleryIMG, toggl
     const target = useRef(null);
   return (
     <div id='image-gallery'
-    style={{display: 'grid', border: 'solid 2px green' }}
+    style={{display: 'grid', /*border: 'solid 2px green'*/ }}
     >
       {/* <div id='main-img'  style={setMainImg()} >
         {createGallery()}
