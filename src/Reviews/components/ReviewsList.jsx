@@ -9,29 +9,39 @@ import ReviewStats from "./ReviewStats.jsx";
 
 /*------------------------- STYLED COMPONENTS------------------------------*/
 
+const Reviews = styled.div`
+display: grid;
+grid-template-columns: 400px 2fr;
+grid-gap: 30px;
+grid-row: 1;
+background-color: white;
+padding: 5px;
+margin: 5px;
+`;
 const Stats = styled.div`
 display: flex;
-flex-direction: row;
-justify-content: flex-start;
+justify-content: center;
 background-color: white;
 padding: 5px;
 margin: 5px;
 `;
 const Tile = styled.div`
 display: flex;
-flex-direction: row;
-justify-content: flex-start;
-box-shadow: 10px 5px 5px #C0C0C0;
+justify-content: center;
 background-color: white;
 padding: 5px;
 margin: 5px;
 `;
 const ButtonStyle = styled.button`
-height: 30px;
-margin: 10px 10px;
-border-radius: 10px;
-border: none;
-line-height: 85%;
+  margin: 0 auto;
+  font-size: 14px;
+  text-align: center;
+  width: 160px;
+  height: 40px;
+  background-color: grey;
+  color: white;
+  border-radius: 5px;
+  border: none;
 `;
 
 
@@ -53,7 +63,6 @@ class ReviewsList extends React.Component {
   componentDidMount() {
     this.getReviews(1, 50, this.state.sort);
     this.getMetadata(this.state.productID)
-    console.log("reviewArray after GET: ", this.state.reviewArray)
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -80,7 +89,6 @@ class ReviewsList extends React.Component {
   getMetadata(productID) {
     return axios.get(`/reviews/meta/?product_id=${productID}`)
       .then(res => {
-        console.log('metadata request came through!')
         this.setState({
           characteristics: res.data.characteristics
         });
@@ -92,7 +100,6 @@ class ReviewsList extends React.Component {
 
   putHelpful = (e) => {
     e.preventDefault();
-    console.log('Helpful Clicked!');
     var id = Number(e.target.parentElement.parentElement.className);
     var clicked = this.state.helpClick;
     if (clicked.indexOf(id) === -1) {
@@ -102,7 +109,6 @@ class ReviewsList extends React.Component {
       })
       axios.put(`/reviews/help/?review_id=${id}`)
         .then(() => {
-          console.log('this review is more helpful!');
         })
         .catch((err) => {
           console.log('Put request error', error);
@@ -124,7 +130,6 @@ class ReviewsList extends React.Component {
   };
 
   mapDisplayList = () => {
-    console.log('this.state.: ', this.state.displayList)
     let displayList = [];
     for (var i = 0; i < this.state.displayCount; i++) {
       let review = this.state.reviewArray[i];
@@ -176,20 +181,19 @@ class ReviewsList extends React.Component {
 
   render() {
     return (
-      <div>
+      <Reviews>
         <Stats>
           <ReviewStats productID={this.state.productID} />
         </Stats>
-        <Tile>
-        {this.mapDisplayList()}
-        </Tile>
-        <ButtonStyle>
-          <button className="btn btn-success" onClick={this.displayCount}>See More Reviews</button>
-        </ButtonStyle>
-        <br></br>
-        <ButtonStyle>
-          <button className="btn btn-success" onClick={this.handleShow}>Add a Review</button>
-        </ButtonStyle>
+        <div align="center">
+          <Tile>
+            {this.mapDisplayList()}
+          </Tile>
+          <ButtonStyle className="btn btn-success" onClick={this.displayCount}>See More Reviews</ButtonStyle>
+          <br/>
+          <br/>
+          <ButtonStyle className="btn btn-success" onClick={this.handleShow}>Add a Review</ButtonStyle>
+        </div>
         <Modal show={this.state.addFormShow} onHide={this.handleClose}>
           <Modal.Header>
             <Modal.Title>
@@ -197,15 +201,15 @@ class ReviewsList extends React.Component {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <ReviewFormHooks characteristics={this.state.characteristics} id={this.state.productID} />
+            <ReviewFormHooks characteristics={this.state.characteristics} productID={this.state.productID} handleClose={this.handleClose} />
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleClose}>
+            {/* <Button variant="secondary" onClick={this.handleClose}>
               Close Button
-            </Button>
+            </Button> */}
           </Modal.Footer>
         </Modal>
-      </div>
+      </Reviews>
     );
   }
 }
